@@ -6,7 +6,7 @@
 name: Ruiming Huang's Blog
 
 # Short bio or description (displayed in the header)
-description: Personal blogs; Courses in RWTH and coding during leisure time
+description: Personal blog; Always learn, sometimes code 
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars0.githubusercontent.com/u/12031381?v=3&u=2e000050ccab701c335b49aee975ac3dbfeb7b76&s=400
@@ -21,13 +21,13 @@ footer-links:
   email: huangruiming999@gmail.com
   facebook:
   flickr:
-  github: https://github.com/Wizna
+  github: Wizna
   instagram:
-  linkedin:
+  linkedin: https://www.linkedin.com/in/%E9%94%90%E9%93%AD-%E9%BB%84-883873b8/
   pinterest:
-  rss: wizna# just type anything here for a working RSS icon
+  rss: # just type anything here for a working RSS icon
   twitter: 
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+  stackoverflow: users/5172180/%E9%BB%84%E9%94%90%E9%93%AD # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
 
@@ -37,11 +37,11 @@ footer-links:
 disqus: ruiming-huangs-blog
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics:
+google_analytics: UA-96728449-1
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: https://wizna.github.io/
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)

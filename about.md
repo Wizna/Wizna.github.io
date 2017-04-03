@@ -4,12 +4,13 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I am currently a master student at RWTH Aachen University.
+Here I would like to share what I learned in my master program Software Systems Engineering in RWTH, as well as what I worked through during coding. 
 
-### More Information
+### My hobbies
 
-A place to include any other types of information that you'd like to include about yourself.
+Coding; Drawing; Football
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[huangruiming999@gmail.com](mailto:huangruiming999@gmail.com)
