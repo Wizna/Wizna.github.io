@@ -1,19 +1,95 @@
----
-layout: default
-permalink: /directory/
----
+--- layout: default permalink: /directory/ ---
 
-<div class="posts">
-  {% for post in site.posts %}
-    <article class="post">
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+<head>
+  <link class="cssdeck" rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src="./bootstrap/js/jquery.min.js"></script>
+  <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
 
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
+  <script type="text/javascript">
+$(document).ready(function () {
+	$('label.tree-toggler').click(function () {
+		$(this).parent().children('ul.tree').toggle(300);
+	});
+});
+</script>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
+</head>
+
+
+
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Bootstrap Tree Menu Example</h1>
+    </div>
 </div>
+<div class="row">
+    <div class="span3">
+        <div class="well">
+            <div>
+                <ul class="nav nav-list">
+                    <li>
+                        <label class="tree-toggler nav-header">Bootstrap</label>
+                        <ul class="nav nav-list tree">
+                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li>
+                                <label class="tree-toggler nav-header">Buttons</label>
+                                <ul class="nav nav-list tree">
+                                    <li><a href="#">Colors</a></li>
+                                    <li><a href="#">Sizes</a></li>
+                                    <li>
+                                        <label class="tree-toggler nav-header">Forms</label>
+                                        <ul class="nav nav-list tree">
+                                            <li><a href="#">Horizontal</a></li>
+                                            <li><a href="#">Vertical</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <label class="tree-toggler nav-header">Responsive</label>
+                        <ul class="nav nav-list tree">
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">CSS</a></li>
+                            <li>
+                                <label class="tree-toggler nav-header">Media Queries</label>
+                                <ul class="nav nav-list tree">
+                                    <li><a href="#">Text</a></li>
+                                    <li><a href="#">Images</a></li>
+                                    <li>
+                                        <label class="tree-toggler nav-header">Mobile Devices</label>
+                                        <ul class="nav nav-list tree">
+                                            <li><a href="#">iPhone</a></li>
+                                            <li><a href="#">Samsung</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <label class="tree-toggler nav-header">Coding</label>
+                                <ul class="nav nav-list tree">
+                                    <li><a href="#">JavaScript</a></li>
+                                    <li><a href="#">jQuery</a></li>
+                                    <li>
+                                        <label class="tree-toggler nav-header">HTML DOM</label>
+                                        <ul class="nav nav-list tree">
+                                            <li><a href="#">DOM Elements</a></li>
+                                            <li><a href="#">Recursive</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
