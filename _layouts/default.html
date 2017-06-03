@@ -13,8 +13,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" /> {% if page.tipue_search_active or layout.tipue_search_active %}
     <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/normalize.css " | relative_url }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../../bootstrap/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ " /bootstrap/js/jquery.min.js " | relative_url }}"></script>
+    <script src="{{ " /bootstrap/js/bootstrap.min.js " | relative_url }}"></script>
     <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | relative_url }}"></script>
     <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/tipuesearch.css " | relative_url }}">
     <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | relative_url }}"></script>
@@ -89,6 +89,7 @@
     {% include analytics.html %}
 </body>
 <footer>
-  <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
 </footer>
+
 </html>
