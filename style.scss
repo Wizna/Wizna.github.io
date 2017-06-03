@@ -212,7 +212,8 @@ img {
 
 nav {
   float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
+  margin-top: 10px; 
+  // @TODO: Vertically middle align
   font-family: $helveticaNeue;
   font-size: 12px;
 
@@ -287,3 +288,8 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "svg-icons";
+
+
+#search-div {
+  margin-top: 50px !important;
+}
