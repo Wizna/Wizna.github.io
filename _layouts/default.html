@@ -15,7 +15,7 @@ exclude_from_search: true
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
-    <script src="{{ " /bootstrap/js/jquery.min.js " | relative_url }}"></script>
+    <script src="{{ " /bootstrap/js/jquery.min.js " | site.baseurl  }}"></script>
     <script src="{{ " /bootstrap/js/bootstrap.js " | relative_url }}"></script>
     {% if page.tipue_search_active or layout.tipue_search_active %}
     <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/normalize.css " | relative_url }}">
