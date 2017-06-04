@@ -6,15 +6,21 @@ permalink: /about/
 
 
 
-<center>![alt](http://rlv.zcache.com/guilty_crown_inori_round_sticker-ra143f83c9c694c4698e7ab3c011c1bb2_v9wth_8byvr_324.jpg)</center>
+<p align="center">
 
 
 
-<center>I(黄锐铭) am currently a master student at RWTH Aachen University.</center>
+<img src="http://rlv.zcache.com/guilty_crown_inori_round_sticker-ra143f83c9c694c4698e7ab3c011c1bb2_v9wth_8byvr_324.jpg">
 
-<center>Here I would like to share what I learned in SSE, as well as problems I worked through during coding. </center>
+</p>
 
-<center>Hope my blogs could be helpful.</center>
+
+
+<center>I(黄锐铭) am currently a master student at RWTH Aachen University</center>
+
+<center>Here I would like to share what I learn in SSE and what I work through during coding</center>
+
+<center>Hope my blogs could be helpful  ٩(˘◡˘)۶</center>
 
 
 
@@ -26,12 +32,10 @@ permalink: /about/
 
 ### Motto
 
-<center>**Dirty, Dangerous, Difficult** </center>
+<center><b>Dirty, Dangerous, Difficult</b></center>	
 
-​	<center>-[Infinite Challenge](http://www.dnvod.tv/Movie/detail.aspx?id=bSRJpoSNpkA%3d)-</center>
-
-
+<center><a href="http://www.dnvod.tv/Movie/detail.aspx?id=bSRJpoSNpkA%3d">- Infinite Challenge -</a></center>
 
 ### Contact me
 
-<center> [huangruiming999@gmail.com](mailto:huangruiming999@gmail.com)</center>
+<center> <a href="mailto:huangruiming999@gmail.com">huangruiming999@gmail.com</a></center>
