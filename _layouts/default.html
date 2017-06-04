@@ -17,11 +17,9 @@ exclude_from_search: true
     <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
     <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
     <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
-    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
     <script src='{{ '/bootstrap/js/directory.js' | site.baseurl  }}'></script>
     {% if page.tipue_search_active or layout.tipue_search_active %}
-    <!-- <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/normalize.css " | site.baseurl  }}"> -->
-    <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | site.baseurl  }}"></script>
     <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/tipuesearch.css " | site.baseurl  }}">
     <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
