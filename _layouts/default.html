@@ -15,8 +15,9 @@ exclude_from_search: true
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
-    <script src="{{ " /bootstrap/js/jquery.min.js " | site.baseurl  }}"></script>
-    <script src="{{ " /bootstrap/js/bootstrap.js " | site.baseurl  }}"></script>
+    <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
+    <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
     {% if page.tipue_search_active or layout.tipue_search_active %}
     <!-- <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/normalize.css " | site.baseurl  }}"> -->
     <!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
@@ -25,6 +26,14 @@ exclude_from_search: true
     <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
     <script src="{{ " /assets/tipuesearch/tipuesearch.min.js " | site.baseurl  }}"></script>
     {% endif %}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('label.tree-toggler').click(function() {
+                $(this).parent().children('ul.tree').toggle(200);
+            });
+        });
+    </script>
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 </head>
 
@@ -86,8 +95,7 @@ exclude_from_search: true
     </div>
     {% include analytics.html %}
 </body>
-<footer>
-    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+<!-- <footer>
 </footer>
-
+ -->
 </html>
