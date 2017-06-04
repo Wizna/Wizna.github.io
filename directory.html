@@ -4,9 +4,19 @@ title: Posts
 permalink: /directory/
 ---
 
+
 <link class="cssdeck" rel="stylesheet" href="../bootstrap/css/directory.css">
     
 
+<ul>
+{% for topic in site.posts %}
+    <div class = "post-direct">
+        <span>{{ topic.relative_path }}</span>
+        <li><a href="{{ site.baseurl }}{{ topic.url }}">{{ topic.title }}</a></li>
+    </div>
+{% endfor %}
+</ul>
+<p id="loadfiles"></p>
 <div class="span3">
     <div class="well">
         <div>

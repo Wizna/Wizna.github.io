@@ -1,2 +1,2 @@
 # Wizna.github.io
-Simply homepage for me :)
+Simply homepage for me : )

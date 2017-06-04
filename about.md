@@ -28,11 +28,11 @@ permalink: /about/
 
 <center>Coding; Drawing; Football; Wasting time</center>
 
+<br/>
 
+### Life motto
 
-### Motto
-
-<center><b>Dirty, Dangerous, Difficult</b></center>	
+<center><i>Dirty, Dangerous, Difficult</i></center>	
 
 <center><a href="http://www.dnvod.tv/Movie/detail.aspx?id=bSRJpoSNpkA%3d">- Infinite Challenge -</a></center>
 
