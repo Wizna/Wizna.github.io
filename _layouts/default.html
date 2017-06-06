@@ -41,8 +41,9 @@ exclude_from_search: true
                         <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a>
                         <a href="{{ site.baseurl }}/about">About</a>
                     </nav>
+                    
                     <div id = "search-div">
-                        <form action="{{ page.url | site.baseurl  }}">
+                        <form action="{{ page.url | site.baseurl  }}" onsubmit="return false;">
                             <div class="tipue_search_right">
                                 <img src="{{ " /assets/tipuesearch/search.png " | site.baseurl  }}" class="tipue_search_icon">
                                 <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
@@ -60,11 +61,11 @@ exclude_from_search: true
                             </div>
                           </div>
                         </div>
-                        <script>
+                        <!--<script>
                         $(document).ready(function() {
                             $('#tipue_search_input').tipuesearch();
                         });
-                        </script>
+                        </script>-->
                     </div>
                 </header>
             </div>

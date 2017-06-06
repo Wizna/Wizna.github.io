@@ -1,9 +1,12 @@
 $(document).ready(function() {
+    $('#tipue_search_input').tipuesearch();
+    
     var windowLoc = $(location).attr('pathname');
     if (windowLoc != '/directory/') {
-        console.log(windowLoc);
         return;
     }
+    console.log(windowLoc);
+    
 
     var out = '<div class=\"span3\"> <div class=\"well\"> <div><ul class=\"nav nav-list\">';
     var tree = getDirectoryStructure();
