@@ -21,9 +21,7 @@ $(document).ready(function() {
         $(this).parent().children('ul.tree').toggle(200);
     });
 
-    //just to make loader look better and more complete, can be deleted
-    setTimeout(showPage, 100);
-
+    showPage();
 });
 
 function showPage() {
