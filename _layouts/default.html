@@ -6,95 +6,79 @@ exclude_from_search: true
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
-    {% include meta.html %}
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
-    <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
-    <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
-    <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
-    <script src='{{ '/bootstrap/js/directory.js' | site.baseurl  }}'></script>
-    {% if page.tipue_search_active or layout.tipue_search_active %}
-    <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | site.baseurl  }}"></script>
-    <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/tipuesearch.css " | site.baseurl  }}">
-    <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
-    <script src="{{ " /assets/tipuesearch/tipuesearch.min.js " | site.baseurl  }}"></script>
-    {% endif %}
+    <head>
+        <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+        {% include meta.html %}
+        <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+        <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
+        <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
+        <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
+        <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
+        <script src='{{ '/bootstrap/js/directory.js' | site.baseurl  }}'></script>
+        {% if page.tipue_search_active or layout.tipue_search_active %}
+        <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | site.baseurl  }}"></script>
+        <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/tipuesearch.css " | site.baseurl  }}">
+        <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
+        <script src="{{ " /assets/tipuesearch/tipuesearch.min.js " | site.baseurl  }}"></script>
+        {% endif %}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('label.tree-toggler').click(function() {
-                $(this).parent().children('ul.tree').toggle(200);
-            });
-        });
-    </script>
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-</head>
+    </head>
 
-<body>
-    <div class="wrapper-masthead">
-        <div class="container">
-            <header class="masthead clearfix">
-                <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-                <div class="site-info">
-                    <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-                    <br>
-                    <p class="site-description">{{ site.description }}</p>
-                </div>
-                <nav>
-                    <a href="{{ site.baseurl }}/">Blog</a>
-                    <a href="{{ site.baseurl }}/directory">Directory</a>
-                    <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a>
-                    <a href="{{ site.baseurl }}/about">About</a>
-                </nav>
-                <div id = "search-div">
-                    <form action="{{ page.url | site.baseurl  }}">
-                        <!-- <div class="tipue_search_right"><img src="{{ " /assets/tipuesearch/search.png " | site.baseurl  }}" class="tipue_search_icon"></div> -->
-                        <div class="tipue_search_right">
-                            <img src="{{ " /assets/tipuesearch/search.png " | site.baseurl  }}" class="tipue_search_icon">
-                            <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
-                        </div>
-                        <!-- <div style="clear: both;"></div> -->
-                    </form>
-                    
-                    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Search Results</h5>
-                          </div>
-                          <div id="tipue_search_content" class="modal-body">
-                          </div>
-                        </div>
-                      </div>
+    <body>
+        <div class="wrapper-masthead">
+            <div class="container">
+                <header class="masthead clearfix">
+                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+                    <div class="site-info">
+                        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+                        <br>
+                        <p class="site-description">{{ site.description }}</p>
                     </div>
-                    <script>
-                    $(document).ready(function() {
-                        $('#tipue_search_input').tipuesearch();
-                    });
-                    </script>
-                </div>
-            </header>
+                    <nav>
+                        <a href="{{ site.baseurl }}/">Blog</a>
+                        <a href="{{ site.baseurl }}/directory">Directory</a>
+                        <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a>
+                        <a href="{{ site.baseurl }}/about">About</a>
+                    </nav>
+                    <div id = "search-div">
+                        <form action="{{ page.url | site.baseurl  }}">
+                            <div class="tipue_search_right">
+                                <img src="{{ " /assets/tipuesearch/search.png " | site.baseurl  }}" class="tipue_search_icon">
+                                <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
+                            </div>
+                        </form>
+                        
+                        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Search Results</h5>
+                              </div>
+                              <div id="tipue_search_content" class="modal-body">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                        $(document).ready(function() {
+                            $('#tipue_search_input').tipuesearch();
+                        });
+                        </script>
+                    </div>
+                </header>
+            </div>
         </div>
-    </div>
-    <div id="main" role="main" class="container">
-        {{ content }}
-    </div>
-    <div class="wrapper-footer">
-        <div class="container">
-            <footer class="footer">
-                {% include svg-icons.html %}
-            </footer>
+        <div id="main" role="main" class="container">
+            {{ content }}
         </div>
-    </div>
-    {% include analytics.html %}
-</body>
-<!-- <footer>
-</footer>
- -->
+        <div class="wrapper-footer">
+            <div class="container">
+                <footer class="footer">
+                    {% include svg-icons.html %}
+                </footer>
+            </div>
+        </div>
+        {% include analytics.html %}
+    </body>
 </html>
