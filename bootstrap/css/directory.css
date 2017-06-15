@@ -1,10 +1,10 @@
 li.indent-li {
-    margin-left: 50px;
+    margin-left: 40px;
 }
 
 #placeHolder {
-    width: 200px;
-    height: 600px;
+    width: 10px;
+    height: 500px;
 }
 
 #loader {
@@ -12,7 +12,7 @@ li.indent-li {
     left: 50%;
     top: 50%;
     z-index: 1;
-    margin: -75px 0 0 -75px;
+    margin: -40px 0 0 -40px;
     border: 16px solid #f3f3f3;
     border-radius: 50%;
     border-top: 16px solid #3498db;
@@ -46,9 +46,9 @@ li.indent-li {
 .animate-bottom {
     position: relative;
     -webkit-animation-name: animatebottom;
-    -webkit-animation-duration: 0.5s;
+    -webkit-animation-duration: 0.4s;
     animation-name: animatebottom;
-    animation-duration: 0.5s
+    animation-duration: 0.4s
 }
 
 @-webkit-keyframes animatebottom {
