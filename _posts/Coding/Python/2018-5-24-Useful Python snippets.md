@@ -12,15 +12,15 @@ I have been using Python intensively for about 1 year. From now and then I look 
 
 | No.  | Goal                                                         | Solution                                                     | Note                                                         |
 | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
-| 2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    |                                                              |
-| 3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] |                                                              |
-| 4    | Trim a string                                                | mystr.strip()                                                |                                                              |
-| 5    | String replace a substring pattern with another substring    | mystr.replace('old', 'new')                                  |                                                              |
-| 6    | Cast  float or string to int                                 | int(mystr)                                                   | auto floor to the nearest integer                            |
-| 7    | Check string or char is upper                                | mystr.isupper()                                              |                                                              |
-| 8    | If statement in list comprehension                           | [value for index,value in enumerate(mylist) if value != 0]   |                                                              |
-| 9    | If else statement in list comprehension                      | row = [None, '\u0303', '\u1200', '\u0203'] <br>w = [x if x is not None else '' for x in row] |                                                              |
+| 1    | Reverse a string or a list                                   | ``'hello world' [::-1]``                                     |                                                              |
+| 2    | Join a list of strings to a single string                    | ```result = ' '.join(mylist)```                              |                                                              |
+| 3    | Flatten list from list of list                               | ```flat_list = [item for sublist in mylist for item in sublist]``` |                                                              |
+| 4    | Trim a string                                                | ```mystr.strip()```                                          |                                                              |
+| 5    | String replace a substring pattern with another substring    | `mystr.replace('old', 'new')`                                |                                                              |
+| 6    | Cast  float or string to int                                 | `int(mystr)`                                                 | auto floor to the nearest integer                            |
+| 7    | Check string or char is upper                                | `mystr.isupper()`                                            |                                                              |
+| 8    | If statement in list comprehension                           | `[value for index,value in enumerate(mylist) if value != 0]` |                                                              |
+| 9    | If else statement in list comprehension                      | `row = [None, '\u0303', '\u1200', '\u0203'] `<br>``w = [x if x is not None else '' for x in row]`` |                                                              |
 | 10   | Transpose matrix  (2-d array)                                | nmatrix = [list(i) for i in zip(*matrix)]                    |                                                              |
 | 11   | Rotate matrix (2-d array) 90 degrees clockwise               | nmatrix = [list(i) for i in zip(*matrix[::-1])]              | if you want to do it inplace, do:<br> matrix[:] = [list(i) for i in zip(*matrix[::-1])] |
 | 12   | Check whether str1 is substring of str2                      | str1 in str2                                                 |                                                              |
