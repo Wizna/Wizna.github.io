@@ -40,15 +40,15 @@ I have been using Python intensively for about 1 year. From now and then I look 
 | 26   | Get arbitrary one element from set                           | next(iter(myset))                                            |                                                              |
 | 27   | Remove element at index 2 from the list                      | mylist.pop(2)                                                | if no argument, last one is removed                          |
 | 28   | Find locations (start, end) of matches with regular expression | myiter = re.finditer('[A-Z][a-z]*', 'This Is My House')<br>indices = [m.span() for m in myiter] |                                                              |
-| 29   |                                                              |                                                              |                                                              |
-| 30   |                                                              |                                                              |                                                              |
-| 31   |                                                              |                                                              |                                                              |
-| 32   |                                                              |                                                              |                                                              |
-| 33   |                                                              |                                                              |                                                              |
-| 34   |                                                              |                                                              |                                                              |
-| 35   |                                                              |                                                              |                                                              |
-| 36   |                                                              |                                                              |                                                              |
-| 37   |                                                              |                                                              |                                                              |
-| 38   |                                                              |                                                              |                                                              |
-| 39   |                                                              |                                                              |                                                              |
+| 29   | Update each value in a dictionary with an operation          | mydict.update((x, y*2) for x, y in mydict.items())           |                                                              |
+| 30   | Merge 2 or more dictionaries                                 | a = Counter({'menu': 20, 'good': 15, 'happy': 10, 'bar': 5}) <br> b = Counter({'menu': 1, 'good': 1, 'bar': 3}) <br> a.update(b) | Change to counters and then update                           |
+| 31   | Find all indices of an element in a list                     | indices = [i for i, x in enumerate(mylist) if x == "whatever"] |                                                              |
+| 32   | Return a random element from a list                          | import random<br> random.choice(mylist)                      |                                                              |
+| 33   | Product of all elements of a list                            | from operator import mul<br>from functools import reduce<br>reduce(mul, [1, 2, 3, 4, 5, 10], 1) |                                                              |
+| 34   | lexicographical  compare of strings                          | stra > strb <br> stra <= strb                                | "abcd" > "ab" and "ad" > "ab"                                |
+| 35   | integer division                                             | 7 // 3                                                       | round down                                                   |
+| 36   | two's complement                                             | ~1314                                                        | equals to -1315                                              |
+| 37   | padding spaces to a string to a certain length               | mystr.center(30)<br>mystr.ljust(10)<br>mystr.rjust(3)        |                                                              |
+| 38   | Get a random float                                           | random.random()                                              |                                                              |
+| 39   | Get a random integer from range                              | random.randrange(6)                                          |                                                              |
 
