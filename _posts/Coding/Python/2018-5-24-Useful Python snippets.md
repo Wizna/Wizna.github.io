@@ -1,7 +1,5 @@
 ![titile image](https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)
 
-# Useful Python snippets
-
 ### Background: 
 
 I have been using Python intensively for about 1 year. From now and then I look up some of the common operations and I decided to record all the code snippets in a handbook.

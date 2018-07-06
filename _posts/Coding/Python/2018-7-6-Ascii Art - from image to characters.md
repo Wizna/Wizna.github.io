@@ -1,7 +1,5 @@
 ![title image](http://wx4.sinaimg.cn/large/006a0Rdhgy1ficp70i78kj30yp0qown2.jpg)
 
-# Ascii Art - from image to characters
-
 ### Background
 
 I just got interested in Ascii art, and so I searched on the Internet and came up with following code in doing it with Python.
@@ -105,20 +103,14 @@ I run above code in Jupyter Notebook, but it should be easy in adding arguments 
 
 5. (0.665, 0.3122, 4) is the ratio between width and height of result image. If using a different font or with a different font size, this should be change a little bit.
 
-6. Font Courier New can be download from 
-
-   [Courier New font download]: https://github.com/trishume/OpenTuringCompiler/blob/master/stdlib-sfml/fonts/Courier%20New.ttf
-
-   
+6. Font Courier New can be download from https://github.com/trishume/OpenTuringCompiler/blob/master/stdlib-sfml/fonts/Courier%20New.ttf 
 
 7. resolution should be larger than 0, and it can be larger than 1.
 
- ### Results
+### Input image 
 
-### input image 
-
-![](C:\Users\Ruiming Huang\Documents\Jupyter Notebook\Playaround\ycy.jpg)
+![](https://raw.githubusercontent.com/Wizna/Wizna.github.io/master/images/ycy.jpg)
 
 ### Ascii output image
 
-![](C:\Users\Ruiming Huang\Documents\Jupyter Notebook\Playaround\ycy_ascii-2.jpg)
+![](https://github.com/Wizna/Wizna.github.io/blob/master/images/ycy_ascii-2.jpg?raw=true)
