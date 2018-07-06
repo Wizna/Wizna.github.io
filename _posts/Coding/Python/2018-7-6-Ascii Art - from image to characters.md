@@ -94,18 +94,13 @@ I run above code in Jupyter Notebook, but it should be easy in adding arguments 
 ### Side Notes
 
 1. readinFilePath is the path to the input image file.
-
 2. outputTextFile is the output text file containing ascii characters.
-
 3. outputImageFile is the output image containing ascii characters. I added this because text file always wraps around long lines and results in distorted image.
-
 4. I use font Courier New, you can use other monospace fonts.
-
 5. (0.665, 0.3122, 4) is the ratio between width and height of result image. If using a different font or with a different font size, this should be change a little bit.
-
-6. Font Courier New can be download from https://github.com/trishume/OpenTuringCompiler/blob/master/stdlib-sfml/fonts/Courier%20New.ttf 
-
+6. Font Courier New can be download from [here](https://github.com/trishume/OpenTuringCompiler/blob/master/stdlib-sfml/fonts/Courier%20New.ttf). 
 7. resolution should be larger than 0, and it can be larger than 1.
+8. Yang Chaoyue (杨超越) is so pretty. Congratulations to her becoming a member of "Rocket Girls 101".
 
 ### Input image 
 
