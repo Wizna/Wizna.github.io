@@ -4,7 +4,7 @@
 
 Recently I am reading the book "Cracking the Coding Interview", and in Chapter 6 the egg drop problem caught my attention. The solution shows an intuitive way of thinking, but has no code for how we can generate the result.
 
-###The Egg Drop Problem: 
+### The Egg Drop Problem: 
 
 There is a building of 100 floors. If an egg drops from the Nth floor or above, it will break. If it's dropped from any floor below, it will not break. Your're given two eggs. Find N, while minimizing the number of drops for the worst case.
 
