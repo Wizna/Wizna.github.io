@@ -10,9 +10,9 @@ However, keep in mind that one-line is not the ultimate goal instead of readabil
 
 Given an array of integers `A` sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
 
-**Example:**
+**Example**
 
-```
+```json
 Input: [-4,-1,0,3,10]
 Output: [0,1,9,16,100]
 ```
@@ -100,7 +100,7 @@ Given a sequence of `words` written in the alien language, and the `order` of th
 
 **Example**
 
-```
+```json
 Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
 Output: true
 ```
@@ -109,12 +109,12 @@ Output: true
 
 ```python
 def isAlienSorted(words, order):
-	"""
-	:type words: List[str]
-	:type order: str
-	:rtype: bool
-	"""
-	return sorted(words, key=lambda x: list(map(order.index, x))) == words
+    """
+    :type words: List[str]
+    :type order: str
+    :rtype: bool
+    """
+    return sorted(words, key=lambda x: list(map(order.index, x))) == words
 ```
 
 
