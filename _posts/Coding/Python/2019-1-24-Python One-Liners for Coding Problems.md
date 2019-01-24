@@ -89,7 +89,7 @@ def fib(N):
     :type N: int
     :rtype: int
     """
-    return reduce(lambda x, _: [x[-1], sum(x)], range(N), [0, 1])[0]
+    return reduce(lambda x, _: [x[1], sum(x)], range(N), [0, 1])[0]
 ```
 
 
