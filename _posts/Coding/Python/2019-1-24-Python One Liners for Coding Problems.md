@@ -92,6 +92,32 @@ def fib(N):
     return reduce(lambda x, _: [x[1], sum(x)], range(N), [0, 1])[0]
 ```
 
+### Problem 5
+
+In an alien language, surprisingly they also use english lowercase letters, but possibly in a different `order`. The `order` of the alphabet is some permutation of lowercase letters.
+
+Given a sequence of `words` written in the alien language, and the `order` of the alphabet, return `true` if and only if the given `words` are sorted lexicographically in this alien language.
+
+**Example**
+
+```
+Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
+Output: true
+```
+
+**Solution**
+
+```python
+def isAlienSorted(words, order):
+	"""
+	:type words: List[str]
+	:type order: str
+	:rtype: bool
+	"""
+	return sorted(words, key=lambda x: list(map(order.index, x))) == words
+```
+
+
 
 
 ### To be continued ...
