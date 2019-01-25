@@ -190,24 +190,28 @@ def lastRemaining(n):
 
 
 
-## collapsible markdown?
+<details><summary>Solution</summary>
 
-<details><summary>CLICK ME</summary>
-<p>
 
 #### yes, even hidden code blocks!
 
-​```python
+```python
 print("hello world!")
-​```
+```
 
-</p>
 </details>
 
+<details>Solution
 
 
+### yes, even hidden code blocks!
 
->! Spoiler text
+```python
+print("hello world!")
+```
+
+</details>
+
 
 
 
