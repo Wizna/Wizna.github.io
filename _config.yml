@@ -94,3 +94,5 @@ collections:
   posts:
     output: true
     permalink: /posts/:path/
+
+markdown: CommonMarkGhPages
