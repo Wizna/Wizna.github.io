@@ -191,25 +191,10 @@ def lastRemaining(n):
 
 
 <details><summary>Solution</summary>
-
-
-#### yes, even hidden code blocks!
-
+<p>
 ```python
 print("hello world!")
 ```
-
-</details>
-
-<details>Solution
-
-
-### yes, even hidden code blocks!
-
-```python
-print("hello world!")
-```
-
 </details>
 
 
