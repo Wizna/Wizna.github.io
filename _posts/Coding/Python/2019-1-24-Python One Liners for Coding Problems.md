@@ -203,9 +203,9 @@ print("hello world!")
 
 ## _formatted_ **heading** with [a](link)
 
----
+```python
 {{standard 3-backtick code block omitted from here due to escaping issues}}
----
+```
 
 Collapsible until here.
 </p></details>
