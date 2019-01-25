@@ -19,7 +19,7 @@ Input: [-4,-1,0,3,10]
 Output: [0,1,9,16,100]
 ```
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 def sortedSquares(A):
@@ -32,7 +32,7 @@ def sortedSquares(A):
         for j in range(len(A) - 1, -1, -1)
     ][::-1]
 ```
-
+</p></details>
 **Side Notes**
 
 1. O(n), 2 pointers.
@@ -43,7 +43,7 @@ def sortedSquares(A):
 
 Write a function to multiply two positive integers `a` and `b` without using the `*` operator (or `/` operator). You can use addition, subtraction, and bit shifting.
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 def multiply(a, b):
@@ -54,7 +54,7 @@ def multiply(a, b):
     """
     return sum(b << i for i in range(32) if a >> i & 1)
 ```
-
+</p></details>
 **Side Notes**
 
 1. Works for 32-bit integers.
@@ -69,7 +69,7 @@ We have a list of `points` on the plane.  Find the `K` closest points to the ori
 
 You may return the answer in any order.  The answer is guaranteed to be unique (except for the order that it is in.)
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 def kClosest(points, K):
@@ -81,14 +81,14 @@ def kClosest(points, K):
     return sorted(points, key = lambda x: (x[0]**2 + x[1]**2))[:K]
 
 ```
-
+</p></details>
 
 
 ### Problem 4
 
 Given `N`, calculate **Fibonacci number** `F(N)`, starting from `0` and `1`.
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 from functools import reduce
@@ -99,7 +99,7 @@ def fib(N):
     """
     return reduce(lambda x, _: [x[1], sum(x)], range(N), [0, 1])[0]
 ```
-
+</p></details>
 
 
 ### Problem 5
@@ -115,7 +115,7 @@ Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
 Output: true
 ```
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 def isAlienSorted(words, order):
@@ -126,7 +126,7 @@ def isAlienSorted(words, order):
     """
     return sorted(words, key=lambda x: list(map(order.index, x))) == words
 ```
-
+</p></details>
 
 
 ### Problem 6
@@ -139,7 +139,7 @@ Rotate the image by 90 degrees (clockwise).
 
 You have to rotate the image [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly. **DO NOT** allocate another 2D matrix and do the rotation.
 
-**Solution**
+<details><summary>Solution</summary>
 
 ```python
 def rotate(matrix):
@@ -149,7 +149,7 @@ def rotate(matrix):
     """
     matrix[:] = map(list, zip(*matrix[::-1]))
 ```
-
+</p></details>
 
 
 ### Problem 7
@@ -176,7 +176,7 @@ Output:
 6
 ```
 
-**Solution**
+<details><summary>Solution</summary><p>
 
 ```python
 def lastRemaining(n):
@@ -186,29 +186,8 @@ def lastRemaining(n):
     """
     return n // 2 + 1 if n <= 3 else lastRemaining(n // 4) * 4 - (n % 4 < 2) * 2
 ```
-
-
-
-
-<details><summary>Solution</summary>
-<p>
-```python
-print("hello world!")
-```
-</p>
-</details>
-
-
-<details><summary>stuff with *mark* **down**</summary><p>
-
-## _formatted_ **heading** with [a](link)
-
-```python
-{{standard 3-backtick code block omitted from here due to escaping issues}}
-```
-
-Collapsible until here.
 </p></details>
+
 
 ### To be continued ...
 
