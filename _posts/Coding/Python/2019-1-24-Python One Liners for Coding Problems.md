@@ -6,6 +6,8 @@ Python is a powerful and concise language and I believe one-liners can show its 
 
 However, keep in mind that one-line is not the ultimate goal instead of readability and performance.
 
+Please work on the puzzles before you click on "Solution".
+
 
 
 ### Problem 1
@@ -33,6 +35,7 @@ def sortedSquares(A):
     ][::-1]
 ```
 </p></details>
+
 **Side Notes**
 
 1. O(n), 2 pointers.
@@ -55,6 +58,7 @@ def multiply(a, b):
     return sum(b << i for i in range(32) if a >> i & 1)
 ```
 </p></details>
+
 **Side Notes**
 
 1. Works for 32-bit integers.
