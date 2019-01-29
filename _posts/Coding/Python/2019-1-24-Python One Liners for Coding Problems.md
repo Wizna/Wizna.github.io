@@ -188,7 +188,7 @@ def lastRemaining(n):
     :type n: int
     :rtype: int
     """
-    return n // 2 + 1 if n <= 3 else lastRemaining(n // 4) * 4 - (n % 4 < 2) * 2
+    return n // 2 + 1 if n < 4 else lastRemaining(n // 4) * 4 - (n % 4 < 2) * 2
 ```
 </p></details>
 
