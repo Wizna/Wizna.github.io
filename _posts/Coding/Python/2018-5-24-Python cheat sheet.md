@@ -8,16 +8,18 @@ I have been using Python intensively for about 1 year. From now and then I look 
 
 ### Table:
 
-<style>
-.tablelines table, .tablelines td, .tablelines th {
-        border: 1px solid black;
-        }
-</style>
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | *Content Cell  |
+| Content Cell  | Content Cell  |
+
 
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
-
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-
 |    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
 |    2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    |                                                              |
 |    3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] |                                                              |
@@ -57,4 +59,3 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   37    | padding spaces to a string to a certain length               | mystr.center(30)<br>mystr.ljust(10)<br>mystr.rjust(3)        |                                                              |
 |   38    | Get a random float                                           | random.random()                                              |                                                              |
 |   39    | Get a random integer from range                              | random.randrange(6)                                          |                                                              |
-{: .tablelines}
