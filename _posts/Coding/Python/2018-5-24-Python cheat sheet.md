@@ -15,7 +15,9 @@ I have been using Python intensively for about 1 year. From now and then I look 
 </style>
 
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
+
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
+
 |    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
 |    2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    |                                                              |
 |    3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] |                                                              |
