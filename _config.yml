@@ -96,3 +96,7 @@ collections:
     permalink: /posts/:path/
 
 markdown: CommonMarkGhPages
+
+commonmark:
+  options: ["SMART", "FOOTNOTES"]
+  extensions: ["strikethrough", "autolink", "tables"]
