@@ -8,6 +8,12 @@ I have been using Python intensively for about 1 year. From now and then I look 
 
 ### Table:
 
+<style>
+.tablelines table, .tablelines td, .tablelines th {
+        border: 1px solid black;
+        }
+</style>
+
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 |    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
