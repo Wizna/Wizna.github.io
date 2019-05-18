@@ -13,8 +13,10 @@ I have been using Python intensively for about 1 year. From now and then I look 
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 | First Header  | Second Header |
+
 | ------------- | ------------- |
-| Content Cell  | *Content Cell  |
+
+| Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
 
