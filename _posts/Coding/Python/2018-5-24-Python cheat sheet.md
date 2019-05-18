@@ -55,4 +55,4 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   37    | padding spaces to a string to a certain length               | mystr.center(30)<br>mystr.ljust(10)<br>mystr.rjust(3)        |                                                              |
 |   38    | Get a random float                                           | random.random()                                              |                                                              |
 |   39    | Get a random integer from range                              | random.randrange(6)                                          |                                                              |
-
+{: .tablelines}
