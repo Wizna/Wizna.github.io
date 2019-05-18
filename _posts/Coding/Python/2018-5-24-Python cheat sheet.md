@@ -7,19 +7,6 @@ I have been using Python intensively for about 1 year. From now and then I look 
 
 
 ### Table:
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-| First Header  | Second Header |
-
-| ------------- | ------------- |
-
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-
-
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 |    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
@@ -28,16 +15,16 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |    4    | Trim a string                                                | mystr.strip()                                                |                                                              |
 |    5    | String replace a substring pattern with another substring    | mystr.replace('old', 'new')                                  |                                                              |
 |    6    | Cast  float or string to int                                 | int(mystr)                                                   | auto floor to the nearest integer                            |
-|    7    | Check string or char is upper                                | mystr.isupper()                                              |                                                              |
+|    7    | Check string or char is in uppercase                         | mystr.isupper()                                              |                                                              |
 |    8    | If statement in list comprehension                           | [value for index,value in enumerate(mylist) if value != 0]   |                                                              |
 |    9    | If else statement in list comprehension                      | row = [None, '\u0303', '\u1200', '\u0203']<br>w = [x if x is not None else '' for x in row] |                                                              |
 |   10    | Transpose matrix  (2-d array)                                | nmatrix = [list(i) for i in zip(*matrix)]                    |                                                              |
-|   11    | Rotate matrix (2-d array) 90 degrees clockwise               | nmatrix = [list(i) for i in zip(*matrix[::-1])]              | if you want to do it inplace, do:<br> matrix[:] = [list(i) for i in zip(*matrix[::-1])] |
+|   11    | Rotate matrix (2-d array) 90° clockwise                      | nmatrix = [list(i) for i in zip(*matrix[::-1])]              | if you want to do it inplace, do:<br> matrix[:] = [list(i) for i in zip(*matrix[::-1])] |
 |   12    | Check whether str1 is substring of str2                      | str1 in str2                                                 |                                                              |
 |   13    | Get Current work directory                                   | import os<br>cwd = os.getcwd()                               |                                                              |
-|   14    | Iterate dictionary                                           | for index, value in mydict.items(): <br>...                  |                                                              |
+|   14    | Iterate dictionary                                           | for key, value in mydict.items(): <br>...                    |                                                              |
 |   15    | Split string with multiple delimiters                        | import re <br>re.split(';\|,\|\*\|\n', 'He,llo * worl;d')    |                                                              |
-|   16    | Merge 2 dictionaries                                         | result = {k: resultDictL.get(k, 0) + resultDictR.get(k, 0) for k in set(resultDictL) \| set(resultDictR)} |                                                              |
+|   16    | Merge 2 dictionaries                                         | from collections import Counter<br/>a = Counter({'menu': 20, 'good': 15, 'happy': 10, 'bar': 5})<br/>b = Counter({'menu': 1, 'good': 1, 'bar': 3})<br/>a.update(b) | new value is the sum of 2 values from 2 dictionaries         |
 |   17    | Initialize list with same primitive values                   | mylist = [True] * 400                                        | don't use this with 2-d array                                |
 |   18    | Python supports tertiary  operator                           | if 3 < 5 < 8: print(5)                                       |                                                              |
 |   19    | Sort a list of strings by length                             | mylist.sort(key = len)                                       |                                                              |
@@ -51,7 +38,6 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   27    | Remove element at index 2 from the list                      | mylist.pop(2)                                                | if no argument, last one is removed                          |
 |   28    | Find locations (start, end) of matches with regular expression | myiter = re.finditer('[A-Z][a-z]*', 'This Is My House')<br>indices = [m.span() for m in myiter] |                                                              |
 |   29    | Update each value in a dictionary with an operation          | mydict.update((x, y*2) for x, y in mydict.items())           |                                                              |
-|   30    | Merge 2 or more dictionaries                                 | a = Counter({'menu': 20, 'good': 15, 'happy': 10, 'bar': 5}) <br>b = Counter({'menu': 1, 'good': 1, 'bar': 3}) <br>a.update(b) | Change to counters and then update                           |
 |   31    | Find all indices of an element in a list                     | indices = [i for i, x in enumerate(mylist) if x == "whatever"] |                                                              |
 |   32    | Return a random element from a list                          | import random<br>random.choice(mylist)                       |                                                              |
 |   33    | Product of all elements of a list                            | from operator import mul<br>from functools import reduce<br>reduce(mul, [1, 2, 3, 4, 5, 10], 1) |                                                              |
@@ -61,3 +47,20 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   37    | padding spaces to a string to a certain length               | mystr.center(30)<br>mystr.ljust(10)<br>mystr.rjust(3)        |                                                              |
 |   38    | Get a random float                                           | random.random()                                              |                                                              |
 |   39    | Get a random integer from range                              | random.randrange(6)                                          |                                                              |
+|         | Get profile of<br/>program, print out most time consuming function calls | import cProfile<br/><br/>cProfile.run('int(13)')             |                                                              |
+|         | Get<br/>line by line time execution in jupyter notebook      | %load_ext line_profiler<br/>%lprun -f totalNQueens totalNQueens(13) | need to specify the function name (e.g. totalNQueens) and the real execution call (e.g. totalNQueens(13))<br/>should use "" when passing strings as arguments |
+|         | Usage<br/>of doctest                                         | def average(values):<br/>    """<br/>    >>> average([20, 30, 70])<br/>    40.0<br/>    """<br/>    return sum(values) / len(values)<br/>import doctest<br/>doctest.testmod() | there must be at least 1 space on the right side of >>>      |
+|         | Double<br/>ended queue                                       | from collections import deque<br/>d = deque('ghi')           | can be think of a queue + stack                              |
+|         | Print<br/>out nicely                                         | from pprint import pprint<br/>pprint(….)                     |                                                              |
+|         | Permutation<br/>and combination                              | from itertools import combinations<br/><br/>list(combinations([1, 2, 3, 4], 2)) | output: [(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]     |
+|         | Get<br/>all attributes and their values of an object         | vars(myobject)                                               |                                                              |
+|         | Get the<br/>representation string of the object              | repr(myobject)                                               | if not specified, it will be like:<br/>'<__main__.Duck object at 0x00000133BDE7A6D8>' |
+|         | Save<br/>memory by using generator instead of list           | Use <br/>sum(x*x for x in range(10))                         | instead of <br/>sum([x*x for x in range(10)])                |
+|         | variables<br/>created inside a loop are accessible outside the loop scope | for j in mylist:<br/>    print(j)<br/>print(j)               | the<br/>j actually is assigned the last element of the list mylist |
+|         | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed |                                                              |
+|         | to<br/>make class objects comparable, just add function \__lt__ | def \__lt__(self, other):<br/>        return ((self**.**last, self**.**first) **<** (other**.**last, other**.**first)) |                                                              |
+|         | to<br/>make class objects hashable                           | Implement \__hash__<br/>Also need to take care of \__eq__ and make it compatible with hash |                                                              |
+
+
+
+### To be continued ...
