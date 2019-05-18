@@ -99,4 +99,4 @@ markdown: CommonMarkGhPages
 
 commonmark:
   options: ["SMART", "FOOTNOTES"]
-  extensions: ["strikethrough", "autolink", "tables"]
+  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
