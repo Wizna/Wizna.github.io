@@ -1,6 +1,22 @@
-# Algorithms
+
+
+
 
 {:toc}
+
+[TOC]
+
+
+[[_TOC_]]
+
+
+[[_TOC_]]
+
+
+{:toc}
+
+
+
 
 ## Sorting
 
