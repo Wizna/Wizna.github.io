@@ -15,6 +15,18 @@
 
 {:toc}
 
+- {:toc}
+
+
+
+
+1. The generated Toc will be an ordered list
+{:toc}
+
+
+var toc = require('markdown-toc');
+
+toc('# One\n\n# Two').content;
 
 
 
