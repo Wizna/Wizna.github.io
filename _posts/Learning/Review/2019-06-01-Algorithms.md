@@ -1,36 +1,23 @@
 
 
-
-
-{:toc}
-
-[TOC]
-
-
-[[_TOC_]]
-
-
-[[_TOC_]]
-
-
-{:toc}
-
-- {:toc}
-
-
-
-
-1. The generated Toc will be an ordered list
-{:toc}
-
-
-var toc = require('markdown-toc');
-
-toc('# One\n\n# Two').content;
-
-
-
 ## Sorting
+
+### Quicksort
+
+```python
+def quicksort(self, nums):
+    if len(nums) <= 1:
+        return nums
+
+    pivot = random.choice(nums)
+    lt = [v for v in nums if v < pivot]
+    eq = [v for v in nums if v == pivot]
+    gt = [v for v in nums if v > pivot]
+
+    return self.quicksort(lt) + eq + self.quicksort(gt)
+```
+
+
 
 ### Heapsort
 
@@ -51,9 +38,7 @@ toc('# One\n\n# Two').content;
   
   def right(i):
       return 2 * i + 1
-  ```
 
-  ```python
   def max_heapify(A, i):
       l = left(i)
       r = right(i)
