@@ -10,7 +10,7 @@ permalink: /about/
 
 
 
-<img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/4f55dc16-4129-4dfb-aae0-2f751ce25650/d8qf4fm-3d704f07-e5ec-4527-b229-0eafb9ecd747.png">
+<img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/4f55dc16-4129-4dfb-aae0-2f751ce25650/d8qf4fm-3d704f07-e5ec-4527-b229-0eafb9ecd747.png">{:height="200px" width="200px"}
 
 </p>
 

@@ -1,3 +1,5 @@
+![title image](https://a.ksd-i.com/a/2016-09-17/84299-457783.jpg)
+
 
 
 ## Sorting
@@ -102,6 +104,12 @@ def quicksort(self, nums):
 ## Miscellaneous
 
 ### Permutations & combinations
+
+
+
+
+
+To be continued ...
 
 
 
