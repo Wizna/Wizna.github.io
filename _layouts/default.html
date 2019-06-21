@@ -1,6 +1,6 @@
---- 
-tipue_search_active: true 
-exclude_from_search: true 
+---
+tipue_search_active: true
+exclude_from_search: true
 ---
 
 <!DOCTYPE html>
@@ -38,10 +38,10 @@ exclude_from_search: true
                     <nav>
                         <a href="{{ site.baseurl }}/">Blog</a>
                         <a href="{{ site.baseurl }}/directory">Directory</a>
-                        <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a>
+                        <!-- <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a> -->
                         <a href="{{ site.baseurl }}/about">About</a>
                     </nav>
-                    
+
                     <div id = "search-div">
                         <form action="{{ page.url | site.baseurl  }}" onsubmit="return false;">
                             <div class="tipue_search_right">
@@ -49,7 +49,7 @@ exclude_from_search: true
                                 <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
                             </div>
                         </form>
-                        
+
                         <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -61,11 +61,6 @@ exclude_from_search: true
                             </div>
                           </div>
                         </div>
-                        <!--<script>
-                        $(document).ready(function() {
-                            $('#tipue_search_input').tipuesearch();
-                        });
-                        </script>-->
                     </div>
                 </header>
             </div>
