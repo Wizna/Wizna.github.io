@@ -10,7 +10,7 @@ permalink: /about/
 
 
 
-<img src="http://rlv.zcache.com/guilty_crown_inori_round_sticker-ra143f83c9c694c4698e7ab3c011c1bb2_v9wth_8byvr_324.jpg">
+<img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/4f55dc16-4129-4dfb-aae0-2f751ce25650/d8qf4fm-3d704f07-e5ec-4527-b229-0eafb9ecd747.png">
 
 </p>
 
@@ -26,7 +26,7 @@ permalink: /about/
 
 ### My hobbies
 
-<center>Coding; Drawing; Football; Wasting time</center>
+<center>Coding; Reading; Drawing; Football</center>
 
 <br/>
 

@@ -101,6 +101,7 @@ def quicksort(self, nums):
 
 ## Miscellaneous
 
+### Permutations & combinations
 
 
 
