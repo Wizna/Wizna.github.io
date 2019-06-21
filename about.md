@@ -7,10 +7,8 @@ permalink: /about/
 
 
 <p align="center">
-<img src="images/imageedit_2_6522234514.png">
-![](images/imageedit_2_6522234514.png)
+<img src="https://github.com/Wizna/Wizna.github.io/blob/master/images/imageedit_2_6522234514.png?raw=true">
 </p>
-![](images/imageedit_2_6522234514.png)
 
 
 <center>I(黄锐铭) am currently a master student at RWTH Aachen University</center>
