@@ -109,3 +109,7 @@ I run above code in Jupyter Notebook, but it should be easy in adding arguments 
 ### Ascii output image
 
 ![](https://github.com/Wizna/Wizna.github.io/blob/master/images/ycy_ascii-2.jpg?raw=true)
+
+### A gif version
+
+![](https://github.com/Wizna/Wizna.github.io/blob/master/images/ycy.gif?raw=true)
