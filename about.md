@@ -8,8 +8,9 @@ permalink: /about/
 
 <p align="center">
 <img src="images/imageedit_2_6522234514.png">
+![](images/imageedit_2_6522234514.png)
 </p>
-
+![](images/imageedit_2_6522234514.png)
 
 
 <center>I(黄锐铭) am currently a master student at RWTH Aachen University</center>
