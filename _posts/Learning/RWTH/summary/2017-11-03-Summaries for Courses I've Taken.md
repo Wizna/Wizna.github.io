@@ -10,11 +10,11 @@ The contents are in English, with some side notes in Chinese. Because of my inca
 
 ### List of contents
 
-[Advanced Internet Technology]("https://wizna.github.io/assets/summary/Advanced Internet Technology - summary.pdf")
+[Advanced Internet Technology](https://wizna.github.io/assets/summary/Advanced%20Internet%20Technology%20-%20summary.pdf)
 
-[Advanced Machine Learning](https://wizna.github.io/assets/summary/Advanced Machine Learning - summary.pdf)
+[Advanced Machine Learning](https://wizna.github.io/assets/summary/Advanced%20Machine%20Learning%20-%20summary.pdf)
 
-[Computer Vision](https://wizna.github.io/assets/summary/Computer Vision - summary.pdf)
+[Computer Vision](https://wizna.github.io/assets/summary/Computer%20Vision%20-%20summary.pdf)
 
 [Cryptography](https://wizna.github.io/assets/summary/Cryptography - summary.pdf)
 
