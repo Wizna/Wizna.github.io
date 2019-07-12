@@ -126,24 +126,27 @@ I have been using Python intensively for about 1 year. From now and then I look 
 </thead>
 <tbody>
 	<tr>
-		<td><pre lang="nemerle">
-  def x : int = 3;
-  def y : string = "foo";
-  def obj : Object = getObject();
-  </pre></td>
+		<td>
+        	<pre lang="python">
+              def x : int = 3;
+              def y : string = "foo";
+              def obj : Object = getObject();
+          	</pre>
+  		</td>
 		<td>Column 2</td>
 		<td>Column 3</td>
 	</tr>
 	<tr>
 		<td>Custom Table Content</td>
 		<td>
-		
-  ```nemerle
-  def x : int = 3;
-  def y : string = "foo";
-  def obj : Object = getObject();
-  ```
-</td>
+
+          ```python
+          def x : int = 3;
+          def y : string = "foo";
+          def obj : Object = getObject();
+          ```
+          
+        </td>
 		<td>Column 5</td>
 	</tr>
 </tbody>
