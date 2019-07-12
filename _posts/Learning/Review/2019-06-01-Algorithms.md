@@ -105,7 +105,10 @@ def quicksort(self, nums):
 
 ### Permutations & combinations
 
+### Selection rank 
 
+- similar to quick sort
+- 
 
 
 
