@@ -97,6 +97,6 @@ collections:
 
 # markdown: CommonMarkGhPages
 
-commonmark:
-  options: ["SMART", "FOOTNOTES"]
-  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+# commonmark:
+#   options: ["SMART", "FOOTNOTES"]
+#   extensions: ["strikethrough", "autolink", "table", "tagfilter"]

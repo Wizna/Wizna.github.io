@@ -143,7 +143,7 @@ Rotate the image by 90 degrees (clockwise).
 
 You have to rotate the image [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly. **DO NOT** allocate another 2D matrix and do the rotation.
 
-<details><summary>Solution</summary>
+<details><summary>Solution</summary><p>
 
 ```python
 def rotate(matrix):
@@ -153,6 +153,7 @@ def rotate(matrix):
     """
     matrix[:] = map(list, zip(*matrix[::-1]))
 ```
+
 </p></details>
 
 
@@ -180,7 +181,7 @@ Output:
 6
 ```
 
-<details><summary>Solution</summary><p>
+<details><summary>Solution</summary>
 
 ```python
 def lastRemaining(n):
@@ -190,7 +191,8 @@ def lastRemaining(n):
     """
     return n // 2 + 1 if n < 4 else lastRemaining(n // 4) * 4 - (n % 4 < 2) * 2
 ```
-</p></details>
+
+</details>
 
 
 ### To be continued ...
