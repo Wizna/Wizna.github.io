@@ -152,4 +152,7 @@ I have been using Python intensively for about 1 year. From now and then I look 
 </tbody>
 </table>
 
+
+<script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script>
+
 ### To be continued ...
