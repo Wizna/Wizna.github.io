@@ -95,7 +95,7 @@ collections:
     output: true
     permalink: /posts/:path/
 
-markdown: CommonMarkGhPages
+# markdown: CommonMarkGhPages
 
 commonmark:
   options: ["SMART", "FOOTNOTES"]
