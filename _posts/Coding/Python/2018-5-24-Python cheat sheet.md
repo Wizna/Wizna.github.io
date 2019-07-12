@@ -7,6 +7,8 @@ I have been using Python intensively for about 1 year. From now and then I look 
 
 
 ### Table:
+
+{:class="table table-bordered"}
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
 |    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
@@ -127,18 +129,19 @@ I have been using Python intensively for about 1 year. From now and then I look 
 <tbody>
 	<tr>
 		<td>
-        	<pre lang="python">
+        	<pre lang="python3">
               def x : int = 3;
-              def y : string = "foo";
-              def obj : Object = getObject();
+              	def y : string = "foo";
+              		def obj : Object = getObject();
           	</pre>
   		</td>
-		<td>Column 2</td>
+		<td><script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script></td>
 		<td>Column 3</td>
 	</tr>
 	<tr>
 		<td>Custom Table Content</td>
 		<td>
+
 
           ```python
           def x : int = 3;
@@ -147,8 +150,8 @@ I have been using Python intensively for about 1 year. From now and then I look 
           ```
           
         </td>
-		<td>Column 5</td>
-	</tr>
+    	<td>Column 5</td>
+    </tr>
 </tbody>
 </table>
 
