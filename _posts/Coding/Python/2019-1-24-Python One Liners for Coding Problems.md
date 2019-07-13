@@ -21,20 +21,10 @@ Input: [-4,-1,0,3,10]
 Output: [0,1,9,16,100]
 ```
 
-<details><summary>Solution</summary>
-
-```python
-def sortedSquares(A):
-    """
-    :type A: List[int]
-    :rtype: List[int]
-    """
-    return [
-        A.pop(0 if abs(A[0]) > abs(A[j]) else j)**2
-        for j in range(len(A) - 1, -1, -1)
-    ][::-1]
-```
-</p></details>
+<details>
+<summary>Solution</summary>
+<script src="https://gist.github.com/Wizna/93d18ce47a5beb7d6942294ed07bccb4.js"></script>
+</details>
 
 **Side Notes**
 
@@ -47,17 +37,8 @@ def sortedSquares(A):
 Write a function to multiply two positive integers `a` and `b` without using the `*` operator (or `/` operator). You can use addition, subtraction, and bit shifting.
 
 <details><summary>Solution</summary>
-
-```python
-def multiply(a, b):
-    """
-    :type a: int
-    :type b: int
-    :rtype: int
-    """
-    return sum(b << i for i in range(32) if a >> i & 1)
-```
-</p></details>
+<script src="https://gist.github.com/Wizna/0f1b920ed59a240fe06150e6d23a4f50.js"></script>
+</details>
 
 **Side Notes**
 
@@ -74,18 +55,8 @@ We have a list of `points` on the plane.  Find the `K` closest points to the ori
 You may return the answer in any order.  The answer is guaranteed to be unique (except for the order that it is in.)
 
 <details><summary>Solution</summary>
-
-```python
-def kClosest(points, K):
-    """
-    :type points: List[List[int]]
-    :type K: int
-    :rtype: List[List[int]]
-    """
-    return sorted(points, key = lambda x: (x[0]**2 + x[1]**2))[:K]
-
-```
-</p></details>
+<script src="https://gist.github.com/Wizna/be97effec90463e902ee9a8267d3cb50.js"></script>
+</details>
 
 
 ### Problem 4
@@ -93,17 +64,8 @@ def kClosest(points, K):
 Given `N`, calculate **Fibonacci number** `F(N)`, starting from `0` and `1`.
 
 <details><summary>Solution</summary>
-
-```python
-from functools import reduce
-def fib(N):
-    """
-    :type N: int
-    :rtype: int
-    """
-    return reduce(lambda x, _: [x[1], sum(x)], range(N), [0, 1])[0]
-```
-</p></details>
+<script src="https://gist.github.com/Wizna/c8dd054682cee8472a9a8b40e8b98b50.js"></script>
+</details>
 
 
 ### Problem 5
@@ -120,17 +82,8 @@ Output: true
 ```
 
 <details><summary>Solution</summary>
-
-```python
-def isAlienSorted(words, order):
-    """
-    :type words: List[str]
-    :type order: str
-    :rtype: bool
-    """
-    return sorted(words, key=lambda x: list(map(order.index, x))) == words
-```
-</p></details>
+<script src="https://gist.github.com/Wizna/60a46b741994120c881f2c142eb17bd3.js"></script>
+</details>
 
 
 ### Problem 6
@@ -144,20 +97,8 @@ Rotate the image by 90 degrees (clockwise).
 You have to rotate the image [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly. **DO NOT** allocate another 2D matrix and do the rotation.
 
 <details><summary>Solution</summary>
-<script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script>
-
-
+<script src="https://gist.github.com/Wizna/1f6c6382e5653ffcff43d7d0b5982592.js"></script>
 </details>
-
-```python
-def rotate(matrix):
-    """
-    :type matrix: List[List[int]]
-    :rtype: void Do not return anything, modify matrix in-place instead.
-    """
-    matrix[:] = map(list, zip(*matrix[::-1]))
-```
-
 
 
 ### Problem 7
@@ -185,21 +126,5 @@ Output:
 ```
 
 <details><summary>Solution</summary>
-<p>
-<script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script>
-</p>
-
+<script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script>
 </details>
-
-```python
-def lastRemaining(n):
-    """
-    :type n: int
-    :rtype: int
-    """
-    return n // 2 + 1 if n < 4 else lastRemaining(n // 4) * 4 - (n % 4 < 2) * 2
-```
-
-
-### To be continued ...
-
