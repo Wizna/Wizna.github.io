@@ -1,7 +1,5 @@
 ![titile image](https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2016/05/729665main_A-BlackHoleArt-pia16695_full-1024x576.jpg)
 
-# Solution to LeetCode No.52 N-Queens II
-
 ### Problem
 
 return the total number of distinct solutions for N-Queens problem.

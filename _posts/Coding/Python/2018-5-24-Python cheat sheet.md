@@ -59,103 +59,10 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   47    | Get the<br/>representation string of the object              | repr(myobject)                                               | if not specified, it will be like:<br/>'<__main__.Duck object at 0x00000133BDE7A6D8>' |
 |   48    | Save<br/>memory by using generator instead of list           | Use <br/>sum(x*x for x in range(10))                         | instead of <br/>sum([x*x for x in range(10)])                |
 |   49    | variables<br/>created inside a loop are accessible outside the loop scope | for j in mylist:<br/>    print(j)<br/>print(j)               | the<br/>j actually is assigned the last element of the list mylist |
-|   50    | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed |                                                              |
-|   51    | to<br/>make class objects comparable, just add function \_\_lt\_\_ | def \_\_lt\_\_(self, other):<br/>        return ((self.last, self.first) < (other.last, other.first)) |                                                              |
-|   52    | to<br/>make class objects hashable                           | Implement \_\_hash\_\_<br/>Also need to take care of \_\_eq\_\_ and make it compatible with hash |                                                              |
+|   50    | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed | <script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script> |
+|   51    | to<br/>make class objects comparable, just add function \_\_lt\_\_ | def \_\_lt\_\_(self, other):<br/>        return ((self.last, self.first) < (other.last, other.first)) | <script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script> |
+|   52    | to<br/>make class objects hashable                           | Implement \_\_hash\_\_<br/>Also need to take care of \_\_eq\_\_ and make it compatible with hash | <script src="https://gist.github.com/Wizna/be97effec90463e902ee9a8267d3cb50.js"></script> |
 
 
-
-
-
-
-
-
-<table>
-<tr>
-<td>
-
-  ```csharp
-  const int x = 3;
-  const string y = "foo";
-  readonly Object obj = getObject();
-  ```
-</td>
-<td>
-
-  ```nemerle
-  def x : int = 3;
-  def y : string = "foo";
-  def obj : Object = getObject();
-  ```
-</td>
-<td>
-  Variables defined with <code>def</code> cannot be changed once defined. This is similar to <code>readonly</code> or <code>const</code> in C# or <code>final</code> in Java. Most variables in Nemerle aren't explicitly typed like this.
-</td>
-</tr>
-</table>
-
-
-<table>
-<tr>
-<td>
-   <pre lang="csharp">
-   const int x = 3;
-   const string y = "foo";
-   readonly Object obj = getObject();
-   </pre>
-</td>
-<td>
-  <pre lang="nemerle">
-  def x : int = 3;
-  def y : string = "foo";
-  def obj : Object = getObject();
-  </pre>
-</td>
-<td>
-  Variables defined with <code>def</code> cannot be changed once defined. This is similar to <code>readonly</code> or <code>const</code> in C# or <code>final</code> in Java. Most variables in Nemerle aren't explicitly typed like this.
-</td>
-</tr>
-</table>
-
-
-<table>
-<thead>
-	<tr>
-		<th>Header 1</th>
-		<th>Header 2</th>
-		<th>Header :</th>
-	</tr>
-</thead>
-<tbody>
-	<tr>
-		<td>
-        	<pre lang="python3">
-              def x : int = 3;
-              	def y : string = "foo";
-              		def obj : Object = getObject();
-          	</pre>
-  		</td>
-		<td><script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script></td>
-		<td>Column 3</td>
-	</tr>
-	<tr>
-		<td>Custom Table Content</td>
-		<td>
-
-
-          ```python
-          def x : int = 3;
-          def y : string = "foo";
-          def obj : Object = getObject();
-          ```
-          
-        </td>
-    	<td>Column 5</td>
-    </tr>
-</tbody>
-</table>
-
-
-<script src="https://gist.github.com/Wizna/24a0b94415cea68e105f6a4836e4cc22.js"></script>
 
 ### To be continued ...
