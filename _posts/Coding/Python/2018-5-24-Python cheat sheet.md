@@ -11,10 +11,10 @@ I have been using Python intensively for about 1 year. From now and then I look 
 {:class="table table-bordered"}
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-|    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         |                                                              |
-|    2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    |                                                              |
-|    3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] |                                                              |
-|    4    | Trim a string                                                | mystr.strip()                                                |                                                              |
+|    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         | https://gist.github.com/6d8bc2a47af1ce6a83af4e5227eb9e00#file-python cheat sheet 1-py |
+|    2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    | <script>https://gist.github.com/6d8bc2a47af1ce6a83af4e5227eb9e00#file-python cheat sheet 1-py</script> |
+|    3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] | `'hello world' [::-1]`                                       |
+|    4    | Trim a string                                                | mystr.strip()                                                | ```hello word[::-1]```                                       |
 |    5    | String replace a substring pattern with another substring    | mystr.replace('old', 'new')                                  |                                                              |
 |    6    | Cast  float or string to int                                 | int(mystr)                                                   | auto floor to the nearest integer                            |
 |    7    | Check string or char is in uppercase                         | mystr.isupper()                                              |                                                              |
