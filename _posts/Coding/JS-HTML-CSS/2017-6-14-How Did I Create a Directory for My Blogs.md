@@ -1,12 +1,8 @@
 ![title image](https://theluxurytravelexpert.files.wordpress.com/2014/01/scenery.jpg)
 
-
-
-# How Did I Create a Directory for My Blogs
-
 ### Motivation
 
-I did not find any useful directory page for static sites like jekyll. And I definitely find listing all blogs In chronological order is not handy, so I decided to implement one.
+I did not find any useful directory page for static sites like Jekyll. And I definitely find listing all blogs In chronological order is not handy, so I decided to implement one.
 
 ### Idea
 
@@ -14,7 +10,7 @@ First generate html page from structures of the folders of blogs. This is possib
 
 ### Result
 
-You can find the demo [here](https://wizna.github.io/directory/). I use JQuery and Bootstrap to ease my coding, so don't forget to import them.
+You can find the demo [here](https://wizna.github.io/directory/). I use jQuery and Bootstrap to ease my coding, so don't forget to import them.
 
 ### Code
 
@@ -50,11 +46,11 @@ We will get something like:
 </div>
 ```
 
-The paths are shown in <span>, the last element is the filename while the others are the subfolders' name. Spaces in the filename and folder name are changed into %20.
+The paths are shown in `<span>`s, the last element is the filename while the others are the subfolders' name. Spaces in the filename and folder name are changed into %20.
 
 Note that empty subfolders in the _posts will not show up, since Jekyll only iterates through md files.
 
-Then we use JavaScript to modify the page when document is ready, the first step is to construct a tree from the url of posts:
+Then we use JavaScript to modify the page when document is ready, the first step is to construct a tree from the URL of posts:
 
 ```javascript
 function getDirectoryStructure() {
@@ -85,7 +81,7 @@ function getDirectoryStructure() {
 
 
 
-I did not implement the tree myself, just using a piece of code from GitHub [Tree](https://github.com/benoitvallon/computer-science-in-javascript/blob/master/data-structures-in-javascript/tree.js).
+I did not implement the tree myself, just using a piece of [code](https://github.com/benoitvallon/computer-science-in-javascript/blob/master/data-structures-in-javascript/tree.js) from GitHub.
 
 However, since I have to visit the nodes in a recursive way, so I can't use BFS or DFS provided by the tree structure. But visit the nodes as below:
 
@@ -118,9 +114,9 @@ Since the visitors can notice changing of content of html, I added a loader to t
 
 It is a simple div in html page:
 
-```<div id="loader"></div>```
+`<div id="loader"></div>`
 
-The corresponding css is :
+The corresponding CSS is :
 
 ```css
 #loader {
@@ -157,7 +153,7 @@ The corresponding css is :
 }
 ```
 
-Add CSS style and class to the <div> for path:
+Add CSS style and class to the `<div>` for path:
 
 ```html
 <div id="loadfiles" style="display:none;" class="animate-bottom">
@@ -169,9 +165,9 @@ Add CSS style and class to the <div> for path:
 
 
 
-Note that when you want to change the size of the loader, change margin top and left to half of its size, so as to make the loader exactly in the center of the screen.
+Note that when you want to change the size of the loader, change "margin-top" and "margin-left" to half of its size, so as to make the loader exactly in the center of the screen.
 
-Also, do not forget to change the visibility of the <div>s afterwards:
+Also, do not forget to change the visibility of the `<div>`s afterwards:
 
 ```javascript
 function showPage() {
