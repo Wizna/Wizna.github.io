@@ -1,7 +1,5 @@
 ![image spanner](https://images.freecreatives.com/wp-content/uploads/2015/06/beautiful-nature-scenery.jpg)
 
-# How to select exam dates automatically
-
 ### Background
 
 In my major Software Systems Engineering here in RWTH, often there are 2 exam dates for each course and one can take either of them. It's always annoying for me to select the dates, maybe I have a little bit of select dyslexia.
@@ -48,15 +46,15 @@ def selection(exams):
 
 Sample Input:
 
-```python
+`
 selection([[[2,27], [3, 23]], [[2, 26], [3, 19]], [[2,14]], [[3, 1]],[[2,9],[3,20]]])
-```
+`
 
 Sample output:
 
-```
+`
 ('[[2, 9], [2, 14], [3, 1], [3, 19], [3, 23]]', 13.154818109052103)
-```
+`
 
 ### Notes
 
