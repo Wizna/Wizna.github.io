@@ -1,9 +1,4 @@
-
 <img src="http://s1.picswalls.com/wallpapers/2016/03/29/beautiful-nature-hd-wallpaper_042322367_304.jpg" />
-
-# A Spell Checker for German Courses
-
-
 
 ### Background
 
@@ -15,15 +10,9 @@ This summer semester I selected the practical lab: data analysis and visualizati
 
 This is a simple spell checker on German words with special character. 
 
-It is specially implemented for replacing course'names having '?' with the right character.
+It is specially implemented for replacing course' names having '?' with the right character.
 
 I simply followed the Idea of Novig and modified his code.
-
-
-
-### Link of Novig's blog
-
-[Novig's blog on spell checker](http://norvig.com/spell-correct.html)
 
 
 
@@ -78,10 +67,8 @@ def correctionStr(string):
 
 ### Usage
 
-Simply run with : 
-	myCorrectStr = correctionStr("Einf?hrung f?r settings?")
-Then myCorrectStr should be:
-	'einführung für settings?'
+Simply run with: `myCorrectStr = correctionStr("Einf?hrung f?r settings?")`
+Then `myCorrectStr` should be `"einführung für settings?"`
 
 
 ### Note
@@ -93,6 +80,6 @@ I constructed this file by counting on a text file containing 5 German books and
 
 
 ### Link
-
-[File for coursetable.p](https://github.com/Wizna/play/blob/master/coursetable.p)
+[Novig's blog](http://norvig.com/spell-correct.html)
+[coursetable.p](https://github.com/Wizna/play/blob/master/coursetable.p)
 
