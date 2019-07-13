@@ -68,6 +68,7 @@ def correctionStr(string):
 ### Usage
 
 Simply run with: `myCorrectStr = correctionStr("Einf?hrung f?r settings?")`
+
 Then `myCorrectStr` should be `"einführung für settings?"`
 
 
@@ -81,5 +82,6 @@ I constructed this file by counting on a text file containing 5 German books and
 
 ### Link
 [Novig's blog](http://norvig.com/spell-correct.html)
+
 [coursetable.p](https://github.com/Wizna/play/blob/master/coursetable.p)
 
