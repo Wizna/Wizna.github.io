@@ -11,10 +11,10 @@ I have been using Python intensively for about 1 year. From now and then I look 
 {:class="table table-bordered"}
 | **No.** | **Goal**                                                     | **Solution**                                                 | **Note**                                                     |
 | :-----: | :----------------------------------------------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-|    1    | Reverse a string or a list                                   | 'hello world' [::-1]                                         | https://gist.github.com/6d8bc2a47af1ce6a83af4e5227eb9e00#file-python cheat sheet 1-py |
-|    2    | Join a list of strings to a single string                    | result = ' '.join(mylist)                                    | <script>https://gist.github.com/6d8bc2a47af1ce6a83af4e5227eb9e00#file-python cheat sheet 1-py</script> |
-|    3    | Flatten list from list of list                               | flat_list = [item for sublist in mylist for item in sublist] | `'hello world' [::-1]`                                       |
-|    4    | Trim a string                                                | mystr.strip()                                                | ```hello word[::-1]```                                       |
+|    1    | Reverse a string or a list                                   | <script src="https://gist.github.com/Wizna/6d8bc2a47af1ce6a83af4e5227eb9e00.js"></script> |                                                              |
+|    2    | Join a list of strings to a single string                    | <script src="https://gist.github.com/Wizna/2a9441980881bbe6b48c33209fe7b707.js"></script> |                                                              |
+|    3    | Flatten list from list of list                               | <script src="https://gist.github.com/Wizna/dc4030c27711837cb9a25b7e8947a350.js"></script> |                                                              |
+|    4    | Trim a string                                                | mystr.strip()                                                |                                                              |
 |    5    | String replace a substring pattern with another substring    | mystr.replace('old', 'new')                                  |                                                              |
 |    6    | Cast  float or string to int                                 | int(mystr)                                                   | auto floor to the nearest integer                            |
 |    7    | Check string or char is in uppercase                         | mystr.isupper()                                              |                                                              |
@@ -59,9 +59,9 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   47    | Get the<br/>representation string of the object              | repr(myobject)                                               | if not specified, it will be like:<br/>'<__main__.Duck object at 0x00000133BDE7A6D8>' |
 |   48    | Save<br/>memory by using generator instead of list           | Use <br/>sum(x*x for x in range(10))                         | instead of <br/>sum([x*x for x in range(10)])                |
 |   49    | variables<br/>created inside a loop are accessible outside the loop scope | for j in mylist:<br/>    print(j)<br/>print(j)               | the<br/>j actually is assigned the last element of the list mylist |
-|   50    | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed | <script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script> |
-|   51    | to<br/>make class objects comparable, just add function \_\_lt\_\_ | def \_\_lt\_\_(self, other):<br/>        return ((self.last, self.first) < (other.last, other.first)) | <script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script> |
-|   52    | to<br/>make class objects hashable                           | Implement \_\_hash\_\_<br/>Also need to take care of \_\_eq\_\_ and make it compatible with hash | <script src="https://gist.github.com/Wizna/be97effec90463e902ee9a8267d3cb50.js"></script> |
+|   50    | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed |                                                              |
+|   51    | to<br/>make class objects comparable, just add function \_\_lt\_\_ | def \_\_lt\_\_(self, other):<br/>        return ((self.last, self.first) < (other.last, other.first)) |                                                              |
+|   52    | to<br/>make class objects hashable                           | Implement \_\_hash\_\_<br/>Also need to take care of \_\_eq\_\_ and make it compatible with hash |                                                              |
 
 
 
