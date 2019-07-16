@@ -128,3 +128,17 @@ Output:
 <details><summary>Solution</summary>
 <script src="https://gist.github.com/Wizna/606702a3ca194f283fe11a627a4f542f.js"></script>
 </details>
+
+
+### Problem 8
+
+Find the index of `n`th occurrence of substring `b` in string `a`.
+
+<details><summary>Solution</summary>
+<script src="https://gist.github.com/Wizna/7b6f9b6c7db7f95b0d4390002b9e660a.js"></script>
+</details>
+
+**Side Notes**
+
+1. If finding 4th of `b` in `a` is -1, then obviously the result of 5th should also be -1.
+2. `y` is `[0, 1, 2, 3, ...]`, increase 1 at a time, so it always increases slower than x (the indices), so `y > x + 1` is equivalent to `x == -1 and y != 0`.
