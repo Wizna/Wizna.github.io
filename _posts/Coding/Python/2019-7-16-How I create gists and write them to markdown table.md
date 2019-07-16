@@ -8,9 +8,11 @@ I have hundreds of code snippets in OneNote, I want to put them into `python che
 
 Create a gist for each code snippet, then embed the `<script>` tag into markdown file.
 
-First we need to generate a new personal token at https://github.com/settings/tokens.
+First we need to generate a new personal token [here](https://github.com/settings/tokens).
 
 We only need the permission that relate to gist.
+
+Then we move on to coding.
 
 ### Code
 
