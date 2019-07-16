@@ -62,7 +62,3 @@ I have been using Python intensively for about 1 year. From now and then I look 
 |   50    | check whether a list iterate till end normally               | for item in mylist: <br/>    ...<br/>    break<br/>else: <br/>    Do things that should be done if mylist is thoroughly traversed |                                                              |
 |   51    | to<br/>make class objects comparable, just add function \_\_lt\_\_ | def \_\_lt\_\_(self, other):<br/>        return ((self.last, self.first) < (other.last, other.first)) |                                                              |
 |   52    | to<br/>make class objects hashable                           | Implement \_\_hash\_\_<br/>Also need to take care of \_\_eq\_\_ and make it compatible with hash |                                                              |
-
-
-
-### To be continued ...
