@@ -108,7 +108,14 @@ def quicksort(self, nums):
 ### Selection rank 
 
 - similar to quick sort
-- 
+
+
+
+### Newton-Raphson algorithm
+
+### PSO algorithm
+
+
 
 
 
