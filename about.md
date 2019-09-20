@@ -14,11 +14,12 @@ permalink: /about/
 <center>I(黄锐铭) am currently a master student at RWTH Aachen University</center>
 <center>Here I would like to share what I learn in SSE and what I work through during coding</center>
 <center>Hope my blogs could be helpful  ٩(˘◡˘)۶</center>
-
 ### My hobbies
 
 <center>Coding; Reading; Drawing; Football</center>
-<br/>
+
+### Websites
+<center>媲美网: http://ysmiao.cn/ycy/</center>
 
 ### Life motto
 
