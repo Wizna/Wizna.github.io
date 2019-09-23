@@ -17,14 +17,13 @@ permalink: /about/
 ### My hobbies
 
 <center>Coding; Reading; Drawing; Football</center>
-
 ### Websites
-<center>媲美网: http://ysmiao.cn/ycy/</center>
-
+<center>杨超越(Yang Chaoyue)美图打分网站</center>
+<center><a href="http://ysmiao.cn/ycy/">- 媲美 -</a></center>
 ### Life motto
 
 <center><i>Dirty, Dangerous, Difficult</i></center>	
-<center><a href="http://www.dnvod.tv/Movie/detail.aspx?id=bSRJpoSNpkA%3d">- Infinite Challenge -</a></center>
+<center><a href="https://en.wikipedia.org/wiki/Infinite_Challenge">- Infinite Challenge -</a></center>
 ### Contact me
 
 <center> <a href="mailto:huangruiming999@gmail.com">huangruiming999@gmail.com</a></center>
