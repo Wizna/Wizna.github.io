@@ -1,12 +1,12 @@
 ![](https://photo.settour.com.tw/900x600/https%3A%2F%2Fs2.settour.com.tw%2Fss_img%2FGFG%2F0000%2F0002%2F55%2Fori_9681881.jpg)
 
-[TOC]
+{:toc}
 
-#Background
+# Background
 
 Just a review of machine learning
 
-#Basics
+# Basics
 - Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training b y Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 
 
 ## Hyper parameters
@@ -41,11 +41,11 @@ Just a review of machine learning
 
 
 
-#Convolutional neural network
+# Convolutional neural network
 
 
 
-#Recurrent neural network
+# Recurrent neural network
 
 - 
 - 
@@ -54,10 +54,10 @@ Just a review of machine learning
 
 
 
-#Computer vision
+# Computer vision
 
-##Pooling
+## Pooling
 - 
 
-#Natural language processing
+# Natural language processing
 
