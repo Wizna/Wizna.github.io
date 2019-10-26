@@ -20,13 +20,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Transfer learning
 
-- chop off classification layers and replace with ones cater to ones' needs. Freeze pretrained layers during training. Enable training on batch normalization layers as well may get better results.
+- Chop off classification layers and replace with ones cater to ones' needs. Freeze pretrained layers during training. Enable training on batch normalization layers as well may get better results.
 
-- 
 
 ## Curriculum learning
 
-- 
+
 ## Objective function
 
 ### Mean absolute error
@@ -107,7 +106,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Word2vec
 
-## N-gram
+## N-grams
 
 
 
