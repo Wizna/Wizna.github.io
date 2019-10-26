@@ -27,7 +27,18 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Curriculum learning
 
 - 
+## Objective function
+
+### Mean absolute error
+
+### Mean squared error
+
+### Cross-entropy loss
+
+- $loss(x,class)=-\log(\frac{exp(x[class])}{\Sigma_{j}exp(x[j])})=-x[class]+\log(\Sigma_{j}exp(x[j]))$
+
 ## Regularization
+
 ### Dropout
 
 ## Learning rate
@@ -54,7 +65,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Ensembles
 
-- Combine multiple models' predictions to produce a final result
+- Combine multiple models' predictions to produce a final result (can be a collection of different checkpoints of a single model or models of different structures)
 
 # Convolutional neural network
 
@@ -62,11 +73,14 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Recurrent neural network
 
-- 
-- 
-## Attention mechanism
+- May suffer vanishing or exploding gradient
 
 
+
+## LSTM
+
+- [Long short-term memory]( https://www.bioinf.jku.at/publications/older/2604.pdf )
+- Can be bidirectional (just stack 2 lstm together, with input of opposite direction)
 
 # Computer vision
 
@@ -88,6 +102,36 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 
 
 # Natural language processing
+
+## Embeddings
+
+### Word2vec
+
+## N-gram
+
+
+
+## BPE
+
+- Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
+- 
+
+## Metrics
+
+### BLEU
+
+### TER
+
+
+
+## Attention
+
+- [Attention Is All You Need]( https://arxiv.org/pdf/1706.03762.pdf )
+- 
+
+# Reinforcement learning
+
+
 
 # To be continued ...
 
