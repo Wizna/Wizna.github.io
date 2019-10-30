@@ -40,6 +40,10 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Dropout
 
+### Label smoothing
+
+- Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q'(k|x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
+
 ## Learning rate
 
 ###  Pick learning rate
@@ -66,6 +70,20 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Combine multiple models' predictions to produce a final result (can be a collection of different checkpoints of a single model or models of different structures)
 
+##  Activations
+
+### ReLU
+
+### LeakyReLU
+
+### tanh
+
+###Sigmoid
+
+### Softmax
+
+
+
 # Convolutional neural network
 
 
@@ -85,6 +103,10 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Data augmentation
 
+### general
+
+- Mixup: superimpose e.g. 2 images together with a weight respectively e.g. 0.3, 0.7, classification loss modified to mean of the 2 class (with true labels not as 1s, but as 0.3, 0.7) [mixup: Beyond Empirical Risk Minimization]( https://arxiv.org/pdf/1710.09412.pdf )
+
 ### for image
 
 - Change to RGB, HSV, YUV, LAB color spaces
@@ -95,6 +117,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### for text
 
 - Back-translation for machine translation task, use a translator from opposite direction and generate (synthetic source data, monolingual target data) dataset
+
+### for audio
+
+- SoX effects
+- Change to spectrograms, then apply time warping, frequency masking (randomly remove a set of frequencies), time masking [ SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition ]( https://arxiv.org/pdf/1904.08779.pdf )
 
 ## Pooling
 
