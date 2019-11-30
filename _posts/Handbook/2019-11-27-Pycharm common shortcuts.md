@@ -46,4 +46,5 @@
 | extract variable                          | ctrl + alt + v           |                                       |
 | extract field                             | ctrl + alt + f           |                                       |
 | extract parameter                         | ctrl + alt + p           |                                       |
+| advanced search                           | ctrl + shift + f         |                                       |
 
