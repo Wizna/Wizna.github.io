@@ -6,7 +6,7 @@
 
 ### 代码
 
-https://github.com/Wizna/GPT2-Chinese
+[项目地址](https://github.com/Wizna/GPT2-Chinese)
 
 ### 使用
 <script src="https://gist.github.com/Wizna/aa6205fe0a7fd2bbc9a2e5250bc98624.js"></script>
