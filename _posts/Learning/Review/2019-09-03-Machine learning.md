@@ -65,6 +65,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Optimizer
 
 - Gradient descent: go along the gradient, not applicable to extremely large model (memory, time)
+- weight = weight - learning_rate * gradient
 - Stochastic gradient descent: pick a sample or a subset of data, go
 
 ### Adam
