@@ -5,6 +5,9 @@
  
 
 
+##背景
+简单复习一下最基本的算法和数据结构
+
 ## Sorting
 
 ### Quicksort
@@ -21,8 +24,6 @@ def quicksort(self, nums):
 
     return self.quicksort(lt) + eq + self.quicksort(gt)
 ```
-
-
 
 ### Heapsort
 
@@ -72,6 +73,8 @@ def quicksort(self, nums):
 
 ### Red-Black Trees
 
+### AVL Trees
+
 ### Augmenting data structures
 
 ### B-Trees
@@ -102,6 +105,10 @@ def quicksort(self, nums):
 
 ### String matching
 
+#### Rabin-Karp
+
+
+
 ### Computational geometry
 
 ## Miscellaneous
@@ -117,6 +124,8 @@ def quicksort(self, nums):
 ### Newton-Raphson algorithm
 
 ### PSO algorithm
+
+### Fenwick tree
 
 
 
