@@ -1,3 +1,5 @@
+
+
 ![](https://photo.settour.com.tw/900x600/https%3A%2F%2Fs2.settour.com.tw%2Fss_img%2FGFG%2F0000%2F0002%2F55%2Fori_9681881.jpg)
 
 * TOC
@@ -9,6 +11,22 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Basics
 - Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 
+- MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
+- broadcast就是复制来填充新的维度
+- missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
+- 使用`x+=y`或者`z[:]=x`可以在老地方设置新ndarray，节约内存
+- scalar, vector, matrix, tensor: 0-, 1-, 2-, n-dimension
+- $L_{p}$ norm: ![image-20200517120714786](https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png)
+- calculus微积分: integration, differentiation
+- product rule: ![image-20200517210613582](https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png)
+
+* quotient rule: ![image-20200517210755705](https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png)
+* chain rule: ![image-20200517213323541](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213323541.png)
+* matrix calculus: ![image-20200517213215946](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213215946.png)
+* A gradient is a vector whose components are the partial derivatives of a multivariate function
+  with respect to all its variables
+* Bayes' Theorem: ![image-20200517214155675](https://raw.githubusercontent.com/Wizna/play/master/image-20200517214155675.png)
+* 
 
 ## Hyper parameters
 
@@ -67,6 +85,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - Gradient descent: go along the gradient, not applicable to extremely large model (memory, time)
 - weight = weight - learning_rate * gradient
 - Stochastic gradient descent: pick a sample or a subset of data, go
+- 
+
+### Momentum 
+
+### Adagrad 
 
 ### Adam
 
