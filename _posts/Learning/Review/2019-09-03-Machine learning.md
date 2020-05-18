@@ -9,6 +9,8 @@
 
 Just a review of machine learning for myself (really busy recently, so ...)
 
+内容来自dive into deep learning, pattern recognition and machine learning, 网络。
+
 # Basics
 - Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 
 - MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
@@ -16,16 +18,28 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
 - 使用`x+=y`或者`z[:]=x`可以在老地方设置新ndarray，节约内存
 - scalar, vector, matrix, tensor: 0-, 1-, 2-, n-dimension
-- $L_{p}$ norm: ![image-20200517120714786](https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png)
+- $L_{p}$ norm: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png" alt="image-20200517120714786" style="zoom:80%;" />
 - calculus微积分: integration, differentiation
-- product rule: ![image-20200517210613582](https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png)
+- product rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png" alt="image-20200517210613582" style="zoom:80%;" />
 
-* quotient rule: ![image-20200517210755705](https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png)
+* quotient rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png" alt="image-20200517210755705" style="zoom:80%;" />
 * chain rule: ![image-20200517213323541](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213323541.png)
-* matrix calculus: ![image-20200517213215946](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213215946.png)
+* matrix calculus: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517213215946.png" alt="image-20200517213215946" style="zoom:80%;" />[matrix calculus wiki](https://en.wikipedia.org/wiki/Matrix_calculus)
 * A gradient is a vector whose components are the partial derivatives of a multivariate function
   with respect to all its variables
-* Bayes' Theorem: ![image-20200517214155675](https://raw.githubusercontent.com/Wizna/play/master/image-20200517214155675.png)
+* Bayes' Theorem: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517214155675.png" alt="image-20200517214155675" style="zoom:80%;" />
+* <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517222203691.png" alt="image-20200517222203691" style="zoom:80%;" />[推导](https://en.wikipedia.org/wiki/Variance)
+* dot product: a scalar; cross product: a vector
+* stochastic gradient descent: update in direction of negative gradient of minibatch<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518114459580.png" alt="image-20200518114459580" style="zoom:80%;" />
+* likelihood: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518120658206.png" alt="image-20200518120658206" style="zoom:80%;" />
+* 经常用negative log-likelihood来将maximize multiplication变成minimize sum
+* minimizing squared error is equivalent to maximum likelihood estimation of a linear model under the assumption of additive Gaussian noise
+* one-hot encoding: 1个1，其他补0
+* entropy of a distribution p: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518173223125.png" alt="image-20200518173223125" style="zoom:80%;" />
+* cross-entropy is *asymmetric*: $H(p,q)=-\sum\limits_{x\in X}{p(x)\log q(x)}$
+* minimize cross-entropy == maximize likelihood
+* Kullback-Leibler divergence (也叫relative entropy或者information gain) is the difference between cross-entropy and entropy: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518174004941.png" alt="image-20200518174004941" style="zoom:80%;" />
+* KL divergence is *asymmetric* and does not satisfy the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)
 * 
 
 ## Hyper parameters
@@ -107,9 +121,17 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ###Sigmoid
 
+* sigmoid是一类s型曲线
+* 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
+* 
+
 ### Softmax
 
+* 计算<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518141705932.png" alt="image-20200518141705932" style="zoom:80%;" />
+* softmax保证了each logit >=0且和为1
+* 给softmax搭配cross entropy避免了exponential带来的数值overflow或者underflow问题
 
+* 
 
 # Convolutional neural network
 
