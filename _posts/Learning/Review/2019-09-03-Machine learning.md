@@ -19,6 +19,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 使用`x+=y`或者`z[:]=x`可以在老地方设置新ndarray，节约内存
 - scalar, vector, matrix, tensor: 0-, 1-, 2-, n-dimension
 - $L_{p}$ norm: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png" alt="image-20200517120714786" style="zoom:80%;" />
+- $L_{p}$norm的性质, for vectors in $C^{n}$ where $ 0 < r < p $：![f58fa1507500f5afe377f76f4d3fc0007c93b64e](https://raw.githubusercontent.com/Wizna/play/master/f58fa1507500f5afe377f76f4d3fc0007c93b64e.svg)
 - calculus微积分: integration, differentiation
 - product rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png" alt="image-20200517210613582" style="zoom:80%;" />
 
@@ -40,15 +41,17 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * minimize cross-entropy == maximize likelihood
 * Kullback-Leibler divergence (也叫relative entropy或者information gain) is the difference between cross-entropy and entropy: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518174004941.png" alt="image-20200518174004941" style="zoom:80%;" />
 * KL divergence is *asymmetric* and does not satisfy the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)
+* cross validation: split into k sets. do k experiments on (k-1 train, 1 validation), average the results
 * 
 
-## Hyper parameters
+## Hyperparameters
+
+* 一般layer width (node个数)取2的幂，计算高效
+* 
 
 ### Grid search
 
 ### Random search
-
-
 
 ## Transfer learning
 
@@ -70,7 +73,20 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Regularization
 
+### Weight decay
+
+* 即L2 regularization
+* encourages weight values to decay towards zero, unless supported by the data.
+* 这是q=2,ridge，让weights distribute evenly, driven to small values
+* q=1的话，lasso, if $λ$ is sufficiently large, some of the coefficients $w_{j}$ are driven to zero, leading to a sparse model,比如右边lasso的$w_{1}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519133624932.png" alt="image-20200519133624932" style="zoom:50%;" />
+* 
+
 ### Dropout
+
+* breaks up co-adaptation between layers
+* in training, zeroing out each hidden unit with probability $p$, multiply by $\frac{1}{1-p}$ if kept, 这使得expected sum of weights, expected value of activation the same (这也是可以直接让p=0就用在test mode)
+* in testing, no dropout
+* 不同层可以不同dropout, a common trend is to set a lower dropout probability closer to the input layer
 
 ### Label smoothing
 
@@ -91,6 +107,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - Start with a large learning rate, shrink after a number of iterations or after some conditions met (e.g. 3 epoch without improvement on loss)
 
 ## Initialization
+
+* 
 
 ### Xavier initialization
 
@@ -115,14 +133,19 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### ReLU
 
-### LeakyReLU
+* $ReLU(z)=max(z,0)$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519004508856.png" alt="image-20200519004508856" style="zoom:50%;" />
+* mitigates vanishing gradient
 
-### tanh
+### LeakyReLU
 
 ###Sigmoid
 
 * sigmoid是一类s型曲线
 * 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
+* logistic function值域0-1: $f(x)=\frac{1}{1+e^{-x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519005935784.png" alt="image-20200519005935784" style="zoom: 50%;" />
+* 求导$\frac{df}{dx}=f(x)(1-f(x))=f(x)f(-x)$[过程](https://en.wikipedia.org/wiki/Logistic_function#Derivative)
+* tanh (hyperbolic tangent) function: $f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519011314832.png" alt="image-20200519011314832" style="zoom:50%;" />
+* tanh形状和logistic相似，不过tanh是原点对称的$\frac{df}{dx}=1-f^{2}(x)$
 * 
 
 ### Softmax
@@ -202,7 +225,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Attention
 
 - [Attention Is All You Need]( https://arxiv.org/pdf/1706.03762.pdf )
-- 
+
+
+
+### BERT
+
+* 
 
 # Reinforcement learning
 
