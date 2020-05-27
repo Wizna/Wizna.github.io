@@ -42,6 +42,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * Kullback-Leibler divergence (也叫relative entropy或者information gain) is the difference between cross-entropy and entropy: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518174004941.png" alt="image-20200518174004941" style="zoom:80%;" />
 * KL divergence is *asymmetric* and does not satisfy the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)
 * cross validation: split into k sets. do k experiments on (k-1 train, 1 validation), average the results
+* forward propagation calculates and stores intermediate variables.
+* 对于loss function $J$, 要计算偏导的$W$, $\frac{\partial J}{\partial W}=\frac{\partial J}{\partial O}*I^{T}+\lambda W$, 这里$O$是这个的output, $I$是这个的input，后面的term是regularization的导，这里也说明了为啥forward propagation要保留中间结果，此外注意activation function的导是elementwise multiplication，有些activation function对不同值的导得分别计算。training比prediction要占用更多内存
 * 
 
 ## Hyperparameters
@@ -108,9 +110,16 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Initialization
 
-* 
+* 求偏导，简单例子，对于一个很多层dense的模型，偏导就是连乘，eigenvalues范围广，特别大或者特别小，这个是log-space不能解决的
+
+* Vanishing gradients: cause by比如用sigmoid做activation function,导数两头都趋于0，见图<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200520122630230.png" alt="image-20200520122630230" style="zoom:50%;" />
+* Exploding gradients：比如100个~Normal(0,1)的数连乘，output炸了，gradient也炸了，一发update，model参数就毁了
+* Symmetry：全连接的话，同一层所有unit没差，所以如果初始化为同一个值就废了
+* 普通可用的初始化，比如Uniform(-0.07, 0.07)或者Normal(mean=0, std=0.01)
 
 ### Xavier initialization
+
+* 
 
 ## Optimizer
 
