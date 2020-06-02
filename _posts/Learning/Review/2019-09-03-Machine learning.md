@@ -119,7 +119,9 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Xavier initialization
 
-* 
+* 为了满足variance经过一层后稳定，$\sigma^2$是某层$W$初始化后的的variance，对于forward propagation, 我们需要$n_{in}\sigma^2=1$，对于backward propagation，我们需要$n_{out}\sigma^2=1$，所以，选择满足![image-20200602162551489](https://raw.githubusercontent.com/Wizna/play/master/image-20200602162551489.png)
+* 可以用mean是0，variance是$\sigma^2=\frac{2}{n_{in}+n_{out}}$的Gaussian distribution，也可以用uniform distribution $U(-\sqrt{\frac{6}{n_{in} + n_{out}}},\sqrt{\frac{6}{n_{in} + n_{out}}})$
+* 注意到variance of uniform distribution $U(-a, a)$是$\int_{-a}^{a}(x-0)^2 \cdot f(x)dx=\int_{-a}^{a}x^2 \cdot \frac{1}{2a}dx=\frac{a^2}{3}$
 
 ## Optimizer
 
