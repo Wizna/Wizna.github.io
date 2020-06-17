@@ -1,6 +1,6 @@
 
 
-![](https://photo.settour.com.tw/900x600/https%3A%2F%2Fs2.settour.com.tw%2Fss_img%2FGFG%2F0000%2F0002%2F55%2Fori_9681881.jpg)
+![title image](https://raw.githubusercontent.com/Wizna/play/master/https%253A%252F%252Fs2.settour.com.tw%252Fss_img%252FGFG%252F0000%252F0002%252F55%252Fori_9681881.jpg)
 
 * TOC
 {:toc}
@@ -44,6 +44,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * cross validation: split into k sets. do k experiments on (k-1 train, 1 validation), average the results
 * forward propagation calculates and stores intermediate variables.
 * 对于loss function $J$, 要计算偏导的$W$, $\frac{\partial J}{\partial W}=\frac{\partial J}{\partial O}*I^{T}+\lambda W$, 这里$O$是这个的output, $I$是这个的input，后面的term是regularization的导，这里也说明了为啥forward propagation要保留中间结果，此外注意activation function的导是elementwise multiplication，有些activation function对不同值的导得分别计算。training比prediction要占用更多内存
+* Shift: distribution shift, covariate shift, label shift
 * 
 
 ## Hyperparameters
