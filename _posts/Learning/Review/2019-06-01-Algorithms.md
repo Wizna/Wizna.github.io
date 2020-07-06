@@ -85,7 +85,34 @@ def quicksort(self, nums):
 
 ### Segment Tree
 
+### Linkedlist
 
+- to find if there is a cycle in a linked list 
+
+- ```python 
+  class Node:
+      def __init__(self, x):
+          self.val = x
+          self.next = None
+  
+  def is_cyclic(head):
+      """
+      :type head: Node
+      :rtype: bool
+      """
+      if not head:
+          return False
+      runner = head
+      walker = head
+      while runner.next and runner.next.next:
+          runner = runner.next.next
+          walker = walker.next
+          if runner == walker:
+              return True
+      return False
+  ```
+
+- 
 
 ## Graph
 
@@ -112,6 +139,26 @@ def quicksort(self, nums):
 ### Computational geometry
 
 ## Miscellaneous
+
+### Parition of a number
+
+- **partition** of a positive [integer](https://en.wikipedia.org/wiki/Integer) *n*, also called an **integer partition**, is a way of writing *n* as a [sum](https://en.wikipedia.org/wiki/Summation) of positive integers，不关心顺序
+
+- ```python
+  # 这个是输出所有的partition结果
+  def partitions(n, I=1):
+      yield (n, )
+      for i in range(I, n // 2 + 1):
+          for p in partitions(n - i, i):
+              yield (i, ) + p
+              
+  # 这个是计算有多少种分法，其实和上面的类似            
+  def par(n, b=1):
+      r = 1
+      for i in range(b, n // 2 + 1):
+          r += par(n - i, i)
+      return r
+  ```
 
 ### Permutations & combinations
 
