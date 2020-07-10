@@ -6,7 +6,9 @@
 
 
 ##背景
-简单复习一下最基本的算法和数据结构
+简单复习一下最基本的算法和数据结构，可惜一直耽搁了。
+
+部分来自introduction to algorithm和https://github.com/keon/algorithms，还有网络。
 
 ## Sorting
 
@@ -35,7 +37,7 @@ def quicksort(self, nums):
 
 - index of array starts at 1.
 
-- ```python
+```python
   def parent(i):
       return i // 2
   
@@ -63,10 +65,7 @@ def quicksort(self, nums):
       A.heap_size = len(A)
       for i in range(len(A) // 2, 0, -1):
           max_heapfiy(A, i)
-  ```
-
-- 
-
+```
 
 
 ## Data Structures
@@ -79,9 +78,13 @@ def quicksort(self, nums):
 
 ### B-Trees
 
-### Disjoint sets
+### Disjoint sets (Union find)
+
+- 
 
 ### Trie
+
+
 
 ### Segment Tree
 
@@ -89,7 +92,7 @@ def quicksort(self, nums):
 
 - to find if there is a cycle in a linked list 
 
-- ```python 
+```python 
   class Node:
       def __init__(self, x):
           self.val = x
@@ -110,9 +113,7 @@ def quicksort(self, nums):
           if runner == walker:
               return True
       return False
-  ```
-
-- 
+```
 
 ## Graph
 
@@ -144,7 +145,7 @@ def quicksort(self, nums):
 
 - **partition** of a positive [integer](https://en.wikipedia.org/wiki/Integer) *n*, also called an **integer partition**, is a way of writing *n* as a [sum](https://en.wikipedia.org/wiki/Summation) of positive integers，不关心顺序
 
-- ```python
+```python
   # 这个是输出所有的partition结果
   def partitions(n, I=1):
       yield (n, )
@@ -158,7 +159,7 @@ def quicksort(self, nums):
       for i in range(b, n // 2 + 1):
           r += par(n - i, i)
       return r
-  ```
+```
 
 ### Permutations & combinations
 
