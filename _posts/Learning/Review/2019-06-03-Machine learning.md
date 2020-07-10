@@ -304,6 +304,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### Word2vec
 
 - **Word2vec** is a group of related models that are used to produce [word embeddings](https://en.wikipedia.org/wiki/Word_embedding). These models are shallow, two-layer [neural networks](https://en.wikipedia.org/wiki/Neural_network) that are trained to reconstruct linguistic contexts of words. Word2vec takes as its input a large [corpus of text](https://en.wikipedia.org/wiki/Text_corpus) and produces a [vector space](https://en.wikipedia.org/wiki/Vector_space), typically of several hundred [dimensions](https://en.wikipedia.org/wiki/Dimensions), with each unique word in the [corpus](https://en.wikipedia.org/wiki/Corpus_linguistics) being assigned a corresponding vector in the space. [Word vectors](https://en.wikipedia.org/wiki/Word_vectors) are positioned in the vector space such that words that share common contexts in the corpus are located close to one another in the space.
+- 训练时，会抑制那些出现频率高的词，比如the，所以出现频率越高，训练时某句中被dropout的概率越大
 
 #### Skip-gram model
 
@@ -342,6 +343,20 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 其中条件为真，$[\![x]\!]=1$，否则为$-1$
 - 现在是$\log_{2}{|V|}$
 
+### GloVe 
+
+- 
+
+### Subword embedding
+
+#### fastText 
+
+
+
+#### BPE 
+
+- Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
+- 
 
 ## N-grams
 
@@ -349,9 +364,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - Laplace smoothing (additive smoothing): ![image-20200629065408275](https://raw.githubusercontent.com/Wizna/play/master/image-20200629065408275.png),这里m是categories数量，所以估计值会在原本的概率和1/m的均匀分布之间，$\alpha$经常取0~1之间的数，如果是1的话，这个也叫做add-one smoothing
 - 
 
-## BPE
 
-- Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
+
 - 
 
 ## Metrics
