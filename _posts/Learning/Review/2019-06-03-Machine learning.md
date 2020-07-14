@@ -56,6 +56,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * 对于复杂模型，有block这个概念表示特定的结构，可以是1层，几层或者整个模型。只要写好参数和forward函数即可。
 * 模型有时候需要，也可以，使不同层之间绑定同样的参数，这时候backpropagation的gradient是被分享那一层各自的和，比如a->b->b->c，就是第一个b和第二个b的和
 * chain rule (probability): ![image-20200627215124291](https://raw.githubusercontent.com/Wizna/play/master/image-20200627215124291.png)
+* cosine similarity，如果俩向量同向就是1 ![image-20200714115907851](https://raw.githubusercontent.com/Wizna/play/master/image-20200714115907851.png)
 * 
 
 ## Hyperparameters
@@ -300,6 +301,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Embeddings
 
 - The technique of mapping words to vectors of real numbers is known as word embedding.
+- word embedding可以给下游任务用，也可以直接用来找近义词或者类比（biggest = big + worst - bad）
+- one-hot的维度是词汇量大小，sparse and high-dimensional，训练的embedding几维其实就是几个column，n个词汇，d维表示出来就是$n*d$的2维矩阵，所以很dense，一般就几百维
 
 ### Word2vec
 
@@ -345,18 +348,38 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### GloVe 
 
+- use square loss，数以$w_{i}$为central target word的那些context word的个数，比如某个word $w_{j}$，那么这个个数记为$x_{ij}$，注意到两个词互为context，所以$x_{ij}=x_{ji}$，这带来一个好处，2 vectors相等（实际中训练后俩vector因为初始化不一样，所以训练后不一样，取sum作为最后训练好的的embedding）
+- 令![image-20200711100056462](https://raw.githubusercontent.com/Wizna/play/master/image-20200711100056462.png)，$p'$是我们的目标，$q'$是要训练的那俩vector，此外还有俩bias标量参数，一个给target word $b_{i}$, 一个给context word $c_{i}$. The weight function $h(x)$ is a monotone increasing function with the range [0; 1].
+- loss function is ![image-20200711095455939](https://raw.githubusercontent.com/Wizna/play/master/image-20200711095455939.png)
 - 
 
 ### Subword embedding
 
+- 欧洲很多语言词性变化很多（morphology词态学），但是意思相近，简单的每个词对应某向量就浪费了这种信息。用subword embedding可以生成训练中没见过的词
+
 #### fastText 
 
-
+- 给每个单词加上$<>$，然后按照character取长度3-6的那些subword，然后自己本身$<myself>$也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
+- 缺点是vocabulary变大很多
 
 #### BPE 
 
 - Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
-- 
+- 从length=1的symbol是开始，也就是字母，greedy
+
+## BERT
+
+* bidirectional encoder representations from transformers
+* 本质上word embedding是种粗浅的pretrain，而且word2vec, GloVe是context无关的，因为单词一词多义，所以context-sensitive的语言模型很有价值
+* 在context-sensitive的语言模型中，ELMo是task-specific, GPT更好的一点就是它是task-agnostic(不可知的)，不过GPT只是一侧context，从左到右，左边一样的话对应的vector就一样，不如ELMo，BERT天然双向context。在ELMo中，加的pretrained model被froze，不过GPT中所有参数都会被fine-tune.
+* classification token $<cls>$，separation token $<sep>$
+* The embeddings of the BERT input sequence are the sum of the token embeddings, segment embeddings, and positional embeddings这仨都是要训练的
+* pretraining包含两个tasks，masked language modeling 和next sentence prediction
+* masked language modeling就是mask某些词为$<mask>$，然后来预测这个token。loss可以是cross-entropy
+* next sentence prediction则是判断两个句子是否是连着的，binary classification，也可用cross-entropy loss
+* BERT可以被用于大量不同任务，加上fully-connected layer，这是要train的，而本身的pretrained parameters也要fine-tune。Parameters that are only related to pretraining loss will not be updated during finetuning，指的是按照masked language modelling loss和next sentence prediction loss训练的俩MLPs
+* 一般是BERT representation of <cls>这个token被用来transform，比如扔到一个mlp中去输出个分数或类别
+* 一般来说BERT不适合text generation，因为虽然可以全都<mask>，然后随便生成。但是不如GPT-2那种从左到右生成。
 
 ## N-grams
 
@@ -402,9 +425,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
   position along the embedding vector dimension。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones
 - 
 
-### BERT
-
-* 
+* [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf)这里提出一种结构，可以parameter少，还并行性好，结果还很好，3 steps: attending, comparing, aggregating.
 
 # Reinforcement learning
 
