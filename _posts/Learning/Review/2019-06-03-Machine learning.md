@@ -26,7 +26,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - calculus微积分: integration, differentiation
 - product rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png" alt="image-20200517210613582" style="zoom:80%;" />
 
-* quotient rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png" alt="image-20200517210755705" style="zoom:80%;" />
+* quotient rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png" alt="image-20200517210755705" style="zoom:80%;" />上面的是领导啊
 * chain rule: ![image-20200517213323541](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213323541.png)
 * matrix calculus: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517213215946.png" alt="image-20200517213215946" style="zoom:80%;" />[matrix calculus wiki](https://en.wikipedia.org/wiki/Matrix_calculus)
 * A gradient is a vector whose components are the partial derivatives of a multivariate function
@@ -192,6 +192,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
 * logistic function值域0-1: $f(x)=\frac{1}{1+e^{-x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519005935784.png" alt="image-20200519005935784" style="zoom: 50%;" />
 * 求导$\frac{df}{dx}=f(x)(1-f(x))=f(x)f(-x)$[过程](https://en.wikipedia.org/wiki/Logistic_function#Derivative)
+* ![image-20200715084244575](https://raw.githubusercontent.com/Wizna/play/master/image-20200715084244575.png)
 * tanh (hyperbolic tangent) function: $f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519011314832.png" alt="image-20200519011314832" style="zoom:50%;" />
 * tanh形状和logistic相似，不过tanh是原点对称的$\frac{df}{dx}=1-f^{2}(x)$
 * 
@@ -431,9 +432,14 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Appendix
 
-- 知识蒸馏
+- 知识蒸馏：模型压缩，用小模型模拟 a pre-trained, larger model (or ensemble of models)，引入一个变量softmax temperature $T$，$T$经常是1~20，$p_i = \frac{exp\left(\frac{z_i}{T}\right)}{\sum_{j} \exp\left(\frac{z_j}{T}\right)}$。两个新的超参数$\alpha, \beta$，其中$\beta$一般是$1-\alpha$，soft target包含的信息量更大。![image-20200715070355206](https://raw.githubusercontent.com/Wizna/play/master/image-20200715070355206.png)
 
-- Gaussian Mixture Model 和 K means
+- 步骤：1、训练大模型：先用hard target，也就是正常的label训练大模型。
+  2、计算soft target：利用训练好的大模型来计算soft target。也就是大模型“软化后”再经过softmax的output。
+  3、训练小模型，在小模型的基础上再加一个额外的soft target的loss function，通过lambda来调节两个loss functions的比重。
+  4、预测时，将训练好的小模型按常规方式使用。
+
+- Gaussian Mixture Model 和 K means：本质都可以做clustering，k means就是随便选几个点做cluster，然后hard assign那些点到某一个cluster，计算mean作为新cluster，不断EM optimization。gaussian mixture model则可以soft assign，某个点有多少概率属于这个cluster
 
 - 无监督机器翻译怎么做
 
@@ -443,7 +449,13 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Unsupervised Machine Translation Using Monolingual Corpora Only
 
-- 
+- 方法
+
+- starts with an unsupervised naïve translation model obtained by making word-by-word translation of sentences using a parallel dictionary learned in an unsupervised way
+
+- train the encoder and decoder by reconstructing a sentence in a particular domain, given a noisy version （避免直接copy）of the same sentence in the same or in the other domain （重建或翻译）其中result of a translation with the model at the previous iteration in the case of the translation task.
+
+- 此外还训练一个神经网络discriminator，encoder需要fool这个网络（让它判断不了输入语言ADVERSARIAL TRAINING）
 
 - Glove vs word2vec， glove会更快点,easier to parallelize 
 
@@ -453,9 +465,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Coverage机制 Seq2Seq token重复问题
 
-- 样本不均衡：上采样，下采样，调整权重
-
-- 预防过拟合
+- 预防过拟合：label smoothing
 
 - cross entropy logistic regression
 
@@ -463,9 +473,31 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Boosting Bagging Stacking
 
+- ```
+  # bagging
+  Given dataset D of size N.
+  For m in n_models:
+      Create new dataset D_i of size N by sampling with replacement from D.
+      Train model on D_i (and then predict)
+  Combine predictions with equal weight 
+  
+  # boosting，重视那些分错的
+  Init data with equal weights (1/N).
+  For m in n_model:
+      Train model on weighted data (and then predict)
+      Update weights according to misclassification rate.
+      Renormalize weights
+  Combine confidence weighted predictions
+  
+  ```
+
+- 
+
 - GDBT Random Forest
 
 - xgboost lightgbm
+
+- 样本不均衡：上采样，下采样，调整权重
 
 - 编辑距离
 
