@@ -15,6 +15,8 @@
 ### Quicksort
 
 ```python
+import random
+
 def quicksort(self, nums):
     if len(nums) <= 1:
         return nums
@@ -170,7 +172,6 @@ def topo_sort(latencies):
         time_dict[(n, prev)] = time
 
     node_results = defaultdict(int)
-    to_decide = source | end
 
     topo_que = list(source - end)
     while topo_que:
@@ -332,6 +333,18 @@ def ford_fulkerson(capacity, source, sink):
 
 
 ### Newton-Raphson algorithm
+
+- 牛顿法就是按照公式更新![image-20200715153703685](https://raw.githubusercontent.com/Wizna/play/master/image-20200715153703685.png)，这里的公式说白了就是$x-r^{2}$，求它的解
+
+```python 
+def sqrt(x):
+    r = x
+    while r * r > x:
+        r = (r + x / r) / 2
+    return r
+```
+
+
 
 ### PSO algorithm
 
