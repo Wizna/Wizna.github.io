@@ -289,8 +289,68 @@ def ford_fulkerson(capacity, source, sink):
 
 
 
-
 ## Selected topics
+
+### Dynamic programming
+
+- 编辑距离
+
+```python 
+  # insert, delete or replace a character
+  def minDistance(self, word1, word2):
+      """Dynamic programming solution"""
+      m = len(word1)
+      n = len(word2)
+      table = [[0] * (n + 1) for _ in range(m + 1)]
+  
+      for i in range(m + 1):
+          table[i][0] = i
+      for j in range(n + 1):
+          table[0][j] = j
+  
+      for i in range(1, m + 1):
+          for j in range(1, n + 1):
+              if word1[i - 1] == word2[j - 1]:
+                  table[i][j] = table[i - 1][j - 1]
+              else:
+                  table[i][j] = 1 + min(table[i - 1][j], table[i][j - 1],
+                                        table[i - 1][j - 1])
+      return table[-1][-1]
+```
+
+- 最长上升子序列
+
+```python 
+  def lengthOfLIS(self, nums: List[int]) -> int:
+      if not nums:
+          return 0
+      dp = []
+      for i in range(len(nums)):
+          dp.append(1)
+          for j in range(i):
+              if nums[i] > nums[j]:
+                  dp[i] = max(dp[i], dp[j] + 1)
+      return max(dp)
+  
+```
+
+- 最长公共子序列
+
+```python 
+  def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+      m, n = len(text1) + 1, len(text2) + 1
+      s = [[0] * m for _ in range(n)]
+      for i in range(1, n):
+          for j in range(1, m):
+              if text2[i - 1] == text1[j - 1]:
+                  s[i][j] = s[i - 1][j - 1] + 1
+              else:
+                  s[i][j] = max(s[i - 1][j], s[i][j - 1])
+  
+      return s[-1][-1]
+```
+
+- 
 
 ### Linear programming
 
