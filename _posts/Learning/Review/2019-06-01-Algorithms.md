@@ -117,6 +117,29 @@ def quicksort(self, nums):
       return False
 ```
 
+- leetcode 25. Reverse Nodes in k-Group. Given a linked list, reverse the nodes of a linked list *k* at a time and return its modified list.
+
+```python 
+def reverseKGroup(self, head, k):
+    dummy = jump = ListNode(0)
+    dummy.next = l = r = head
+    
+    while True:
+        count = 0
+        while r and count < k:   # use r to locate the range
+            r = r.next
+            count += 1
+        if count == k:  # if size k satisfied, reverse the inner linked list
+            pre, cur = r, l
+            for _ in range(k):
+                cur.next, cur, pre = pre, cur.next, cur  # standard reversing
+            jump.next, jump, l = pre, l, r  # connect two k-groups
+        else:
+            return dummy.next
+```
+
+
+
 ## Graph
 
 ### Traverse
@@ -386,6 +409,52 @@ def ford_fulkerson(capacity, source, sink):
 
 ### Permutations & combinations
 
+#### Derangement
+
+- A **derangement** (错排问题) is a [permutation](https://en.wikipedia.org/wiki/Permutation) of the elements of a [set](https://en.wikipedia.org/wiki/Set_(mathematics)), such that no element appears in its original position
+- 下面是个简单的recursive的实现，比较优雅的是，$n = 0, 1$之类的情况也都包含了
+
+```python 
+from math import factorial
+
+
+def selection(n, k):
+    return factorial(n) // factorial(k) // factorial(n - k)
+
+
+def derange(n):
+    total = factorial(n)
+    for i in range(1, n):
+        total -= selection(n, i) * derange(n - i)
+
+    return total - 1
+```
+
+- 还有一种动态规划的做法，很好理解。两种情况，要么n-1的排列没有原位的，要么有一个原位的（如果有$>=2$个，那么新加一个数换不过来）。就是对于$n-1$的情况来说，我新的这个数可以和derange(n-1)每一个情况中的任意一个位置互换，结果是valid的。除此之外，如果有一个数在original position，我和它互换可以使两个都错位
+
+```python 
+def derange(n):
+    r = [0, 1]
+    for i in range(3, n + 1):
+        r.append((i - 1) * (r[-1] + r[-2]))
+
+    return r[n - 1]
+```
+
+- 最后还有数学解法，derangements也叫subfactorial $!n$，有$!0=1,!1=0,!2=1$，https://en.wikipedia.org/wiki/Derangement
+- $!n=n!\sum _{i=0}^{n}{\frac {(-1)^{i}}{i!}}$
+- $\lim _{n\to \infty }{!n \over n!}={1 \over e}\approx 0.3679\ldots .$
+
+```python
+import math
+
+
+def derange(n):
+    return round(factorial(n) / math.e)
+```
+
+
+
 ### Selection rank 
 
 - similar to quick sort
@@ -394,7 +463,8 @@ def ford_fulkerson(capacity, source, sink):
 
 ### Newton-Raphson algorithm
 
-- 牛顿法就是按照公式更新![image-20200715153703685](https://raw.githubusercontent.com/Wizna/play/master/image-20200715153703685.png)，这里的公式说白了就是$x-r^{2}$，求它的解
+- 牛顿法就是按照公式更新![image-20200715153703685](https://raw.githubusercontent.com/Wizna/play/master/image-20200715153703685.png)，这里的公式说白了就是$x-r^{2}=0$，求它的解，第4行等价于`r = r - (r**2 - x) / (2 * r)`
+- 如果满足$f^{\prime}(x)\neq0$, $f^{\prime\prime}(x)$ is continuous, $x_{0} $sufficiently close to the root，那么 [rate of convergence](https://en.wikipedia.org/wiki/Rate_of_convergence) is quadratic. [https://en.wikipedia.org/wiki/Newton%27s_method#Failure_analysis](https://en.wikipedia.org/wiki/Newton's_method#Failure_analysis)
 
 ```python 
 def sqrt(x):

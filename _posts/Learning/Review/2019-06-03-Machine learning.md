@@ -139,7 +139,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Optimizer
 
 - Gradient descent: go along the gradient, not applicable to extremely large model (memory, time)
-- weight = weight - learning_rate * gradient
+- `weight = weight - learning_rate * gradient​`
 - Stochastic gradient descent: pick a sample or a subset of data, go
 - hessian matrix: a [square matrix](https://en.wikipedia.org/wiki/Square_matrix) of second-order [partial derivatives](https://en.wikipedia.org/wiki/Partial_derivative) of a scalar-valued function, it describes the local curvature of a function of many variables.![{\displaystyle \mathbf {H} ={\begin{bmatrix}{\dfrac {\partial ^{2}f}{\partial x_{1}^{2}}}&{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{2}}}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{1}\,\partial x_{n}}}\\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{1}}}&{\dfrac {\partial ^{2}f}{\partial x_{2}^{2}}}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{2}\,\partial x_{n}}}\\[2.2ex]\vdots &\vdots &\ddots &\vdots \\[2.2ex]{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{1}}}&{\dfrac {\partial ^{2}f}{\partial x_{n}\,\partial x_{2}}}&\cdots &{\dfrac {\partial ^{2}f}{\partial x_{n}^{2}}}\end{bmatrix}},}](https://wikimedia.org/api/rest_v1/media/math/render/svg/614e3ddb8ba19b38bbfd8f554816904573aa65aa)
 - hessian matrix is symmetric, hessian matrix of a function *f* is the [Jacobian matrix](https://en.wikipedia.org/wiki/Jacobian_matrix) of the [gradient](https://en.wikipedia.org/wiki/Gradient) of the function: **H**(*f*(**x**)) = **J**(∇*f*(**x**)).
