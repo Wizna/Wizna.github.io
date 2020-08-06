@@ -302,7 +302,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Natural language processing
 
-- beam search: $|Y|$这么多的词汇，很简单，就是每一层都挑前一层$k*|Y|$中挑最可能的k个。最后，收获的不是k个，而是$k*$L个，L是最长搜索的长度，e.g. a, a->b, a->b->c, 最后这些还用perplexity在candidates中来挑选一下最可能的。
+- beam search: $ | Y | $这么多的词汇，很简单，就是每一层都挑前一层$k*|Y|$中挑最可能的k个。最后，收获的不是k个，而是$k*$L个，L是最长搜索的长度，e.g. a, a->b, a->b->c, 最后这些还用perplexity在candidates中来挑选一下最可能的。
 - one-hot 不能很好的体现word之间的相似性，任意2个vector的cosine都是0
 - 
 
