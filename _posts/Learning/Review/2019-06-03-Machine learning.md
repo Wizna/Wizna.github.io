@@ -107,7 +107,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Label smoothing
 
-- Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q \prime (k|x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
+- Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q \prime (k \mid x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
 
 ## Learning rate
 
@@ -302,7 +302,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Natural language processing
 
-- beam search: $ | Y | $这么多的词汇，很简单，就是每一层都挑前一层$k*|Y|$中挑最可能的k个。最后，收获的不是k个，而是$k*$L个，L是最长搜索的长度，e.g. a, a->b, a->b->c, 最后这些还用perplexity在candidates中来挑选一下最可能的。
+- beam search: $ \mid Y \mid $这么多的词汇，很简单，就是每一层都挑前一层$k * \mid Y \mid $中挑最可能的k个。最后，收获的不是k个，而是$k * L$个，L是最长搜索的长度，e.g. a, a->b, a->b->c, 最后这些还用perplexity在candidates中来挑选一下最可能的。
 - one-hot 不能很好的体现word之间的相似性，任意2个vector的cosine都是0
 - 
 
@@ -321,7 +321,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - central target word中间的word，而context word是central target word两侧window size以内的词
 - 每个词有两个d维向量，一个$\textbf{v}_{i}$给central target word，一个$\textbf{u}_{i}$给context word
-- 下标是在字典里的index，${0,1,...,|V|-1}$，其中$V$是vocabulary
+- 下标是在字典里的index，${0,1,...,\mid V\mid-1}$，其中$V$是vocabulary
 - skip-gram不考虑复杂的，也无关距离，就是是不是context的一元条件概率，$w_{o}$是context word, $w_{c}$是target word。![image-20200709105317598](https://raw.githubusercontent.com/Wizna/play/master/image-20200709105317598.png)
 - $T$ is the length of text sequence, $m$ is window size, the joint probability of generating all context words given the central target word is![image-20200710104955955](https://raw.githubusercontent.com/Wizna/play/master/image-20200710104955955.png)
 - 训练时候就是minimize上面这个probability的-log，然后对$\textbf{u}_{i}$, $\textbf{v}_{i}$各自求偏导来update
@@ -337,7 +337,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### Negative sampling
 
-- 注意到上面skip-gram和CBOW我们每次softmax都要计算字典大小$|V|$这么多。所以用两种approximation的方法，negative sampling和hierarchical softmax
+- 注意到上面skip-gram和CBOW我们每次softmax都要计算字典大小$\mid V \mid $这么多。所以用两种approximation的方法，negative sampling和hierarchical softmax
 - 本质上这里就是换了一个loss function。
 - [解释论文](https://arxiv.org/pdf/1402.3722.pdf)，这个文章给了一种需要target word和context word不同vector的理由，因为自己和自己相近出现是很困难的，但是$v \cdot  v$很小不符合逻辑。
 - 不用conditional probability而用joint probability了，$D=1$指文本中有这个上下文，如果没有就是$D=0$，也就是negative samples![image-20200710190731269](https://raw.githubusercontent.com/Wizna/play/master/image-20200710190731269.png)
@@ -345,14 +345,14 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 老样子，对于长度$T$的文本，joint probability ![image-20200710191044299](https://raw.githubusercontent.com/Wizna/play/master/image-20200710191044299.png)
 - 如果只是maximize这个，就都是相同的1了，所以需要negative samples
 - 最后变成了如下，随机K个negative samples![image-20200710191727570](https://raw.githubusercontent.com/Wizna/play/master/image-20200710191727570.png)
-- 现在gradient计算跟$|V|$没关系了，和K线性相关
+- 现在gradient计算跟$\mid V \mid $没关系了，和K线性相关
 
 #### Hierarchical softmax
 
 - 每个叶子节点是个word，$L(w)$是w的深度，$n(w,j)$是这个路径上$j^{th}$节点
 - 改写成![image-20200710192415556](https://raw.githubusercontent.com/Wizna/play/master/image-20200710192415556.png)
 - 其中条件为真，$[\![x]\!]=1$，否则为$-1$
-- 现在是$\log_{2}{|V|}$
+- 现在是$\log_{2}{\mid V \mid }$
 
 ### GloVe 
 
