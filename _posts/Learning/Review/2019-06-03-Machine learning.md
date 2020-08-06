@@ -113,6 +113,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Let the learning rate increase linearly (multiply same number) from small to higher over each mini-batch, calculate the loss for each rate, plot it (log scale on learning rate), pick the learning rate that gives the greatest decline (the going-down slope for loss) [Cyclical Learning Rates for Training Neural Networks]( https://arxiv.org/pdf/1506.01186.pdf )
 
+### Warmup
+
+- 对于区分度高的数据集，为了避免刚开始batches的data导致偏见，所以learning rate是线性从一个小的值增加到target 大小。https://stackoverflow.com/questions/55933867/what-does-learning-rate-warm-up-mean
+- [Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour](https://arxiv.org/pdf/1706.02677.pdf)
+
 ### Differential learning rate
 
 - Use different learning rate for different layers of the model, e.g. use smaller learning rate for transfer learning pretrained-layers, use a larger learning rate for the new classification layer
@@ -403,10 +408,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Attention
 
 - [Attention Is All You Need]( https://arxiv.org/pdf/1706.03762.pdf )
-
+- Attention is a generalized pooling method with bias alignment over inputs.
+- 参数少，速度快（可并行），效果好
 - attention layer有个key-value pairs $\bf (k_{1}, v_{1})..(k_{n}, v_{n})$组成的memory，输入query $\bf{q}$，然后用score function $\alpha$计算query和key的相似度，然后输出对应的value作为output $\bf o$
 - ![image-20200702011857241](https://raw.githubusercontent.com/Wizna/play/master/image-20200702011857241.png)![image-20200702012144153](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012144153.png)![image-20200702012222310](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012222310.png)
-- 两种常见attention layer,都可以内含有dropout: dot product attention and multilayer perceptron attention.前者score function就是点乘，后者则是个可训练的hidden layer
+- 两种常见attention layer,都可以内含有dropout: dot product attention and multilayer perceptron attention.前者score function就是点乘（要求query和keys的维度一样），后者则有个可训练的hidden layer的MLP，输出一个数
 - seq2seq with attention mechanism: encoder没变化。during the decoding, the decoder output from the previous timestep $t-1$ is used as the query. The output of the attention model is viewed as the context information, and such context is concatenated with the decoder input Dt. Finally, we feed the concatenation into the decoder.
 - The decoder of the seq2seq with attention model passes three items from the encoder:
 - 1. the encoder outputs of all timesteps: they are used as the attention layerʼs memory with
@@ -419,12 +425,16 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 1. transformer block:包含multi-head attention layer and position-wise feed-forward network layers
   2. add and norm: a residual structure and a layer normalization ![image-20200702035112666](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035112666.png)
   3. position encoding: 唯一add positional information的地方
+- <img src="https://raw.githubusercontent.com/Wizna/play/master/image--000.png" alt="image--000" style="zoom: 25%;" />
+- self-attention model is a normal attention model, with its query, its key, and its value being copied exactly the same from each item of the sequential inputs. output items of a self-attention layer can be computed in parallel. Self attention is a mechanism relating different positions of a single sequence in order to compute a representation of the sequence.
 - multi-head attention: contain parallel self-attention layers (head), 可以是any attention (e.g. dot product attention, mlp attention)
 - position-wise feed-forward networks:3-d inputs with shape (batch size, sequence length, feature size), consists of two dense layers, equivalent to applying two $1*1$ convolution layers
--  layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize
+-  layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability
+-  add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
+-  
 - position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)i refers to the order in the sentence, and j refers to the
-  position along the embedding vector dimension。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones
-- 
+  position along the embedding vector dimension。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones ，一些解释https://www.zhihu.com/question/347678607
+- [https://medium.com/@pkqiang49/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-attention-%E6%9C%AC%E8%B4%A8%E5%8E%9F%E7%90%86-3%E5%A4%A7%E4%BC%98%E7%82%B9-5%E5%A4%A7%E7%B1%BB%E5%9E%8B-e4fbe4b6d030](https://medium.com/@pkqiang49/一文看懂-attention-本质原理-3大优点-5大类型-e4fbe4b6d030)
 
 * [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf)这里提出一种结构，可以parameter少，还并行性好，结果还很好，3 steps: attending, comparing, aggregating.
 
