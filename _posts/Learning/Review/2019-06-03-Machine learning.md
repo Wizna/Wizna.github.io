@@ -93,7 +93,9 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * 即L2 regularization
 * encourages weight values to decay towards zero, unless supported by the data.
 * 这是q=2,ridge，让weights distribute evenly, driven to small values
-* q=1的话，lasso, if $λ$ is sufficiently large, some of the coefficients $w_{j}$ are driven to zero, leading to a sparse model,比如右边lasso的$w_{1}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519133624932.png" alt="image-20200519133624932" style="zoom:50%;" />
+* q=1的话，lasso, if `λ` is sufficiently large, some of the coefficients $w_{j}$ are driven to zero, leading to a sparse model,比如右边lasso的 $w_{1}$
+
+<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519133624932.png" alt="image-20200519133624932" style="zoom:50%;" />
 * 
 
 ### Dropout
@@ -105,7 +107,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Label smoothing
 
-- Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q'(k|x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
+- Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q \prime (k|x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
 
 ## Learning rate
 
@@ -186,7 +188,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### ReLU
 
-* $ReLU(z)=max(z,0)$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519004508856.png" alt="image-20200519004508856" style="zoom:50%;" />
+* $ReLU(z)=max(z,0)$ <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519004508856.png" alt="image-20200519004508856" style="zoom:50%;" />
 * mitigates vanishing gradient
 
 ### LeakyReLU
@@ -195,7 +197,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 * sigmoid是一类s型曲线
 * 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
-* logistic function值域0-1: $f(x)=\frac{1}{1+e^{-x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519005935784.png" alt="image-20200519005935784" style="zoom: 50%;" />
+* logistic function值域 0 ~ 1 : $f(x)=\frac{1}{1+e^{-x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519005935784.png" alt="image-20200519005935784" style="zoom: 50%;" />
 * 求导$\frac{df}{dx}=f(x)(1-f(x))=f(x)f(-x)$[过程](https://en.wikipedia.org/wiki/Logistic_function#Derivative)
 * ![image-20200715084244575](https://raw.githubusercontent.com/Wizna/play/master/image-20200715084244575.png)
 * tanh (hyperbolic tangent) function: $f(x)=\frac{1-e^{-2x}}{1+e^{-2x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519011314832.png" alt="image-20200519011314832" style="zoom:50%;" />
