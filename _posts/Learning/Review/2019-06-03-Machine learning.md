@@ -367,9 +367,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### fastText 
 
-- 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和
-
-![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
+- 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
 - 缺点是vocabulary变大很多
 
 #### BPE 
@@ -385,11 +383,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * classification token `<cls>`，separation token `<sep>`
 * The embeddings of the BERT input sequence are the sum of the token embeddings, segment embeddings, and positional embeddings这仨都是要训练的
 * pretraining包含两个tasks，masked language modeling 和next sentence prediction
-* masked language modeling就是mask某些词为$<mask>$，然后来预测这个token。loss可以是cross-entropy
+* masked language modeling就是mask某些词为`<mask>`，然后来预测这个token。loss可以是cross-entropy
 * next sentence prediction则是判断两个句子是否是连着的，binary classification，也可用cross-entropy loss
 * BERT可以被用于大量不同任务，加上fully-connected layer，这是要train的，而本身的pretrained parameters也要fine-tune。Parameters that are only related to pretraining loss will not be updated during finetuning，指的是按照masked language modelling loss和next sentence prediction loss训练的俩MLPs
-* 一般是BERT representation of <cls>这个token被用来transform，比如扔到一个mlp中去输出个分数或类别
-* 一般来说BERT不适合text generation，因为虽然可以全都<mask>，然后随便生成。但是不如GPT-2那种从左到右生成。
+* 一般是BERT representation of `<cls>`这个token被用来transform，比如扔到一个mlp中去输出个分数或类别
+* 一般来说BERT不适合text generation，因为虽然可以全都`<mask>`，然后随便生成。但是不如GPT-2那种从左到右生成。
 
 ## N-grams
 
