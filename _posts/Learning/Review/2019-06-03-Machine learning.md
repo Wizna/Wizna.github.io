@@ -365,7 +365,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### fastText 
 
-- 给每个单词加上$<>$，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和
+- 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和
 
 ![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
 - 缺点是vocabulary变大很多
@@ -380,7 +380,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * bidirectional encoder representations from transformers
 * 本质上word embedding是种粗浅的pretrain，而且word2vec, GloVe是context无关的，因为单词一词多义，所以context-sensitive的语言模型很有价值
 * 在context-sensitive的语言模型中，ELMo是task-specific, GPT更好的一点就是它是task-agnostic(不可知的)，不过GPT只是一侧context，从左到右，左边一样的话对应的vector就一样，不如ELMo，BERT天然双向context。在ELMo中，加的pretrained model被froze，不过GPT中所有参数都会被fine-tune.
-* classification token $<cls>$，separation token $<sep>$
+* classification token `<cls>`，separation token `<sep>`
 * The embeddings of the BERT input sequence are the sum of the token embeddings, segment embeddings, and positional embeddings这仨都是要训练的
 * pretraining包含两个tasks，masked language modeling 和next sentence prediction
 * masked language modeling就是mask某些词为$<mask>$，然后来预测这个token。loss可以是cross-entropy
