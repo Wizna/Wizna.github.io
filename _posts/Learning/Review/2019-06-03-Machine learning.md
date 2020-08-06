@@ -191,7 +191,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### LeakyReLU
 
-###Sigmoid
+### Sigmoid
 
 * sigmoid是一类s型曲线
 * 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
@@ -365,7 +365,9 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### fastText 
 
-- 给每个单词加上$<>$，然后按照character取长度3-6的那些subword，然后自己本身$<myself>$也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
+- 给每个单词加上$<>$，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和
+
+![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
 - 缺点是vocabulary变大很多
 
 #### BPE 
@@ -422,8 +424,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
   3. the encoder valid length: so the attention layer will not consider the padding tokens with
      in the encoder outputs.
 - transformer:主要是加了3个东西，
-- 1. transformer block:包含multi-head attention layer and position-wise feed-forward network layers
-  2. add and norm: a residual structure and a layer normalization ![image-20200702035112666](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035112666.png)
+- 1. transformer block:包含两种sublayers，multi-head attention layer and position-wise feed-forward network layers
+  2. add and norm: a residual structure and a layer normalization，注意到右边式子括号中是residual，外面是layer norm ![image-20200702035112666](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035112666.png)
   3. position encoding: 唯一add positional information的地方
 - <img src="https://raw.githubusercontent.com/Wizna/play/master/image--000.png" alt="image--000" style="zoom: 25%;" />
 - self-attention model is a normal attention model, with its query, its key, and its value being copied exactly the same from each item of the sequential inputs. output items of a self-attention layer can be computed in parallel. Self attention is a mechanism relating different positions of a single sequence in order to compute a representation of the sequence.
