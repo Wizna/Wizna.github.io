@@ -108,6 +108,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### Label smoothing
 
 - Use not hard target 1 and 0, but a smoothed distribution. Subtract $\epsilon$  from target class, and assign that to all the classes based on a distribution (i.e. sum to 1). So the new smoothed version is $q \prime (k \mid x)=(1-\epsilon)\delta_{k,y}+\epsilon u(k)$ (x is the sample, y is the target class, u is the class distribution) [Rethinking the Inception Architecture for Computer Vision]( https://arxiv.org/pdf/1512.00567.pdf )
+- hurts perplexity, but improves accuracy and BLEU score.
 
 ## Learning rate
 
@@ -189,13 +190,29 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### ReLU
 
 * $ReLU(z)=max(z,0)$ <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519004508856.png" alt="image-20200519004508856" style="zoom:50%;" />
-* mitigates vanishing gradient
+* mitigates vanishing gradient，不过还是有dying ReLU的问题
 
-### LeakyReLU
+### Leaky ReLU
+
+- 以下用$x_{ji}$ to denote the input of $i$th channel in $j$th example
+
+- 就是negative部分也有一个小斜率![image-20200808193135697](https://raw.githubusercontent.com/Wizna/play/master/image-20200808193135697.png)
+- $a_{i}$越大越接近ReLU，经验上可以取6~100
+
+### PReLU
+
+- parametric rectified linear unit，和leaky一样， 不过$a_{i}$ is learned in the training via back propagation
+- may suffer from severe overfitting issue in small scale dataset
+
+### RReLU
+
+- Randomized Leaky Rectified Linear，就是把斜率从一个uniform $U(l,u)$里随机![image-20200808193608756](https://raw.githubusercontent.com/Wizna/play/master/image-20200808193608756.png)
+- test phase取固定值，也就是$\frac{l+u}{2}$
+- 在小数据集上表现不错，经常是training loss比别人大，但是test loss更小
 
 ### Sigmoid
 
-* sigmoid是一类s型曲线
+* sigmoid是一类s型曲线，这一类都可能saturated
 * 代表：logit function, logistic function(logit的inverse function)，hyperbolic tangent function
 * logistic function值域 0 ~ 1 : $f(x)=\frac{1}{1+e^{-x}}$<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519005935784.png" alt="image-20200519005935784" style="zoom: 50%;" />
 * 求导$\frac{df}{dx}=f(x)(1-f(x))=f(x)f(-x)$[过程](https://en.wikipedia.org/wiki/Logistic_function#Derivative)
@@ -414,7 +431,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 参数少，速度快（可并行），效果好
 - attention layer有个key-value pairs $\bf (k_{1}, v_{1})..(k_{n}, v_{n})$组成的memory，输入query $\bf{q}$，然后用score function $\alpha$计算query和key的相似度，然后输出对应的value作为output $\bf o$
 - ![image-20200702011857241](https://raw.githubusercontent.com/Wizna/play/master/image-20200702011857241.png)![image-20200702012144153](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012144153.png)![image-20200702012222310](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012222310.png)
-- 两种常见attention layer,都可以内含有dropout: dot product attention and multilayer perceptron attention.前者score function就是点乘（要求query和keys的维度一样），后者则有个可训练的hidden layer的MLP，输出一个数
+- 两种常见attention layer,都可以内含有dropout: dot product attention (multiplicative) and multilayer perceptron (additive) attention.前者score function就是点乘（要求query和keys的维度一样），后者则有个可训练的hidden layer的MLP，输出一个数
+- dimension of the keys $d_{k}$, multiplicative attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. Additive attention outperforms dot product attention without scaling for larger values of $d_{k}$ (所以原论文里用scaled dot product attention，给点乘后的结果乘了一个$\frac{1}{\sqrt{d_{k}}}$的参数)
 - seq2seq with attention mechanism: encoder没变化。during the decoding, the decoder output from the previous timestep $t-1$ is used as the query. The output of the attention model is viewed as the context information, and such context is concatenated with the decoder input Dt. Finally, we feed the concatenation into the decoder.
 - The decoder of the seq2seq with attention model passes three items from the encoder:
 - 1. the encoder outputs of all timesteps: they are used as the attention layerʼs memory with
@@ -429,13 +447,15 @@ Just a review of machine learning for myself (really busy recently, so ...)
   3. position encoding: 唯一add positional information的地方
 - <img src="https://raw.githubusercontent.com/Wizna/play/master/image--000.png" alt="image--000" style="zoom: 25%;" />
 - self-attention model is a normal attention model, with its query, its key, and its value being copied exactly the same from each item of the sequential inputs. output items of a self-attention layer can be computed in parallel. Self attention is a mechanism relating different positions of a single sequence in order to compute a representation of the sequence.
-- multi-head attention: contain parallel self-attention layers (head), 可以是any attention (e.g. dot product attention, mlp attention)
+- multi-head attention: contain parallel self-attention layers (head), 可以是any attention (e.g. dot product attention, mlp attention) <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200808172837983.png" alt="image-20200808172837983" style="zoom:80%;" />
+- 在transformer中multi-head attention用在了3处，1是encoder-decoder attention, queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder。2是self-attention in encoder，all of the keys, values and queries come from output of the previous layer in the encoder。3是self-attention in decoder, 类似
 - position-wise feed-forward networks:3-d inputs with shape (batch size, sequence length, feature size), consists of two dense layers, equivalent to applying two $1*1$ convolution layers
+- 这个feed-forward networks applied to each position separately and identically,不过当然不同层的参数不一样。本质式子就是俩线性变换夹了一个ReLU，![image-20200808174456469](https://raw.githubusercontent.com/Wizna/play/master/image-20200808174456469.png)
 -  layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability
 -  add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
 -  
-- position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)i refers to the order in the sentence, and j refers to the
-  position along the embedding vector dimension。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones ，一些解释https://www.zhihu.com/question/347678607
+- position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)$i$ refers to the order in the sentence, and $j$ refers to the
+  position along the embedding vector dimension, $d$是dimension of embedding。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones ，一些解释https://www.zhihu.com/question/347678607
 - [https://medium.com/@pkqiang49/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-attention-%E6%9C%AC%E8%B4%A8%E5%8E%9F%E7%90%86-3%E5%A4%A7%E4%BC%98%E7%82%B9-5%E5%A4%A7%E7%B1%BB%E5%9E%8B-e4fbe4b6d030](https://medium.com/@pkqiang49/一文看懂-attention-本质原理-3大优点-5大类型-e4fbe4b6d030)
 
 * [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf)这里提出一种结构，可以parameter少，还并行性好，结果还很好，3 steps: attending, comparing, aggregating.
@@ -456,7 +476,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Reinforcement learning
 
-### Appendix
+# Appendix
 
 - 知识蒸馏：模型压缩，用小模型模拟 a pre-trained, larger model (or ensemble of models)，引入一个变量softmax temperature $T$，$T$经常是1~20，$p_i = \frac{exp\left(\frac{z_i}{T}\right)}{\sum_{j} \exp\left(\frac{z_j}{T}\right)}$。两个新的超参数$\alpha, \beta$，其中$\beta$一般是$1-\alpha$，soft target包含的信息量更大。![image-20200715070355206](https://raw.githubusercontent.com/Wizna/play/master/image-20200715070355206.png)
 
@@ -471,17 +491,9 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Glove vs word2vec， glove会更快点,easier to parallelize 
 
-- Attention CopyNet
-
-- Transformer multi-head
+- CopyNet
 
 - Coverage机制 Seq2Seq token重复问题
-
-- 预防过拟合：label smoothing
-
-- cross entropy logistic regression
-
-- 一层神经网络
 
 - Boosting Bagging Stacking
 
@@ -508,5 +520,3 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 样本不均衡：上采样，下采样，调整权重
 
 
-
-# To be continued ...
