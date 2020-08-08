@@ -337,16 +337,16 @@ Just a review of machine learning for myself (really busy recently, so ...)
 #### Skip-gram model
 
 - central target word中间的word，而context word是central target word两侧window size以内的词
-- 每个词有两个d维向量，一个$\textbf {v}_{i}$给central target word，一个$\textbf {u}_{i}$给context word
+- 每个词有两个d维向量，一个$\bf{{v}_{i}}$给central target word，一个$\bf{{u}_{i}}$给context word
 - 下标是在字典里的index，${0,1,...,\mid V\mid-1}$，其中$V$是vocabulary
 - skip-gram不考虑复杂的，也无关距离，就是是不是context的一元条件概率，$w_{o}$是context word, $w_{c}$是target word。![image-20200709105317598](https://raw.githubusercontent.com/Wizna/play/master/image-20200709105317598.png)
 - $T$ is the length of text sequence, $m$ is window size, the joint probability of generating all context words given the central target word is![image-20200710104955955](https://raw.githubusercontent.com/Wizna/play/master/image-20200710104955955.png)
-- 训练时候就是minimize上面这个probability的-log，然后对$\textbf{u}_{i}$, $\textbf{v}_{i}$各自求偏导来update
+- 训练时候就是minimize上面这个probability的-log，然后对$\textbf{{u}_{i}}$, $\textbf{{v}_{i}}$各自求偏导来update
 
 #### CBOW model
 
 - skip-gram是给central target word下产生context word的概率，CBOW反过来，给context word，生成中间的target word
-- 以下$\textbf{u}_{i}$是target word, $\textbf{v}_{i}$是context word，和skip-gram相反。windows size $m$,方式其实和skip-gram类似，不过因为context word很多，所以求平均向量来相乘![image-20200710121120870](https://raw.githubusercontent.com/Wizna/play/master/image-20200710121120870.png)
+- 以下$\textbf{{u}_{i}}$是target word, $\textbf{{v}_{i}}$是context word，和skip-gram相反。windows size $m$,方式其实和skip-gram类似，不过因为context word很多，所以求平均向量来相乘![image-20200710121120870](https://raw.githubusercontent.com/Wizna/play/master/image-20200710121120870.png)
 - 同样的，对于长度$T$的sequence，likelihood function如下![image-20200710121324863](https://raw.githubusercontent.com/Wizna/play/master/image-20200710121324863.png)
 - 同样的，minimize -log
 - 推荐的windows size是10 for skip-gram and 5 for CBOW
@@ -384,7 +384,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### fastText 
 
-- 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{u}_{w}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
+- 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf{{u}_{w}}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
 - 缺点是vocabulary变大很多
 
 #### BPE 
