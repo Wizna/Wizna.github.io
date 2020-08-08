@@ -337,7 +337,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 #### Skip-gram model
 
 - central target word中间的word，而context word是central target word两侧window size以内的词
-- 每个词有两个d维向量，一个$\textbf{v}_{i}$给central target word，一个$\textbf{u}_{i}$给context word
+- 每个词有两个d维向量，一个$\textbf {v}_{i}$给central target word，一个$\textbf {u}_{i}$给context word
 - 下标是在字典里的index，${0,1,...,\mid V\mid-1}$，其中$V$是vocabulary
 - skip-gram不考虑复杂的，也无关距离，就是是不是context的一元条件概率，$w_{o}$是context word, $w_{c}$是target word。![image-20200709105317598](https://raw.githubusercontent.com/Wizna/play/master/image-20200709105317598.png)
 - $T$ is the length of text sequence, $m$ is window size, the joint probability of generating all context words given the central target word is![image-20200710104955955](https://raw.githubusercontent.com/Wizna/play/master/image-20200710104955955.png)
