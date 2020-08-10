@@ -14,11 +14,21 @@ Just a review of machine learning for myself (really busy recently, so ...)
 # Basics
 
 ## Batch normalization
-- Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 也方便optimization，而且各feature之间不会有莫名的侧重
+- Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 也方便optimization，而且各feature之间不会有莫名的侧重，注意是每个feature dimension分开进行batch normalization
+
 - batch normalization 经常被每一层分别使用。batch size不能为1（因为这时输出总为0）。
-- batch normalization对于fully connected 经常是在affine和activation之间，而convolutional layer经常是convolutional layer和activation之间（对于每个output channel分别做）
-- batch normalization的优点是减少了训练时间
-- batch normalization在train和predict表现不一样，predict时是用的training时根据所有training set估计的population mean和variance
+
+- [这里](https://github.com/ducha-aiki/caffenet-benchmark/blob/master/batchnorm.md)说BN放在activation之后会更好一些
+
+- batch normalization的优点是可以用更大的学习速率，减少了训练时间，初始化不那么重要，结果更好，是某种程度的regularization
+
+- batch normalization在train和predict表现不一样，predict时是用的training时根据所有training set估计的population mean和variance，实现上是计算动态的值，during training keeps running estimates of its computed mean and variance
+
+## Layer normalization
+
+- layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability。
+- batch normalization用在rnn上的话，得考虑不同sequence长度不同，而layer norm没有这个问题(one set of weight and bias shared over all time-steps)
+- layer norm就是每个sample自己进行layer层面的normalization，有自己的mean, variance。所以可以batch size为1
 - MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
 - broadcast就是复制来填充新的维度
 - missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
@@ -454,7 +464,6 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 在transformer中multi-head attention用在了3处，1是encoder-decoder attention, queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder。2是self-attention in encoder，all of the keys, values and queries come from output of the previous layer in the encoder。3是self-attention in decoder, 类似
 - position-wise feed-forward networks:3-d inputs with shape (batch size, sequence length, feature size), consists of two dense layers, equivalent to applying two $1*1$ convolution layers
 - 这个feed-forward networks applied to each position separately and identically,不过当然不同层的参数不一样。本质式子就是俩线性变换夹了一个ReLU，![image-20200808174456469](https://raw.githubusercontent.com/Wizna/play/master/image-20200808174456469.png)
--  layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability
 -  add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
 -  
 - position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)$i$ refers to the order in the sentence, and $j$ refers to the
