@@ -28,7 +28,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability。
 - batch normalization用在rnn上的话，得考虑不同sequence长度不同，而layer norm没有这个问题(one set of weight and bias shared over all time-steps)
-- layer norm就是每个sample自己进行layer层面的normalization，有自己的mean, variance。所以可以batch size为1
+- layer norm就是每个sample自己进行across feature 的layer层面的normalization，有自己的mean, variance。所以可以batch size为1, batch norm则是across minibatch 单个neuron来算
 - MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
 - broadcast就是复制来填充新的维度
 - missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
@@ -57,6 +57,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * minimize cross-entropy == maximize likelihood
 * Kullback-Leibler divergence (也叫relative entropy或者information gain) is the difference between cross-entropy and entropy: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518174004941.png" alt="image-20200518174004941" style="zoom:80%;" />
 * KL divergence is *asymmetric* and does not satisfy the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)
+* Jensen-Shannon divergence: ${{\rm {JSD}}}(P\parallel Q)={\frac  {1}{2}}D(P\parallel M)+{\frac  {1}{2}}D(Q\parallel M)$ where $M={\frac  {1}{2}}(P+Q)$，这个JSD是symmetric的
 * cross validation: split into k sets. do k experiments on (k-1 train, 1 validation), average the results
 * forward propagation calculates and stores intermediate variables.
 * 对于loss function $J$, 要计算偏导的$W$, $\frac{\partial J}{\partial W}=\frac{\partial J}{\partial O}*I^{T}+\lambda W$, 这里$O$是这个的output, $I$是这个的input，后面的term是regularization的导，这里也说明了为啥forward propagation要保留中间结果，此外注意activation function的导是elementwise multiplication，有些activation function对不同值的导得分别计算。training比prediction要占用更多内存
@@ -485,6 +486,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - train the encoder and decoder by reconstructing a sentence in a particular domain, given a noisy version （避免直接copy）of the same sentence in the same or in the other domain （重建或翻译）其中result of a translation with the model at the previous iteration in the case of the translation task.
 
 - 此外还训练一个神经网络discriminator，encoder需要fool这个网络(让它判断不了输入语言ADVERSARIAL TRAINING)
+
+# GAN
+
+- [generative adversarial nets - paper](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
+- 本质是个minmax，$D$是discriminator, $G$ is generator. ![image-20200810125644188](https://raw.githubusercontent.com/Wizna/play/master/image-20200810125644188.png)
+- 
 
 # Reinforcement learning
 
