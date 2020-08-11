@@ -491,6 +491,10 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - [generative adversarial nets - paper](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
 - 本质是个minmax，$D$是discriminator, $G$ is generator. ![image-20200810125644188](https://raw.githubusercontent.com/Wizna/play/master/image-20200810125644188.png)
+- $y$ is label, true 1 fake 0, $\textbf{x}$ is inputs, $D$ minimize ![image-20200811153651537](https://raw.githubusercontent.com/Wizna/play/master/image-20200811153651537.png)
+- $\textbf{z}$ is latent variable, 经常是random来生成data
+- $G$ maximize ![image-20200811154721426](https://raw.githubusercontent.com/Wizna/play/master/image-20200811154721426.png) 但是实现的时候，我们实际上是![image-20200811154456918](https://raw.githubusercontent.com/Wizna/play/master/image-20200811154456918.png)， 特点是D的loss提供了training signal给G(当然，因为一个max，一个想min，所以把label由1变0)
+- vanilla GAN couldn’t model all modes on a simple 2D dataset [VEEGAN: Reducing Mode Collapse in GANs using Implicit Variational Learning](https://arxiv.org/pdf/1705.07761.pdf)
 - 
 
 # Reinforcement learning
