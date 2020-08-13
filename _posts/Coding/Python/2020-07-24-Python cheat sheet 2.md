@@ -18,7 +18,11 @@ def isSubsequence(x, s):
 
 # Notes
 
-Global interpreter lock (GIL):  The mechanism used by the [CPython](https://docs.python.org/3/glossary.html#term-cpython) interpreter to assure that only one thread executes Python [bytecode](https://docs.python.org/3/glossary.html#term-bytecode) at a time. https://docs.python.org/3/glossary.html#term-global-interpreter-lock
+- Int: in python3, the plain `int` type is unbounded.
+
+## Global interpreter lock (GIL):  
+
+- The mechanism used by the [CPython](https://docs.python.org/3/glossary.html#term-cpython) interpreter to assure that only one thread executes Python [bytecode](https://docs.python.org/3/glossary.html#term-bytecode) at a time. https://docs.python.org/3/glossary.html#term-global-interpreter-lock
 
 ## Threading
 
