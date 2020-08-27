@@ -85,6 +85,13 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Transfer learning
 
 - Chop off classification layers and replace with ones cater to ones' needs. Freeze pretrained layers during training. Enable training on batch normalization layers as well may get better results.
+- [A Survey on Transfer Learning](https://www.cse.ust.hk/~qyang/Docs/2009/tkde_transfer_learning.pdf)
+- ![image-20200822134803789](https://raw.githubusercontent.com/Wizna/play/master/image-20200822134803789.png)
+
+### One-shot learning
+
+### Zero-shot learning
+
 
 
 ## Curriculum learning
@@ -406,9 +413,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
 - 从length=1的symbol是开始，也就是字母，greedy
 
-## BERT
+## BERT (Bidirectional Encoder Representations from Transformers)
 
-* bidirectional encoder representations from transformers
 * 本质上word embedding是种粗浅的pretrain，而且word2vec, GloVe是context无关的，因为单词一词多义，所以context-sensitive的语言模型很有价值
 * 在context-sensitive的语言模型中，ELMo是task-specific, GPT更好的一点就是它是task-agnostic(不可知的)，不过GPT只是一侧context，从左到右，左边一样的话对应的vector就一样，不如ELMo，BERT天然双向context。在ELMo中，加的pretrained model被froze，不过GPT中所有参数都会被fine-tune.
 * classification token `<cls>`，separation token `<sep>`
@@ -419,6 +425,14 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * BERT可以被用于大量不同任务，加上fully-connected layer，这是要train的，而本身的pretrained parameters也要fine-tune。Parameters that are only related to pretraining loss will not be updated during finetuning，指的是按照masked language modelling loss和next sentence prediction loss训练的俩MLPs
 * 一般是BERT representation of `<cls>`这个token被用来transform，比如扔到一个mlp中去输出个分数或类别
 * 一般来说BERT不适合text generation，因为虽然可以全都`<mask>`，然后随便生成。但是不如GPT-2那种从左到右生成。
+
+## ELMo (Embeddings from Language Models)
+
+- 
+
+## GPT
+
+- 
 
 ## N-grams
 
