@@ -11,15 +11,18 @@ permalink: /about/
 </p>
 
 
-<center>I(黄锐铭) am currently a master student at RWTH Aachen University</center>
-<center>Here I would like to share what I learn in SSE and what I work through during coding</center>
+<center>I am a student. 我是一个学生</center>
+<center>分享知识，让世界更公平</center>
 <center>Hope my blogs could be helpful  ٩(˘◡˘)۶</center>
+
 ### My hobbies
 
 <center>Coding; Reading; Drawing; Football</center>
-### Websites
-<center>杨超越(Yang Chaoyue)美图打分网站</center>
+### Websites 我喜欢的
+<center><a href="http://gen.lib.rus.ec/">Library Genesis</a></center>
+<center><a href="https://sci-hub.se/">Sci-Hub</a></center>
 <center><a href="http://ysmiao.cn/ycy/">- 媲美 -</a></center>
+
 ### Life motto
 
 <center><i>Dirty, Dangerous, Difficult</i></center>	

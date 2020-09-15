@@ -428,6 +428,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## ELMo (Embeddings from Language Models)
 
+- each token is assigned a representation that is a function of the entire input sentence.
 - 
 
 ## GPT
