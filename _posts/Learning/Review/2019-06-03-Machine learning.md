@@ -514,6 +514,167 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 # Reinforcement learning
 
+- 
+
+# Recommender system
+
+## Basics
+
+- 召回即触发 (recall and trigger)
+- multi-hot: 介于 label encoding 和 one-hot 之间 https://stats.stackexchange.com/questions/467633/what-exactly-is-multi-hot-encoding-and-how-is-it-different-from-one-hot
+- 
+
+## CF (collaborative filtering)
+
+- 头部效应明显，处理稀疏向量能力弱，泛化差
+- 
+
+### UserCF
+
+- Drawbacks: user num is much larger than item num, and storage of a similarity matix is expensive, grow by `O(n^2)`, sparse, especially for new users low rate
+
+### ItemCF
+
+- 一个用户 * 物品的`m*n`矩阵，物品相似度，根据正反馈物品推荐topk
+- 相较而言，UserCF适合发现新热点，ItemCF适合稳定的兴趣点
+
+## Matrix factorization
+
+- MF is 1-st order of FM (factorization machine)
+
+- 用更稠密的隐向量，利用了全局信息，一定程度上比CF更好的处理稀疏问题
+
+- 说白了就是把`m*n` matrix factorized into `m*k` and `k*n`,k is the size of the hidden vector, the size is chosen by trade off generalization, calculation and expression capability
+
+- When recommendation, just dot multiply the user vector with item vector
+
+- 2 methods: SVD and gradient descent
+
+- SVD needs co-occurrence matrix to be dense, however, it is very unlikely in the real case, so fill-in; Compution complexity `O(m*n^2)`
+
+- Gradient descent objective function, where `K` is the set of user ratings
+
+- $$
+  min_{q^{*},p^{*}}\Sigma_{(u,i) \in K}{(r_{ui} - q_{i}^{T}p_{u})}^{2}
+  $$
+
+- 
+
+- to counter over-fitting, we can add regularization 
+
+- $$
+  \lambda(\lVert q_{i} \rVert^{2} + \lVert p_{u} \rVert^{2})
+  $$
+
+- MF的空间复杂度降低为`(n+m)*k`
+
+- drawbacks: 不方便加入用户，物品和context信息，同时在缺乏用户历史行为时也表现不佳
+
+## 逻辑回归
+
+- logistics regressio assumes dependent variable y obeys Bernoulli distribution偏心硬币, linear regression assumes y obeys gaussian distribution, 所以logistics regression更符合预测CTR (click through rate)要求
+
+- 辛普森悖论，就是多一个维度时，都表现更好的a，在汇总数据后反而表现差，本质是维度不是均匀的。所以不能轻易合并高维数据，会损失信息
+
+- 本质就是特征给个权重，相乘以后用非线性函数打个分，所以不具有特征交叉生成高维组合特征的能力
+
+- POLY2：一种特征两两交叉的方法，给特征组合一个权重，不过只是治标，而且训练复杂度提升，大量交叉特征很稀疏，根本没有足够训练数据
+
+- $$
+  \Phi POLY2(w,x)=\Sigma_{j_{1}=1}^{n-1}{\Sigma_{j_{2}=j_{1}+1}^{n}{w_{n(j_{1}, j_{2})}x_{j_{1}}x_{j_{2}}}}
+  $$
+
+- 
+
+## Factorization machine
+
+- 以下是FM的2阶版本
+
+- $$
+  \Phi FM(w,x)=\Sigma_{j_{1}=1}^{n-1}{\Sigma_{j_{2}=j_{1}+1}^{n}{(w_{j_{1}}\cdot w_{j_{2}})x_{j_{1}}x_{j_{2}}}}
+  $$
+
+- 每个特征学习一个latent vector, 	隐向量的内积作为交叉特征的权重，权重参数数量从`n^2` -> `kn`
+
+- FFM, 引入了field-aware特征域感知，表达能力更强
+
+- $$
+  \Phi FFM(w,x)=\Sigma_{j_{1}=1}^{n-1}{\Sigma_{j_{2}=j_{1}+1}^{n}{(w_{j_{1},f_{2}}\cdot w_{j_{2},f_{1}})x_{j_{1}}x_{j_{2}}}}
+  $$
+
+- 说白了就是特征变成一组，看菜吃饭
+
+- 参数变成`n*f*k`，其中f是特征域个数，训练复杂度`kn^2`
+
+- FM and FFM可以拓展到高维，不过组合爆炸，现实少用
+
+## GBDT + LR
+
+- GBDT就是构建新的离散特征向量的方法，LR就是logistics regression，和前者是分开的，不用梯度回传啥的
+- GBDT就是gradient boosting decision tree，
+
+
+
+## AutoRec
+
+- AutoEncoder + CF的single hidden layer 的神经网络
+
+- autoencoder 的objective function如下
+
+- $$
+  \min_{\theta}\Sigma_{r\in S}{\lVert}r-h(r;\theta)\rVert_{2}^{2}
+  $$
+
+- 重建函数 h 的参数量一般远小于输入向量的维度
+
+- 经典的模型是3层，input, hidden and output
+
+- $$
+  h(r;\theta)=f(W\cdot g(Vr + \mu)+b)
+  $$
+
+- 其中f，g都是激活函数，而V，输入层到隐层的参数，W是隐层到输出层的参数矩阵
+
+- 可以加上L2 norm，就用普通的提督反向传播就可以训练
+
+## Deep Crossing
+
+- 4 种 layers
+- embedding layer： embedding一般是不会啊one-hot or multi-hot的稀疏响亮转换成稠密的向量，数值型feature可以不用embedding
+- stacking layer： 把embeddign 和数值型特征连接到一起
+- multiple residual units layer: 这个Res结构实现了feature的交叉重组，可以很深，所以就是deep crossing
+- scoring layer: normally logistics for CTR predict or softmax for image classification
+
+## NeuralCF
+
+- https://paperswithcode.com/paper/neural-collaborative-filtering
+- 利用神经网络来替代协同过滤的内积来进行特征交叉
+- 
+
+## PNN
+
+- 相对于 deep crossing 模型，就是把 stacking layer 换成 product layer，说白了就是更好的交叉特征
+- IPNN，就是 inner product
+- OPNN, 就是 outer product，其中外积操作会让模型复杂度从 M （向量的维度）变成 $M^{2}$,可以通过 superposition 来解决，这个操作相当于一个 average pooling，然后再进行外积互操作
+- average pooling一般用在同类的 embedding 中，否则会模糊很重要的信息
+- 
+
+## Wide & Deep
+
+- Wide 主要是记忆，而 deep 则更好的泛化
+- 单输入层的 Wide部分
+- 
+
+## FNN, DeepFM, NFM
+
+## AFM, DIIN
+
+## DIEN
+
+## DRN
+
+
+
 # Appendix
 
 - 知识蒸馏：模型压缩，用小模型模拟 a pre-trained, larger model (or ensemble of models)，引入一个变量softmax temperature $T$，$T$经常是1~20，$p_i = \frac{exp\left(\frac{z_i}{T}\right)}{\sum_{j} \exp\left(\frac{z_j}{T}\right)}$。两个新的超参数$\alpha, \beta$，其中$\beta$一般是$1-\alpha$，soft target包含的信息量更大。![image-20200715070355206](https://raw.githubusercontent.com/Wizna/play/master/image-20200715070355206.png)
