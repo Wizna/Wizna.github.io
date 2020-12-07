@@ -662,16 +662,65 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Wide & Deep
 
 - Wide 主要是记忆，而 deep 则更好的泛化
-- 单输入层的 Wide部分
-- 
+- 单输入层的 Wide部分：已安装应用和曝光应用 2 个
+- Deep 部分：全量特征
+- ![image-20201207164950811](https://raw.githubusercontent.com/Wizna/play/master/image-20201207164950811.png)
+- Deep & cross：本质就是cross layer进行特征交叉，替代掉 wide 部分
 
 ## FNN, DeepFM, NFM
 
-## AFM, DIIN
+### FNN
+
+- 本质在于 embedding 的改进，普通 embedding 训练非常慢
+- embedding 训练收敛慢：
+  1. 参数数量大
+  2. 稀疏，只有非0特征连着的embedding会更新
+- 使用 FM 模型训练好特征的隐向量来初始化 embedding 层，然后训练 embedding
+
+### DeepFM
+
+- FM 替换 wide
+- FM 和 deep 共享相同的 embedding 层
+
+## AFM, DIN
+
+### AFM
+
+- 注意力机制替代 sum pooling
+- 给两两交叉特征层加一个 attention 然后输出 $f_{Att}{j(f_{PI}{(\epsilon)})=\Sigma_{(i,j)\in R_{x}}{a_{ij}(v_{i}\odot v_{j})x_{i}x_{j}}}$
+- 注意力网络是单个全连接层加 softmax，要学习的就是 W, b, h
+- $a\prime_{ij}=h^{T}ReLU(W(v_{i}\odot v_{j})x_{i}x_{j}+b)$
+- $a_{ij}=\frac{\exp(a\prime_{ij})}{\Sigma_{(i,j)\in R_{x}}{\exp (a\prime_{ij})}}$
+- 注意力网络跟大家一块训练即可
+
+### DIN
+
+- item特征组老样子，user特征组由 sum 变成 weighted sum，加上了 attention 的权重，本质就是加了个 attention unit
+- attention unit：输入 2 embedding，计算 element-wise 减，这三者连接在一起，输入全连接层，然后单神经元输出一个 score
+- attention 结构并不复杂，但是有效，应该是因为什么和什么相关的业务信息被attention表示了，比如item id和用户浏览过的item id发生作用，而不需要所有embedding都发生关系，那样训练困难，耗的资源多，逻辑上也不显然
 
 ## DIEN
 
+- 本质是相对于 DIN 加了时间的序列
+- 额外加了一个兴趣进化网络，分为三层，从低到高
+  1. behaviour layer
+  2. interest extraction layer
+  3. interest evolving layer
+- interest extraction layer: 用的 GRU，这个没有RNN梯度消失的问题，也没有LSTM那么多参数，收敛速度更快
+- interest evolving layer：主要是加上了 attention
+
 ## DRN
+
+- 强化学习模型，好处是online
+-  Deep Q-Network，quality，给行动打分
+- ![image-20201207220337087](https://raw.githubusercontent.com/Wizna/play/master/image-20201207220337087.png)
+- 离线用历史数据训练一个初始化模型
+- t1 -> t2 推送服务
+- t2 微更新 （DBGDA）
+- t4 主更新，就是重新训练
+- t5 重复
+- dueling bandit gradient descent algorithm: 
+- 
 
 
 
