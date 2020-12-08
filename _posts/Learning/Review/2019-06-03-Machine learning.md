@@ -376,7 +376,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 #### Negative sampling
 
 - 注意到上面skip-gram和CBOW我们每次softmax都要计算字典大小$\mid V \mid $这么多。所以用两种approximation的方法，negative sampling和hierarchical softmax
-- 本质上这里就是换了一个loss function。
+- 本质上这里就是换了一个loss function。多分类退化成了近似的二分类问题。
 - [解释论文](https://arxiv.org/pdf/1402.3722.pdf)，这个文章给了一种需要target word和context word不同vector的理由，因为自己和自己相近出现是很困难的，但是$v \cdot  v$很小不符合逻辑。
 - 不用conditional probability而用joint probability了，$D=1$指文本中有这个上下文，如果没有就是$D=0$，也就是negative samples![image-20200710190731269](https://raw.githubusercontent.com/Wizna/play/master/image-20200710190731269.png)
 - 这里$\sigma$函数是sigmoid![image-20200710190814168](https://raw.githubusercontent.com/Wizna/play/master/image-20200710190814168.png)个人认为主要好处是-log可以化简
@@ -720,9 +720,47 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - t4 主更新，就是重新训练
 - t5 重复
 - dueling bandit gradient descent algorithm: 
-- 
+  1. 对于网络 Q 的参数$W$，增加一个随机的扰动，得到新的模型参数$\tilde{W}$，这个叫探索网络
+  2. 新老网络分别生成推荐结果$L$ $\tilde{L}$，然后俩进行 interleaving后推给用户
+  3. 好则用，不好则留，迭代
 
+## Embeddings
 
+- 主要用在3个方面
+  1. 网络中的 embedding 层，（和网络整体训练虽好，但是很多时候收敛太慢了，所以经常是 embedding 单独进行预训练）
+  2. embedding 和别的特征向量进行拼接
+  3. 通过 embedding 相似度直接进行召回 （这个要求的是 user, item的向量处于同一个向量空间，这样就可以直接搜索最近邻，不用进行点积运算，用locality sensitie hashing）
+
+### Item2vec
+
+- 和 word2vec 差不多，不过去掉了时间窗口（或者说markov），用用户历史记录序列中所有的item，两两有关
+- 对于一个长度为K的用户历史记录 $w_{1},…,w_{K}$，objective function: $\frac{1}{K}\Sigma_{i=1}^{K}{\Sigma_{j\neq i}^{K}{\log p(w_{j}\lvert w_{i})}}$
+- 主要是用于序列型数据
+
+### Graph embedding
+
+- 可以处理网络型数据
+- 包含结构信息和局部相似性信息
+
+#### DeepWalk
+
+- 构建方法：
+  1. 用户行为序列构建有向图，多次连续出现的物品对，那么对应的边的权重被加强
+  2. 随机起始点，随机游走，产生物品序列，概率就是按照出边的权的比例来
+  3. 新的物品序列输入 word2vec，产生 embedding
+
+#### Node2vec
+
+-  网络具有：
+  1. 同质性 homophily，相近节点 embedding 相似，游走更偏 DFS，商品（同品类，同属性）
+  2. 结构性 structural equivalence，结构相似的节点 embedding 相似，游走更偏 BFS，商品（都是爆款，都是凑单）
+- 调整超参数控制游走，可以产生不同侧重的 embedding，然后都用来后续训练
+
+#### locality sensitive hashing 局部敏感哈希
+
+- 本质是高维空间的点到低维空间的映射，满足高维相近低维也一定相近，但是远的也有一定的概率变成相近的
+- 对于一个 k 维函数，让它计算一下和 k*m 矩阵的运算，就得到一个 m 维的向量，这个 矩阵其实就是 m 个hash 函数，对于生成的向量v，在它 m 个层面进行分桶（$[\frac{v}{w}]$，就是除以桶的宽度然后取整），这样我们就知道了相近的点就是在各个维度相近的桶里，这样查找就会非常快
+- 使用几个hash函数，这些hash函数是用 and, or都是工程上面的权衡
 
 # Appendix
 
