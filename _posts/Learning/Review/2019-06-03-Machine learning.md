@@ -762,6 +762,29 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 对于一个 k 维函数，让它计算一下和 k*m 矩阵的运算，就得到一个 m 维的向量，这个 矩阵其实就是 m 个hash 函数，对于生成的向量v，在它 m 个层面进行分桶（$[\frac{v}{w}]$，就是除以桶的宽度然后取整），这样我们就知道了相近的点就是在各个维度相近的桶里，这样查找就会非常快
 - 使用几个hash函数，这些hash函数是用 and, or都是工程上面的权衡
 
+## Explore and exploit
+
+- 推荐不能太过分，也要注意用户新兴趣的培养，多样性，同时对物品冷启也有好处
+- 分3类：
+  1. 传统的：$\epsilon-Greedy$, Thompson Sampling (适用于偏心硬币，CTR) and UCB (upper confidence bound)
+  2. 个性化的：LinUCB
+  3. 模型的：DRN
+
+## 工程实现
+
+### 大数据
+
+- 1. 批处理：
+  2. 流计算
+  3. lambda
+  4. kappa
+
+### 模型训练
+
+### 上线部署
+
+- 
+
 # Appendix
 
 - 知识蒸馏：模型压缩，用小模型模拟 a pre-trained, larger model (or ensemble of models)，引入一个变量softmax temperature $T$，$T$经常是1~20，$p_i = \frac{exp\left(\frac{z_i}{T}\right)}{\sum_{j} \exp\left(\frac{z_j}{T}\right)}$。两个新的超参数$\alpha, \beta$，其中$\beta$一般是$1-\alpha$，soft target包含的信息量更大。![image-20200715070355206](https://raw.githubusercontent.com/Wizna/play/master/image-20200715070355206.png)
