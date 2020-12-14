@@ -774,12 +774,15 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### 大数据
 
-- 1. 批处理：
-  2. 流计算
-  3. lambda
-  4. kappa
+- 1. 批处理：HDFS + map reduce，延迟较大
+  2. 流计算：Storm, Flink，延迟小，灵活性大
+  3. lambda：批处理（离线处理） + 流计算（实时流），落盘前会进行合并和纠错校验
+  4. kappa：把批处理看作是时间窗口比较大的流处理，存储原始数据+数据重播
 
-### 模型训练
+### 模型训练 （分布式）
+
+- 1. Spark MLlib:全局广播，同步阻断式，慢，确保一致性
+  2. Parameter server:异步非阻断式，速度快，一致性有损（某个），多server，一致性hash，参数范围拉取和推送
 
 ### 上线部署
 

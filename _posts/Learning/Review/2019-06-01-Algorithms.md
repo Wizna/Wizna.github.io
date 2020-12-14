@@ -509,6 +509,12 @@ def sqrt(x):
 
 ### Fenwick tree
 
+### Walker's alias method
+
+- 一个根据 weights 生成随机数的方法
+- 本质就是预处理weights，使得每个 bin 种只有 1 ～ 2个item，然后uniform random，把 binary search 变成了 constant 的查找
+- http://www-sop.inria.fr/members/Alain.Jean-Marie/Cours/AMM/Support/algos.pdf
+
 
 
 
