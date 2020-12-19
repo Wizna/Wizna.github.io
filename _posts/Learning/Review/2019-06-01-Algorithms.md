@@ -515,7 +515,29 @@ def sqrt(x):
 - 本质就是预处理weights，使得每个 bin 种只有 1 ～ 2个item，然后uniform random，把 binary search 变成了 constant 的查找
 - http://www-sop.inria.fr/members/Alain.Jean-Marie/Cours/AMM/Support/algos.pdf
 
+### Choice without repetition from numpy
 
+```python
+n_uniq = 0
+p = p.copy()
+found = np.zeros(shape, dtype=np.int64)
+flat_found = found.ravel()
+while n_uniq < size:
+    x = self.random((size - n_uniq, ))
+    if n_uniq > 0:
+        p[flat_found[0:n_uniq]] = 0
+    cdf = np.cumsum(p)
+    cdf /= cdf[-1]
+    new = cdf.searchsorted(x, side='right')
+    _, unique_indices = np.unique(new, return_index=True)
+    unique_indices.sort()
+    new = new.take(unique_indices)
+    flat_found[n_uniq:n_uniq + new.size] = new
+    n_uniq += new.size
+idx = found
+```
+
+可以学习一下 numpy source code，这里就是分次生成一波一波的，然后把已经生成的 weights 设置成 0
 
 
 
