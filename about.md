@@ -21,7 +21,7 @@ permalink: /about/
 ### Websites 我喜欢的
 <center><a href="http://gen.lib.rus.ec/">Library Genesis</a></center>
 <center><a href="https://sci-hub.se/">Sci-Hub</a></center>
-<center><a href="http://ysmiao.cn/ycy/">- 媲美 -</a></center>
+<center><a href="http://secnone.com/">- Secnone -</a></center>
 
 ### Life motto
 
@@ -30,3 +30,4 @@ permalink: /about/
 ### Contact me
 
 <center> <a href="mailto:huangruiming999@gmail.com">huangruiming999@gmail.com</a></center>
+

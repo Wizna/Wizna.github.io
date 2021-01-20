@@ -119,6 +119,8 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 ### Segment Tree
 
+- 
+
 ### Linkedlist
 
 - to find if there is a cycle in a linked list 
