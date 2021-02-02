@@ -1,4 +1,4 @@
-![title image](http://wx4.sinaimg.cn/mw690/006a0Rdhly1g3lpobkawcj31sg1ccx6r.jpg)
+![title image](https://raw.githubusercontent.com/Wizna/play/master/006a0Rdhly1g3lpobkawcj31sg1ccx6r.jpg)
 
 ### Background
 
