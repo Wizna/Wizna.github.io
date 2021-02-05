@@ -1,6 +1,7 @@
-<img src="https://img5.goodfon.com/wallpaper/nbig/e/64/anime-night-sky-scenery.jpg" alt="title image" />
+![](https://raw.githubusercontent.com/Wizna/play/master/3cad6879d534d967bc58931e0435482a.jpg)
 
 ### 背景
+
 编程是逐步磨练的技能，熟练地使用编辑器的快捷键可以让人事半功倍。水银泻地般地，优雅地编程。
 
 ### 快捷键
