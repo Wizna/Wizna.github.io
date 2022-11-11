@@ -456,37 +456,72 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Attention
 
 - [Attention Is All You Need]( https://arxiv.org/pdf/1706.03762.pdf )
+
 - Attention is a generalized pooling method with bias alignment over inputs.
+
 - 参数少，速度快（可并行），效果好
+
 - attention layer有个key-value pairs $\bf (k_{1}, v_{1})..(k_{n}, v_{n})$组成的memory，输入query $\bf{q}$，然后用score function $\alpha$计算query和key的相似度，然后输出对应的value作为output $\bf o$
+
 - ![image-20200702011857241](https://raw.githubusercontent.com/Wizna/play/master/image-20200702011857241.png)![image-20200702012144153](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012144153.png)![image-20200702012222310](https://raw.githubusercontent.com/Wizna/play/master/image-20200702012222310.png)
+
 - 两种常见attention layer,都可以内含有dropout: dot product attention (multiplicative) and multilayer perceptron (additive) attention.前者score function就是点乘（要求query和keys的维度一样），后者则有个可训练的hidden layer的MLP，输出一个数
+
 - dimension of the keys $d_{k}$, multiplicative attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. Additive attention outperforms dot product attention without scaling for larger values of $d_{k}$ (所以原论文里用scaled dot product attention，给点乘后的结果乘了一个$\frac{1}{\sqrt{d_{k}}}$的参数)
-- seq2seq with attention mechanism: encoder没变化。during the decoding, the decoder output from the previous timestep $t-1$ is used as the query. The output of the attention model is viewed as the context information, and such context is concatenated with the decoder input Dt. Finally, we feed the concatenation into the decoder.
+
+- seq2seq with attention mechanism: encoder没变化。during the decoding, the decoder output from the previous timestep $t-1$ is used as the query. The output of the attention model is viewed as the context information, and such context is concatenated with the decoder input Dt. Finally, we feed the concatenation into the decoder.下图没有 concat，但是基本差不多
+
+  ![](https://raw.githubusercontent.com/Wizna/play/master/1*qN2Pj5J4VqAFf7dsA2dHpA.png)
+
 - The decoder of the seq2seq with attention model passes three items from the encoder:
+
 - 1. the encoder outputs of all timesteps: they are used as the attention layerʼs memory with
      identical keys and values;
   2. the hidden state of the encoderʼs final timestep: it is used as the initial decoderʼs hidden
      state;
   3. the encoder valid length: so the attention layer will not consider the padding tokens with
      in the encoder outputs.
+  
 - transformer:主要是加了3个东西，
+
 - 1. transformer block:包含两种sublayers，multi-head attention layer and position-wise feed-forward network layers
   2. add and norm: a residual structure and a layer normalization，注意到右边式子括号中是residual，外面是layer norm ![image-20200702035112666](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035112666.png)
   3. position encoding: 唯一add positional information的地方
+  
 - <img src="https://raw.githubusercontent.com/Wizna/play/master/image--000.png" alt="image--000" style="zoom: 25%;" />
+
 - self-attention model is a normal attention model, with its query, its key, and its value being copied exactly the same from each item of the sequential inputs. output items of a self-attention layer can be computed in parallel. Self attention is a mechanism relating different positions of a single sequence in order to compute a representation of the sequence.
+
 - multi-head attention: contain parallel self-attention layers (head), 可以是any attention (e.g. dot product attention, mlp attention) <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200808172837983.png" alt="image-20200808172837983" style="zoom:80%;" />
+
 - 在transformer中multi-head attention用在了3处，1是encoder-decoder attention, queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder。2是self-attention in encoder，all of the keys, values and queries come from output of the previous layer in the encoder。3是self-attention in decoder, 类似
+
 - position-wise feed-forward networks:3-d inputs with shape (batch size, sequence length, feature size), consists of two dense layers, equivalent to applying two $1*1$ convolution layers
+
 - 这个feed-forward networks applied to each position separately and identically,不过当然不同层的参数不一样。本质式子就是俩线性变换夹了一个ReLU，![image-20200808174456469](https://raw.githubusercontent.com/Wizna/play/master/image-20200808174456469.png)
+
 -  add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
+
 -  
+
 - position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)$i$ refers to the order in the sentence, and $j$ refers to the
   position along the embedding vector dimension, $d$是dimension of embedding。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones ，一些解释https://www.zhihu.com/question/347678607
+  
 - [https://medium.com/@pkqiang49/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-attention-%E6%9C%AC%E8%B4%A8%E5%8E%9F%E7%90%86-3%E5%A4%A7%E4%BC%98%E7%82%B9-5%E5%A4%A7%E7%B1%BB%E5%9E%8B-e4fbe4b6d030](https://medium.com/@pkqiang49/一文看懂-attention-本质原理-3大优点-5大类型-e4fbe4b6d030)
 
 * [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf)这里提出一种结构，可以parameter少，还并行性好，结果还很好，3 steps: attending, comparing, aggregating.
+
+### self-attention
+
+- https://towardsdatascience.com/illustrated-self-attention-2d627e33b20a
+- ![](https://raw.githubusercontent.com/Wizna/play/master/1*_92bnsMJy8Bl539G4v93yg.gif)
+- 
+
+### target-attention
+
+### multi-head attention
+
+
 
 ## Unsupervised machine translation
 
@@ -784,9 +819,45 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 1. Spark MLlib:全局广播，同步阻断式，慢，确保一致性
   2. Parameter server:异步非阻断式，速度快，一致性有损（某个），多server，一致性hash，参数范围拉取和推送
 
-### 上线部署
+### 评估
 
-- 
+- 我们需要的是所有 item 的一种排序，所以直接序列的评估相对于 ctr 之类的可能更好一点
+
+#### P-R 曲线
+
+- precision - recall curve，通过变化阈值生成（正负样本的阈值）
+- AUC - area under curve 来比较曲线的优劣，而不是单个点
+
+#### ROC curve
+
+- receiver operating characteristic curve
+- 横坐标 false positive rate， 纵坐标 true positive rate
+- 也是通过变化正负样本与之来画的
+- 也用 auc
+
+#### mAP
+
+- mean averagte precision
+- 对于每个用户，对样本进行排序，然后对于所有正样本处的 precision进行平均，得到一个值 ap，对所有用户进行平均，得到mAP
+- roc 和 p-r 都是直接对样本排序，只有mAP 需要分用户对样本排序
+### replay
+
+- 注意防止穿越
+- 尽量让离线评估贴近线上结果，模型需要化静态为动态
+- replay 就是接收到样本就更新的精准线上仿真
+
+### 线上评估
+
+- 用户层面不同层正交，同层互斥
+- interleaving: 在 attest 之前迅速的减小需要检验的算法集，不区分用户群体，所以不会有群体差异。同时提供算法a和b的结果，不过交叉在一起（用户不知道），当然算法结果前后位置顺序得保证公平出现
+- interleaving 具有比 attest 更高的灵敏度，也更容易出现置信的数据，其结果和 abtest 也很有相关性
+- interleaving 缺点是实现有挑战，而且实验结果不是实际的那些（时长，留存）
+
+- 总的一个关系是 离线 -> replay -> interleaving -> abtest 真实性和消耗资源逐渐变高
+
+
+
+
 
 # Appendix
 
@@ -830,5 +901,4 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 
 
 - 样本不均衡：上采样，下采样，调整权重
-
 

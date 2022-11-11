@@ -4,8 +4,7 @@
 {:toc}
  
 
-
-##背景
+## 背景
 简单复习一下最基本的算法和数据结构，可惜一直耽搁了。
 
 部分来自introduction to algorithm和https://github.com/keon/algorithms，还有网络。
@@ -117,8 +116,16 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 
 
-### Segment Tree
+### Range query
 
+#### Segment Tree
+
+- 
+
+#### Fenwick tree (binary index tree)
+
+- 用 O(n) 去 build，然后之后每次 update 和 查询都是 O(log(n))
+- 虽然说是 tree，但是直接使用 array 来实现也是非常容易
 - 
 
 ### Linkedlist
@@ -172,6 +179,12 @@ def reverseKGroup(self, head, k):
 
 
 ## Graph
+
+- A graph is regular if the degree of every node is a constant d
+- A graph is bipartite if it is possible to color it using two colors. 
+- A graph is bipartite exactly when it does not contain a cycle with an odd number of edges. 易知这么一个 cycle，依次染色最后是同色
+- A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes
+- 
 
 ### Traverse
 
@@ -345,7 +358,20 @@ def ford_fulkerson(capacity, source, sink):
 
 ## Selected topics
 
+### Bit manipulation
+
+```python
+# get largest power of 2 that <= n
+n & -n
+
+
+```
+
+
+
 ### Dynamic programming
+
+- Using dynamic programming, it is often possible to change an iteration over permutations into an iteration over subsets complexity drop from $n!$ ->$2^n$
 
 - 编辑距离
 
@@ -486,7 +512,7 @@ def derange(n):
 
 
 
-### Selection rank 
+### Selection rank
 
 - similar to quick sort
 
@@ -508,8 +534,6 @@ def sqrt(x):
 
 
 ### PSO algorithm
-
-### Fenwick tree
 
 ### Walker's alias method
 
@@ -544,7 +568,6 @@ idx = found
 
 
 # To be continued ...
-
 
 
 
