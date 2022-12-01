@@ -1,9 +1,7 @@
 ![title image](https://n.sinaimg.cn/ent/transform/250/w630h420/20191209/3df3-iknhexh9270759.jpg)
 
-
-
 * TOC
-{:toc}
+  {:toc}
 
 # Background
 
@@ -14,6 +12,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 # Basics
 
 ## Batch normalization
+
 - Batch normalization:  subtracting the batch mean and dividing by the batch standard deviation (2 trainable parameters for mean and standard deviation, mean->0, variance->1) to counter covariance shift (i.e. the distribution of input of training and testing are different) [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]( https://arxiv.org/pdf/1502.03167v3.pdf ) 也方便optimization，而且各feature之间不会有莫名的侧重，注意是每个feature dimension分开进行batch normalization
 
 - batch normalization 经常被每一层分别使用。batch size不能为1（因为这时输出总为0）。
@@ -27,50 +26,91 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## Layer normalization
 
 - layer normalization和batch normalization类似，不过不是batch 那一维度（d=0）normalize，而是最后一个维度normalize, 作用是prevents the range of values in the layers from changing too much, which allows faster training and better generalization ability。
-- batch normalization用在rnn上的话，得考虑不同sequence长度不同，而layer norm没有这个问题(one set of weight and bias shared over all time-steps)
-- layer norm就是每个sample自己进行across feature 的layer层面的normalization，有自己的mean, variance。所以可以batch size为1, batch norm则是across minibatch 单个neuron来算
-- MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
-- broadcast就是复制来填充新的维度
-- missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
-- 使用`x+=y`或者`z[:]=x`可以在老地方设置新ndarray，节约内存
-- scalar, vector, matrix, tensor: 0-, 1-, 2-, n-dimension
-- $L_{p}$ norm: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png" alt="image-20200517120714786" style="zoom:80%;" />
-- $L_{p}$norm的性质, for vectors in $C^{n}$ where $ 0 < r < p $：![f58fa1507500f5afe377f76f4d3fc0007c93b64e](https://raw.githubusercontent.com/Wizna/play/master/f58fa1507500f5afe377f76f4d3fc0007c93b64e.svg)
-- calculus微积分: integration, differentiation
-- product rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png" alt="image-20200517210613582" style="zoom:80%;" />
 
+- batch normalization用在rnn上的话，得考虑不同sequence长度不同，而layer norm没有这个问题(one set of weight and bias shared over all time-steps)
+
+- layer norm就是每个sample自己进行across feature 的layer层面的normalization，有自己的mean, variance。所以可以batch size为1, batch norm则是across minibatch 单个neuron来算
+
+- MXNet's ndarray比numpy的要多2特点，1是有automatic differentiation，2是支持在GPU, and distributed cloud architectures上的asynchronous computation.
+
+- broadcast就是复制来填充新的维度
+
+- missing data比如NaN可以用imputation(填充一些数)或者deletion来处理
+
+- 使用`x+=y`或者`z[:]=x`可以在老地方设置新ndarray，节约内存
+
+- scalar, vector, matrix, tensor: 0-, 1-, 2-, n-dimension
+
+- $L_{p}$ norm: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517120714786.png" alt="image-20200517120714786" style="zoom:80%;" />
+
+- $L_{p}$norm的性质, for vectors in $C^{n}$ where $ 0 < r < p $：![f58fa1507500f5afe377f76f4d3fc0007c93b64e](https://raw.githubusercontent.com/Wizna/play/master/f58fa1507500f5afe377f76f4d3fc0007c93b64e.svg)
+
+- calculus微积分: integration, differentiation
+
+- product rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210613582.png" alt="image-20200517210613582" style="zoom:80%;" />
 * quotient rule: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517210755705.png" alt="image-20200517210755705" style="zoom:80%;" />上面的是领导啊
+
 * chain rule: ![image-20200517213323541](https://raw.githubusercontent.com/Wizna/play/master/image-20200517213323541.png)
+
 * matrix calculus: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517213215946.png" alt="image-20200517213215946" style="zoom:80%;" />[matrix calculus wiki](https://en.wikipedia.org/wiki/Matrix_calculus)
+
 * A gradient is a vector whose components are the partial derivatives of a multivariate function
   with respect to all its variables
+
 * Bayes' Theorem: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517214155675.png" alt="image-20200517214155675" style="zoom:80%;" />
+
 * <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200517222203691.png" alt="image-20200517222203691" style="zoom:80%;" />[推导](https://en.wikipedia.org/wiki/Variance)
+
 * dot product: a scalar; cross product: a vector
+
 * stochastic gradient descent: update in direction of negative gradient of minibatch<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518114459580.png" alt="image-20200518114459580" style="zoom:80%;" />
+
 * likelihood: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518120658206.png" alt="image-20200518120658206" style="zoom:80%;" />
+
 * 经常用negative log-likelihood来将maximize multiplication变成minimize sum
+
 * minimizing squared error is equivalent to maximum likelihood estimation of a linear model under the assumption of additive Gaussian noise
+
 * one-hot encoding: 1个1，其他补0
+
 * entropy of a distribution p: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518173223125.png" alt="image-20200518173223125" style="zoom:80%;" />
+
 * cross-entropy is *asymmetric*: $H(p,q)=-\sum\limits_{x\in X}{p(x)\log q(x)}$
+
 * minimize cross-entropy == maximize likelihood
+
 * Kullback-Leibler divergence (也叫relative entropy或者information gain) is the difference between cross-entropy and entropy: <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518174004941.png" alt="image-20200518174004941" style="zoom:80%;" />
+
 * KL divergence is *asymmetric* and does not satisfy the [triangle inequality](https://en.wikipedia.org/wiki/Triangle_inequality)
+
 * Jensen-Shannon divergence: ${{\rm {JSD}}}(P\parallel Q)={\frac  {1}{2}}D(P\parallel M)+{\frac  {1}{2}}D(Q\parallel M)$ where $M={\frac  {1}{2}}(P+Q)$，这个JSD是symmetric的
+
 * cross validation: split into k sets. do k experiments on (k-1 train, 1 validation), average the results
+
 * forward propagation calculates and stores intermediate variables.
+
 * 对于loss function $J$, 要计算偏导的$W$, $\frac{\partial J}{\partial W}=\frac{\partial J}{\partial O}*I^{T}+\lambda W$, 这里$O$是这个的output, $I$是这个的input，后面的term是regularization的导，这里也说明了为啥forward propagation要保留中间结果，此外注意activation function的导是elementwise multiplication，有些activation function对不同值的导得分别计算。training比prediction要占用更多内存
+
 * Shift: distribution shift, covariate shift, label shift
+
 * covariate shift correction: 后面说的只和feature $X$有关，和$y$是没有关系的。训练集来自$q(x)$，测试集来自$p(x)$，![image-20200620111745471](https://raw.githubusercontent.com/Wizna/play/master/image-20200620111745471.png),所以训练时给$X$一个weight $\frac{p(x)}{q(x)}$即可。经常是来一个混合数据集，训练一个分类器来估计这个weight，logistics分类器好算。
+
 * label shift correction:和上面一样，加个importance weights，说白了调整一下输出
+
 * concept shift correction：经常是缓慢的，所以就把新的数据集，再训练更新一下模型即可。
+
 * 确实的数据，可以用这个feature的mean填充
+
 * Logarithms are useful for relative loss.除法变减法
+
 * 对于复杂模型，有block这个概念表示特定的结构，可以是1层，几层或者整个模型。只要写好参数和forward函数即可。
+
 * 模型有时候需要，也可以，使不同层之间绑定同样的参数，这时候backpropagation的gradient是被分享那一层各自的和，比如a->b->b->c，就是第一个b和第二个b的和
+
 * chain rule (probability): ![image-20200627215124291](https://raw.githubusercontent.com/Wizna/play/master/image-20200627215124291.png)
+
 * cosine similarity，如果俩向量同向就是1 ![image-20200714115907851](https://raw.githubusercontent.com/Wizna/play/master/image-20200714115907851.png)
+
 * 
 
 ## Hyperparameters
@@ -92,10 +132,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ### Zero-shot learning
 
-
-
 ## Curriculum learning
-
 
 ## Objective function
 
@@ -117,7 +154,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * q=1的话，lasso, if `λ` is sufficiently large, some of the coefficients $w_{j}$ are driven to zero, leading to a sparse model,比如右边lasso的 $w_{1}$
 
 <img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200519133624932.png" alt="image-20200519133624932" style="zoom:50%;" />
-* 
+*
 
 ### Dropout
 
@@ -133,7 +170,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Learning rate
 
-###  Pick learning rate
+### Pick learning rate
 
 - Let the learning rate increase linearly (multiply same number) from small to higher over each mini-batch, calculate the loss for each rate, plot it (log scale on learning rate), pick the learning rate that gives the greatest decline (the going-down slope for loss) [Cyclical Learning Rates for Training Neural Networks]( https://arxiv.org/pdf/1506.01186.pdf )
 
@@ -155,8 +192,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 * 求偏导，简单例子，对于一个很多层dense的模型，偏导就是连乘，eigenvalues范围广，特别大或者特别小，这个是log-space不能解决的
 
 * Vanishing gradients: cause by比如用sigmoid做activation function,导数两头都趋于0，见图<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200520122630230.png" alt="image-20200520122630230" style="zoom:50%;" />
+
 * Exploding gradients：比如100个~Normal(0,1)的数连乘，output炸了，gradient也炸了，一发update，model参数就毁了
+
 * Symmetry：全连接的话，同一层所有unit没差，所以如果初始化为同一个值就废了
+
 * 普通可用的初始化，比如Uniform(-0.07, 0.07)或者Normal(mean=0, std=0.01)
 
 ### Xavier initialization
@@ -190,11 +230,11 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - stochastic gradient $∇f_{i}(\textbf{x})$ is the unbiased estimate of gradient $∇f(\textbf{x})$.
 - 
 
-### Momentum 
+### Momentum
 
 - $\textbf{g}$ is gradient, $\textbf{v}$ is momentum, $\beta$ is between 0 and 1. ![image-20200707021756694](https://raw.githubusercontent.com/Wizna/play/master/image-20200707021756694.png)
 
-### Adagrad 
+### Adagrad
 
 - ![image-20200707023340021](https://raw.githubusercontent.com/Wizna/play/master/image-20200707023340021.png)
 
@@ -206,7 +246,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - Combine multiple models' predictions to produce a final result (can be a collection of different checkpoints of a single model or models of different structures)
 
-##  Activations
+## Activations
 
 ### ReLU
 
@@ -218,6 +258,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 以下用$x_{ji}$ to denote the input of $i$th channel in $j$th example
 
 - 就是negative部分也有一个小斜率![image-20200808193135697](https://raw.githubusercontent.com/Wizna/play/master/image-20200808193135697.png)
+
 - $a_{i}$越大越接近ReLU，经验上可以取6~100
 
 ### PReLU
@@ -245,7 +286,9 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### Softmax
 
 * 计算<img src="https://raw.githubusercontent.com/Wizna/play/master/image-20200518141705932.png" alt="image-20200518141705932" style="zoom:80%;" />
+
 * softmax保证了each logit >=0且和为1
+
 * 给softmax搭配cross entropy避免了exponential带来的数值overflow或者underflow问题
 
 * 
@@ -297,7 +340,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - memory cell: entirely internal
 - Can be bidirectional (just stack 2 lstm together, with input of opposite direction)
 
-## Encoder-decoder 
+## Encoder-decoder
 
 - a neural network design pattern, encoder -> state(several vector i.e. tensors) -> decoder
 - An encoder is a network (FC, CNN, RNN, etc.) that takes the input, and outputs a feature
@@ -336,12 +379,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## Pooling
 
-- 
-
-# Natural language processing
+- # Natural language processing
 
 - beam search: $ \mid Y \mid $这么多的词汇，很简单，就是每一层都挑前一层$k * \mid Y \mid $中挑最可能的k个。最后，收获的不是k个，而是$k * L$个，L是最长搜索的长度，e.g. a, a->b, a->b->c, 最后这些还用perplexity在candidates中来挑选一下最可能的。
+
 - one-hot 不能很好的体现word之间的相似性，任意2个vector的cosine都是0
+
 - 
 
 ## Embeddings
@@ -392,7 +435,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 其中条件为真，$[\![x]\!]=1$，否则为$-1$
 - 现在是$\log_{2}{\mid V \mid }$
 
-### GloVe 
+### GloVe
 
 - use square loss，数以$w_{i}$为central target word的那些context word的个数，比如某个word $w_{j}$，那么这个个数记为$x_{ij}$，注意到两个词互为context，所以$x_{ij}=x_{ji}$，这带来一个好处，2 vectors相等（实际中训练后俩vector因为初始化不一样，所以训练后不一样，取sum作为最后训练好的的embedding）
 - 令![image-20200711100056462](https://raw.githubusercontent.com/Wizna/play/master/image-20200711100056462.png)，$p'$是我们的目标，$q'$是要训练的那俩vector，此外还有俩bias标量参数，一个给target word $b_{i}$, 一个给context word $c_{i}$. The weight function $h(x)$ is a monotone increasing function with the range [0; 1].
@@ -403,12 +446,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - 欧洲很多语言词性变化很多（morphology词态学），但是意思相近，简单的每个词对应某向量就浪费了这种信息。用subword embedding可以生成训练中没见过的词
 
-#### fastText 
+#### fastText
 
 - 给每个单词加上`<>`，然后按照character取长度3-6的那些subword，然后自己本身`<myself>`也是一个subword，这些subword都按照skip-gram训练词向量，最后central word vector $\textbf u_{w}$就是其所有subword的向量和![image-20200711112827035](https://raw.githubusercontent.com/Wizna/play/master/image-20200711112827035.png)
 - 缺点是vocabulary变大很多
 
-#### BPE 
+#### BPE
 
 - Byte pair encoding:  the most common pair of consecutive bytes of data is replaced with a byte that does not occur within that data, do this recursively [Neural Machine Translation of Rare Words with Subword Units]( https://arxiv.org/pdf/1508.07909.pdf )
 - 从length=1的symbol是开始，也就是字母，greedy
@@ -433,25 +476,19 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 ## GPT
 
-- 
-
-## N-grams
+- ## N-grams
 
 - 语言模型language model: ![image-20200622084204817](https://raw.githubusercontent.com/Wizna/play/master/image-20200622084204817.png)
+
 - Laplace smoothing (additive smoothing): ![image-20200629065408275](https://raw.githubusercontent.com/Wizna/play/master/image-20200629065408275.png),这里m是categories数量，所以估计值会在原本的概率和1/m的均匀分布之间，$\alpha$经常取0~1之间的数，如果是1的话，这个也叫做add-one smoothing
-- 
-
-
 
 - 
 
-## Metrics
+- ## Metrics
 
 ### BLEU
 
 ### TER
-
-
 
 ## Attention
 
@@ -470,7 +507,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - dimension of the keys $d_{k}$, multiplicative attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. Additive attention outperforms dot product attention without scaling for larger values of $d_{k}$ (所以原论文里用scaled dot product attention，给点乘后的结果乘了一个$\frac{1}{\sqrt{d_{k}}}$的参数)
 
 - seq2seq with attention mechanism: encoder没变化。during the decoding, the decoder output from the previous timestep $t-1$ is used as the query. The output of the attention model is viewed as the context information, and such context is concatenated with the decoder input Dt. Finally, we feed the concatenation into the decoder.下图没有 concat，但是基本差不多
-
+  
   ![](https://raw.githubusercontent.com/Wizna/play/master/1*qN2Pj5J4VqAFf7dsA2dHpA.png)
 
 - The decoder of the seq2seq with attention model passes three items from the encoder:
@@ -481,13 +518,13 @@ Just a review of machine learning for myself (really busy recently, so ...)
      state;
   3. the encoder valid length: so the attention layer will not consider the padding tokens with
      in the encoder outputs.
-  
+
 - transformer:主要是加了3个东西，
 
 - 1. transformer block:包含两种sublayers，multi-head attention layer and position-wise feed-forward network layers
   2. add and norm: a residual structure and a layer normalization，注意到右边式子括号中是residual，外面是layer norm ![image-20200702035112666](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035112666.png)
   3. position encoding: 唯一add positional information的地方
-  
+
 - <img src="https://raw.githubusercontent.com/Wizna/play/master/image--000.png" alt="image--000" style="zoom: 25%;" />
 
 - self-attention model is a normal attention model, with its query, its key, and its value being copied exactly the same from each item of the sequential inputs. output items of a self-attention layer can be computed in parallel. Self attention is a mechanism relating different positions of a single sequence in order to compute a representation of the sequence.
@@ -500,15 +537,14 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - 这个feed-forward networks applied to each position separately and identically,不过当然不同层的参数不一样。本质式子就是俩线性变换夹了一个ReLU，![image-20200808174456469](https://raw.githubusercontent.com/Wizna/play/master/image-20200808174456469.png)
 
--  add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
+- add and norm: X as the original input in the residual network, and Y as the outputs from either the multi-head attention layer or the position-wise FFN network. In addition, we apply dropout on Y for regularization. 
 
--  
+- 
 
 - position encoding: ![image-20200702035740355](https://raw.githubusercontent.com/Wizna/play/master/image-20200702035740355.png)$i$ refers to the order in the sentence, and $j$ refers to the
   position along the embedding vector dimension, $d$是dimension of embedding。这个函数应该更容易把握relative positions，并且没有sequence长度限制，不过也可以用别的，比如learned ones ，一些解释https://www.zhihu.com/question/347678607
-  
-- [https://medium.com/@pkqiang49/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-attention-%E6%9C%AC%E8%B4%A8%E5%8E%9F%E7%90%86-3%E5%A4%A7%E4%BC%98%E7%82%B9-5%E5%A4%A7%E7%B1%BB%E5%9E%8B-e4fbe4b6d030](https://medium.com/@pkqiang49/一文看懂-attention-本质原理-3大优点-5大类型-e4fbe4b6d030)
 
+- [https://medium.com/@pkqiang49/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82-attention-%E6%9C%AC%E8%B4%A8%E5%8E%9F%E7%90%86-3%E5%A4%A7%E4%BC%98%E7%82%B9-5%E5%A4%A7%E7%B1%BB%E5%9E%8B-e4fbe4b6d030](https://medium.com/@pkqiang49/一文看懂-attention-本质原理-3大优点-5大类型-e4fbe4b6d030)
 * [A Decomposable Attention Model for Natural Language Inference](https://arxiv.org/pdf/1606.01933.pdf)这里提出一种结构，可以parameter少，还并行性好，结果还很好，3 steps: attending, comparing, aggregating.
 
 ### self-attention
@@ -520,8 +556,6 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ### target-attention
 
 ### multi-head attention
-
-
 
 ## Unsupervised machine translation
 
@@ -548,6 +582,49 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 
 
 # Reinforcement learning
+
+## Basics
+
+- course: https://github.com/huggingface/deep-rl-class
+
+- loop: state0, action0, reward1, state1, action1, reward2 ...
+
+- state: complete description of the world, no hidden information
+
+- observation: partial description of the state of the world
+
+- goal: maximize expected cumulative reward
+
+- policy: tells what action to take given a state
+
+- task:
+  
+  - episodic
+  
+  - continuing
+
+- method:
+  
+  - policy-based (learn which action to take given a state)
+    
+    - deterministic 给定 state s 会选择固定某个 action a <img src="https://huggingface.co/blog/assets/63_deep_rl_intro/policy_3.jpg" title="" alt="Policy" width="112">
+    
+    - stochatistic:  output a probability distribution over actions
+  
+  - value-based (maps a state to the expected value of being at that state)
+    
+    - <img src="https://huggingface.co/blog/assets/63_deep_rl_intro/value_1.jpg" title="" alt="Value based RL" width="329"> 随时间 reward 有一个衰减， γ < 1
+    - 这时 policy 是个简单的人为确定的策略
+
+- value-based methods
+  
+  - Monte Carlo: update the value function from a complete episode, and so we use the actual accurate discounted return of this episode (获得实际的一个 episode 的 reward)
+  
+  - Temporal Difference: update the value function from a step, so we replace Gt that we don't have with an estimated return called TD target （获得一个 action的 reward 以及对于下个 state 的估计来更新现在 state，基于 bellman equation）
+
+- Bellman equation:
+  
+  - ![](/Users/huangruiming/Library/Application%20Support/marktext/images/2022-12-01-16-55-42-image.png)
 
 - 
 
@@ -629,7 +706,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
   \Phi FM(w,x)=\Sigma_{j_{1}=1}^{n-1}{\Sigma_{j_{2}=j_{1}+1}^{n}{(w_{j_{1}}\cdot w_{j_{2}})x_{j_{1}}x_{j_{2}}}}
   $$
 
-- 每个特征学习一个latent vector, 	隐向量的内积作为交叉特征的权重，权重参数数量从`n^2` -> `kn`
+- 每个特征学习一个latent vector,     隐向量的内积作为交叉特征的权重，权重参数数量从`n^2` -> `kn`
 
 - FFM, 引入了field-aware特征域感知，表达能力更强
 
@@ -647,8 +724,6 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 - GBDT就是构建新的离散特征向量的方法，LR就是logistics regression，和前者是分开的，不用梯度回传啥的
 - GBDT就是gradient boosting decision tree，
-
-
 
 ## AutoRec
 
@@ -747,7 +822,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 ## DRN
 
 - 强化学习模型，好处是online
--  Deep Q-Network，quality，给行动打分
+- Deep Q-Network，quality，给行动打分
 - ![image-20201207220337087](https://raw.githubusercontent.com/Wizna/play/master/image-20201207220337087.png)
 - 离线用历史数据训练一个初始化模型
 - t1 -> t2 推送服务
@@ -786,7 +861,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 #### Node2vec
 
--  网络具有：
+- 网络具有：
   1. 同质性 homophily，相近节点 embedding 相似，游走更偏 DFS，商品（同品类，同属性）
   2. 结构性 structural equivalence，结构相似的节点 embedding 相似，游走更偏 BFS，商品（都是爆款，都是凑单）
 - 调整超参数控制游走，可以产生不同侧重的 embedding，然后都用来后续训练
@@ -838,26 +913,30 @@ Just a review of machine learning for myself (really busy recently, so ...)
 #### mAP
 
 - mean averagte precision
+
 - 对于每个用户，对样本进行排序，然后对于所有正样本处的 precision进行平均，得到一个值 ap，对所有用户进行平均，得到mAP
+
 - roc 和 p-r 都是直接对样本排序，只有mAP 需要分用户对样本排序
-### replay
+  
+  ### replay
 
 - 注意防止穿越
+
 - 尽量让离线评估贴近线上结果，模型需要化静态为动态
+
 - replay 就是接收到样本就更新的精准线上仿真
 
 ### 线上评估
 
 - 用户层面不同层正交，同层互斥
+
 - interleaving: 在 attest 之前迅速的减小需要检验的算法集，不区分用户群体，所以不会有群体差异。同时提供算法a和b的结果，不过交叉在一起（用户不知道），当然算法结果前后位置顺序得保证公平出现
+
 - interleaving 具有比 attest 更高的灵敏度，也更容易出现置信的数据，其结果和 abtest 也很有相关性
+
 - interleaving 缺点是实现有挑战，而且实验结果不是实际的那些（时长，留存）
 
 - 总的一个关系是 离线 -> replay -> interleaving -> abtest 真实性和消耗资源逐渐变高
-
-
-
-
 
 # Appendix
 
@@ -895,10 +974,8 @@ Just a review of machine learning for myself (really busy recently, so ...)
       Update weights according to misclassification rate.
       Renormalize weights
   Combine confidence weighted predictions
-  
   ```
 
 - 
 
 - 样本不均衡：上采样，下采样，调整权重
-

@@ -1,10 +1,10 @@
 ![title image](https://raw.githubusercontent.com/Wizna/play/master/84299-457783.jpg)
 
 * TOC
-{:toc}
- 
+  {:toc}
 
 ## 背景
+
 简单复习一下最基本的算法和数据结构，可惜一直耽搁了。
 
 部分来自introduction to algorithm和https://github.com/keon/algorithms，还有网络。
@@ -41,10 +41,10 @@ def quicksort(self, nums):
 ```python
   def parent(i):
       return i // 2
-  
+
   def left(i):
       return 2 * i
-  
+
   def right(i):
       return 2 * i + 1
 
@@ -60,8 +60,8 @@ def quicksort(self, nums):
       if largest != i:
           A[i], A[largest] = A[largest], A[i]
           max_heapify(A, largest)
-          
-          
+
+
   def build_max_heap(A):
       A.heap_size = len(A)
       for i in range(len(A) // 2, 0, -1):
@@ -98,8 +98,6 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         return res
 ```
 
-
-
 ### Red-Black Trees
 
 ### AVL Trees
@@ -110,34 +108,30 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 ### Disjoint sets (Union find)
 
-- 
-
-### Trie
-
-
+- ### Trie
 
 ### Range query
 
 #### Segment Tree
 
-- 
-
-#### Fenwick tree (binary index tree)
+- #### Fenwick tree (binary index tree)
 
 - 用 O(n) 去 build，然后之后每次 update 和 查询都是 O(log(n))
+
 - 虽然说是 tree，但是直接使用 array 来实现也是非常容易
+
 - 
 
 ### Linkedlist
 
 - to find if there is a cycle in a linked list 
 
-```python 
+```python
   class Node:
       def __init__(self, x):
           self.val = x
           self.next = None
-  
+
   def is_cyclic(head):
       """
       :type head: Node
@@ -157,11 +151,11 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 - leetcode 25. Reverse Nodes in k-Group. Given a linked list, reverse the nodes of a linked list *k* at a time and return its modified list.
 
-```python 
+```python
 def reverseKGroup(self, head, k):
     dummy = jump = ListNode(0)
     dummy.next = l = r = head
-    
+
     while True:
         count = 0
         while r and count < k:   # use r to locate the range
@@ -175,8 +169,6 @@ def reverseKGroup(self, head, k):
         else:
             return dummy.next
 ```
-
-
 
 ## Graph
 
@@ -201,9 +193,7 @@ def dfs_traverse(graph, start):
     return visited
 ```
 
-
-
-### Topological sort 
+### Topological sort
 
 - 就是按照图中顺序，得到一个排序，DAG都有至少一个解，有环就没有解，一般的复杂度都是$O(|V|+|E|)$
 
@@ -253,7 +243,6 @@ def topo_sort(latencies):
     return node_results
 ```
 
-
 ### Minimum spanning tree
 
 ### Single-Source Shortest Paths
@@ -261,7 +250,7 @@ def topo_sort(latencies):
 - Dijkstra’s algorithm用于directed graph，而且edge weights $>= 0$ 
 - 复杂度$O(E\log E+V)$
 
-```python 
+```python
 import heapq
 
 
@@ -301,9 +290,7 @@ print(calculate_distances(example_graph, 'X'))
 # => {'U': 1, 'W': 2, 'V': 2, 'Y': 1, 'X': 0, 'Z': 2}
 ```
 
-
-
-### All-Pairs Shortest Paths 
+### All-Pairs Shortest Paths
 
 ### Maximum flow
 
@@ -313,7 +300,7 @@ print(calculate_distances(example_graph, 'X'))
 - capacity就是从s侧到t侧的容量和，注意不包括反向从t->s的那些edges的流量
 - max flow算法本质就是开始都是0，发现某path的最小处>0，那就加上这么小的流量填满。找path用dfs就是Ford-Fulkerson，用bfs就是 [Edmonds–Karp](https://en.wikipedia.org/wiki/Edmonds–Karp_algorithm)
 
-```python 
+```python
 """
 Input : capacity, source, sink
 Output : maximum flow from source to sink
@@ -351,10 +338,7 @@ def ford_fulkerson(capacity, source, sink):
         else: 
             break
     return ret
-
 ```
-
-
 
 ## Selected topics
 
@@ -363,11 +347,7 @@ def ford_fulkerson(capacity, source, sink):
 ```python
 # get largest power of 2 that <= n
 n & -n
-
-
 ```
-
-
 
 ### Dynamic programming
 
@@ -375,19 +355,19 @@ n & -n
 
 - 编辑距离
 
-```python 
+```python
   # insert, delete or replace a character
   def minDistance(self, word1, word2):
       """Dynamic programming solution"""
       m = len(word1)
       n = len(word2)
       table = [[0] * (n + 1) for _ in range(m + 1)]
-  
+
       for i in range(m + 1):
           table[i][0] = i
       for j in range(n + 1):
           table[0][j] = j
-  
+
       for i in range(1, m + 1):
           for j in range(1, n + 1):
               if word1[i - 1] == word2[j - 1]:
@@ -400,7 +380,7 @@ n & -n
 
 - 最长上升子序列
 
-```python 
+```python
   def lengthOfLIS(self, nums: List[int]) -> int:
       if not nums:
           return 0
@@ -411,12 +391,11 @@ n & -n
               if nums[i] > nums[j]:
                   dp[i] = max(dp[i], dp[j] + 1)
       return max(dp)
-  
 ```
 
 - 最长公共子序列
 
-```python 
+```python
   def longestCommonSubsequence(self, text1: str, text2: str) -> int:
       m, n = len(text1) + 1, len(text2) + 1
       s = [[0] * m for _ in range(n)]
@@ -426,19 +405,15 @@ n & -n
                   s[i][j] = s[i - 1][j - 1] + 1
               else:
                   s[i][j] = max(s[i - 1][j], s[i][j - 1])
-  
+
       return s[-1][-1]
 ```
 
-- 
-
-### Linear programming
+- ### Linear programming
 
 ### String matching
 
 #### Rabin-Karp
-
-
 
 ### Computational geometry
 
@@ -455,7 +430,7 @@ n & -n
       for i in range(I, n // 2 + 1):
           for p in partitions(n - i, i):
               yield (i, ) + p
-              
+
   # 这个是计算有多少种分法，其实和上面的类似            
   def par(n, b=1):
       r = 1
@@ -471,7 +446,7 @@ n & -n
 - A **derangement** (错排问题) is a [permutation](https://en.wikipedia.org/wiki/Permutation) of the elements of a [set](https://en.wikipedia.org/wiki/Set_(mathematics)), such that no element appears in its original position
 - 下面是个简单的recursive的实现，比较优雅的是，$n = 0, 1$之类的情况也都包含了
 
-```python 
+```python
 from math import factorial
 
 
@@ -489,7 +464,7 @@ def derange(n):
 
 - 还有一种动态规划的做法，很好理解。两种情况，要么n-1的排列没有原位的，要么有一个原位的（如果有$>=2$个，那么新加一个数换不过来）。就是对于$n-1$的情况来说，我新的这个数可以和derange(n-1)每一个情况中的任意一个位置互换，结果是valid的。除此之外，如果有一个数在original position，我和它互换可以使两个都错位
 
-```python 
+```python
 def derange(n):
     r = [0, 1]
     for i in range(3, n + 1):
@@ -510,28 +485,22 @@ def derange(n):
     return round(factorial(n) / math.e)
 ```
 
-
-
 ### Selection rank
 
 - similar to quick sort
-
-
 
 ### Newton-Raphson algorithm
 
 - 牛顿法就是按照公式更新![image-20200715153703685](https://raw.githubusercontent.com/Wizna/play/master/image-20200715153703685.png)，这里的公式说白了就是$x-r^{2}=0$，求它的解，第4行等价于`r = r - (r**2 - x) / (2 * r)`
 - 如果满足$f^{\prime}(x)\neq0$, $f^{\prime\prime}(x)$ is continuous, $x_{0} $sufficiently close to the root，那么 [rate of convergence](https://en.wikipedia.org/wiki/Rate_of_convergence) is quadratic. [https://en.wikipedia.org/wiki/Newton%27s_method#Failure_analysis](https://en.wikipedia.org/wiki/Newton's_method#Failure_analysis)
 
-```python 
+```python
 def sqrt(x):
     r = x
     while r * r > x:
         r = (r + x / r) / 2
     return r
 ```
-
-
 
 ### PSO algorithm
 
@@ -565,9 +534,4 @@ idx = found
 
 可以学习一下 numpy source code，这里就是分次生成一波一波的，然后把已经生成的 weights 设置成 0
 
-
-
 # To be continued ...
-
-
-
