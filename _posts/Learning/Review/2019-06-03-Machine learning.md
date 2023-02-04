@@ -626,6 +626,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
   
   - ![](/Users/huangruiming/Library/Application%20Support/marktext/images/2022-12-01-16-55-42-image.png)
 
+## Q-learning
+
+- Trains *Q-Function* (an **action-value function**) which internally is a *Q-table* **that contains all the state-action pair values**
+
+- 一般 q-table 都初始化成 0
+
 - 
 
 # Recommender system

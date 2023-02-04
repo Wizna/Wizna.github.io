@@ -172,10 +172,19 @@ def reverseKGroup(self, head, k):
 
 ## Graph
 
-- A graph is regular if the degree of every node is a constant d
-- A graph is bipartite if it is possible to color it using two colors. 
+- A graph is **simple** if no edge starts and ends at the same node, and there are no multiple edges between two nodes
+- A graph is **connected** if there is a path between any two nodes
+- The connected parts of a graph are called its **components**
+- A graph is **regular** if the degree of every node is a constant d
+- In a **coloring** of a graph, each node is assigned a color so that no adjacent nodes
+  
+  have the same color
+- A graph is **bipartite** if it is possible to color it using two colors. 
 - A graph is bipartite exactly when it does not contain a cycle with an odd number of edges. 易知这么一个 cycle，依次染色最后是同色
-- A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes
+- 
+- 
+- 
+- 
 - 
 
 ### Traverse
