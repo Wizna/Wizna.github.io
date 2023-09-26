@@ -1,5 +1,8 @@
 ![](https://raw.githubusercontent.com/Wizna/play/master/20140526024838215.jpg)
 
+* TOC
+  {:toc}
+
 # Background
 
 Well, actually I already has a blog on python cheat sheet, but I found that writing those code in gists make loading time of the page unbearable long. So I decided to put the python notes into plain markdown.
@@ -8,19 +11,17 @@ Well, actually I already has a blog on python cheat sheet, but I found that writ
 
 check whether `x` is a subsequence of `s`
 
-```python 
+```python
 def isSubsequence(x, s):
     it = iter(s)
     return all(c in it for c in x)
 ```
 
-
-
 # Notes
 
 - Int: in python3, the plain `int` type is unbounded.
 
-## Global interpreter lock (GIL):  
+## Global interpreter lock (GIL):
 
 - The mechanism used by the [CPython](https://docs.python.org/3/glossary.html#term-cpython) interpreter to assure that only one thread executes Python [bytecode](https://docs.python.org/3/glossary.html#term-bytecode) at a time. https://docs.python.org/3/glossary.html#term-global-interpreter-lock
 
@@ -46,4 +47,11 @@ def isSubsequence(x, s):
 ### Barrier
 
 - 也是通信，`Barrier(parties=2)`，当有parties这么多个threads同时等待时，一起释放
+
+## f-string
+
+### handling {
+
+- 推荐直接使用 `{{`  ，如果需要多层的 `{`，那么不要使用 `\` ，因为会造成不可控的解析错误，比如需要 `{{}}` 直接上 4 层就行了 `f'{{{{ value }}}}''`
+
 
