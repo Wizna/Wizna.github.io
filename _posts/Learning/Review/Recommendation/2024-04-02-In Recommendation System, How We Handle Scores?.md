@@ -1,3 +1,7 @@
+# ![]()
+
+
+
 # In Recommendation System, How We Handle Scores?
 
 Given different targets of our recommendation system, we have 1 predicted score for each of them. How to ensemble these scores of different physical meanings and scales into one that can represent all the goals of the system is not easy.
@@ -24,8 +28,6 @@ Normally, for targets we want, e.g. watch_time, like, comment, share, $\alpha$ i
 
 For targets we don't want, e.g. reduce_similar, report, $\alpha$ is negative.
 
-
-
 ### Score
 
 #### 1. Raw score
@@ -36,7 +38,7 @@ Cons:
 
 - The physical meaning, order of magnitude and distribution of different targets can be significantly different. Directly ensemble of raw scores will cause some of targets to fail.
 
-- Strong feedback behaviours, e.g. like, report, are . It is hard to decide the weights $\alpha$ for each target.
+- Explicit feedback behaviours, e.g. like, report, varies greatly among different users. Thus a fixed weight $\alpha$ is hard to choose.
 
 #### 2. Rank
 
@@ -49,8 +51,6 @@ $$
 
 $$
 
-
-
 #### 3. Percentile
 
 Percentile is also commonly used. It's sort of similar to rank, while rank is request-wise, and percentile can be target-wise. By logging of all the predicted values of $x$, for a new given value $x_i$ , we can easily compute the percentile of it among all the values. It can be viewed as a different version of rank (target-wise)
@@ -60,5 +60,3 @@ Percentile is also commonly used. It's sort of similar to rank, while rank is re
 For a monotonically increasing function, we can transform a value to another value without messing up the order.
 
 Commonly used functions are as follows:
-
-
