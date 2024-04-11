@@ -1,10 +1,8 @@
 # In Recommendation System, How We Handle Scores?
 
-## Score
-
-### Ensemble
-
 Given different targets of our recommendation system, we have 1 predicted score for each of them. How to ensemble these scores of different physical meanings and scales into one that can represent all the goals of the system is not easy.
+
+I would like to divide this problem into two parts: function and score. Function is used to ensemble different targets into 1 and normally a sort is right after calculation of ensemble function on different scores. Score is the predicted value of a target, the raw score can be used, but often we do some normalization on it.
 
 ### Function
 
@@ -26,11 +24,19 @@ Normally, for targets we want, e.g. watch_time, like, comment, share, $\alpha$ i
 
 For targets we don't want, e.g. reduce_similar, report, $\alpha$ is negative.
 
+
+
 ### Score
 
 #### 1. Raw score
 
 Use the predicted score directly. Pro is that we have keep the information of predicted score. The con is that we must handle different scale by normalization. Mean predicted effective view rate maybe is 0.4, but like rate is around 0.01. A isotonic funciton is applied on the score.
+
+Cons:
+
+- The physical meaning, order of magnitude and distribution of different targets can be significantly different. Directly ensemble of raw scores will cause some of targets to fail.
+
+- Strong feedback behaviours, e.g. like, report, are . It is hard to decide the weights $\alpha$ for each target.
 
 #### 2. Rank
 
@@ -42,6 +48,8 @@ $$
 -\log{(\alpha * rank + bias)}
 
 $$
+
+
 
 #### 3. Percentile
 
