@@ -1,6 +1,4 @@
-# ![]()
-
-
+# ![](https://webneel.com/wallpaper/sites/default/files/images/10-2014/scenery-wallpaper-15.jpg)
 
 # In Recommendation System, How We Handle Scores?
 
