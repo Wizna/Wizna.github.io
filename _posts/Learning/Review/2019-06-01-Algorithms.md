@@ -7,11 +7,13 @@
 
 简单复习一下最基本的算法和数据结构，可惜一直耽搁了。
 
-部分来自introduction to algorithm和https://github.com/keon/algorithms，还有网络。
+部分来自 Introduction to Algorithm 和 https://github.com/keon/algorithms ，还有网络。
 
-## Sorting
+## 1. Sorting
 
-### Quicksort
+### 1.1 Quicksort
+
+- 基本的实现
 
 ```python
 import random
@@ -28,7 +30,13 @@ def quicksort(self, nums):
     return self.quicksort(lt) + eq + self.quicksort(gt)
 ```
 
-### Heapsort
+- 中间存储 O(1) 的实现
+
+```python
+
+```
+
+### 1.2 Heapsort
 
 - The (binary) heap data structure is an array object that we can view as a nearly complete binary tree (except possibly the lowest)
 
@@ -68,7 +76,51 @@ def quicksort(self, nums):
           max_heapfiy(A, i)
 ```
 
-## Data Structures
+### 1.3 Mergesort
+
+- 计算给定 array 中的 inverse pairs 个数  $O(n\log(n))$
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr, 0
+
+    mid = len(arr) // 2
+    left, left_inv = merge_sort(arr[:mid])
+    right, right_inv = merge_sort(arr[mid:])
+
+    merged, split_inv = merge_and_count(left, right)
+    return merged, left_inv + right_inv + split_inv
+
+
+def merge_and_count(left, right):
+    merged = []
+    split_inv = 0
+    i, j = 0, 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            merged.append(left[i])
+            i += 1
+        else:
+            merged.append(right[j])
+            split_inv += len(left) - i
+            j += 1
+
+    merged.extend(left[i:])
+    merged.extend(right[j:])
+
+    return merged, split_inv
+
+
+# Example usage
+arr = [5, 3, 2, 4, 1]
+sorted_arr, inversions = merge_sort(arr)
+print(f"Sorted array: {sorted_arr}")
+print(f"Number of inversions: {inversions}")
+```
+
+## 2. Data Structures
 
 ### Array
 
@@ -170,21 +222,32 @@ def reverseKGroup(self, head, k):
             return dummy.next
 ```
 
-## Graph
+## 3. Graph
 
 - A graph is **simple** if no edge starts and ends at the same node, and there are no multiple edges between two nodes
+
 - A graph is **connected** if there is a path between any two nodes
+
 - The connected parts of a graph are called its **components**
+
 - A graph is **regular** if the degree of every node is a constant d
+
 - In a **coloring** of a graph, each node is assigned a color so that no adjacent nodes
   
   have the same color
+
 - A graph is **bipartite** if it is possible to color it using two colors. 
+
 - A graph is bipartite exactly when it does not contain a cycle with an odd number of edges. 易知这么一个 cycle，依次染色最后是同色
+
 - 
+
 - 
+
 - 
+
 - 
+
 - 
 
 ### Traverse
@@ -349,16 +412,16 @@ def ford_fulkerson(capacity, source, sink):
     return ret
 ```
 
-## Selected topics
+## 4. Selected topics
 
-### Bit manipulation
+### 4.1 Bit manipulation
 
 ```python
 # get largest power of 2 that <= n
 n & -n
 ```
 
-### Dynamic programming
+### 4.2 Dynamic programming
 
 - Using dynamic programming, it is often possible to change an iteration over permutations into an iteration over subsets complexity drop from $n!$ ->$2^n$
 
@@ -420,13 +483,13 @@ n & -n
 
 - ### Linear programming
 
-### String matching
+### 4.3 String matching
 
-#### Rabin-Karp
+#### 4.3.1 Rabin-Karp
 
-### Computational geometry
+### 4.4 Computational geometry
 
-## Miscellaneous
+## 5. Miscellaneous
 
 ### Parition of a number
 
