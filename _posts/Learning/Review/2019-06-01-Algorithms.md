@@ -481,7 +481,35 @@ n & -n
       return s[-1][-1]
 ```
 
-- ### Linear programming
+- 给定一个 int array，判断是否可以分成 2 个子 array，使得它们和相等
+
+```python
+def can_split_into_two_equal_sums(nums):
+    total_sum = sum(nums)
+
+    # If total sum is odd, it's impossible to split into two equal sums
+    if total_sum % 2 != 0:
+        return False
+
+    target_sum = total_sum // 2
+    n = len(nums)
+    dp = [[False] * (target_sum + 1) for _ in range(n + 1)]
+
+    # Base case: If sum is 0, it's always possible (empty subset)
+    for i in range(n + 1):
+        dp[i][0] = True
+
+    for i in range(1, n + 1):
+        for j in range(1, target_sum + 1):
+            if j < nums[i - 1]:
+                dp[i][j] = dp[i - 1][j]
+            else:
+                dp[i][j] = dp[i - 1][j] or dp[i - 1][j - nums[i - 1]]
+
+    return dp[n][target_sum]
+```
+
+### Linear programming
 
 ### 4.3 String matching
 
@@ -491,7 +519,7 @@ n & -n
 
 ## 5. Miscellaneous
 
-### Parition of a number
+### 5.1 Parition of a number
 
 - **partition** of a positive [integer](https://en.wikipedia.org/wiki/Integer) *n*, also called an **integer partition**, is a way of writing *n* as a [sum](https://en.wikipedia.org/wiki/Summation) of positive integers，不关心顺序
 
@@ -511,7 +539,7 @@ n & -n
       return r
 ```
 
-### Permutations & combinations
+### 5.2 Permutations & combinations
 
 #### Derangement
 
@@ -557,11 +585,11 @@ def derange(n):
     return round(factorial(n) / math.e)
 ```
 
-### Selection rank
+### 5.3 Selection rank
 
 - similar to quick sort
 
-### Newton-Raphson algorithm
+### 5.4 Newton-Raphson algorithm
 
 - 牛顿法就是按照公式更新![image-20200715153703685](https://raw.githubusercontent.com/Wizna/play/master/image-20200715153703685.png)，这里的公式说白了就是$x-r^{2}=0$，求它的解，第4行等价于`r = r - (r**2 - x) / (2 * r)`
 - 如果满足$f^{\prime}(x)\neq0$, $f^{\prime\prime}(x)$ is continuous, $x_{0} $sufficiently close to the root，那么 [rate of convergence](https://en.wikipedia.org/wiki/Rate_of_convergence) is quadratic. [https://en.wikipedia.org/wiki/Newton%27s_method#Failure_analysis](https://en.wikipedia.org/wiki/Newton's_method#Failure_analysis)
@@ -574,15 +602,36 @@ def sqrt(x):
     return r
 ```
 
-### PSO algorithm
+### 5.5 Particle swarm optimization (PSO)
 
-### Walker's alias method
+- 粒子群优化
+
+```python
+for each particle i = 1, ..., S do
+    Initialize the particle's position with a uniformly distributed random vector: xi ~ U(blo, bup)
+    Initialize the particle's best known position to its initial position: pi ← xi
+    if f(pi) < f(g) then
+        update the swarm's best known position: g ← pi
+    Initialize the particle's velocity: vi ~ U(-|bup-blo|, |bup-blo|)
+while a termination criterion is not met do:
+    for each particle i = 1, ..., S do
+        for each dimension d = 1, ..., n do
+            Pick random numbers: rp, rg ~ U(0,1)
+            Update the particle's velocity: vi,d ← w vi,d + φp rp (pi,d-xi,d) + φg rg (gd-xi,d)
+        Update the particle's position: xi ← xi + vi
+        if f(xi) < f(pi) then
+            Update the particle's best known position: pi ← xi
+            if f(pi) < f(g) then
+                Update the swarm's best known position: g ← pi
+```
+
+### 5.6 Walker's alias method
 
 - 一个根据 weights 生成随机数的方法
 - 本质就是预处理weights，使得每个 bin 种只有 1 ～ 2个item，然后uniform random，把 binary search 变成了 constant 的查找
 - http://www-sop.inria.fr/members/Alain.Jean-Marie/Cours/AMM/Support/algos.pdf
 
-### Choice without repetition from numpy
+### 5.7 Choice without repetition from numpy
 
 ```python
 n_uniq = 0

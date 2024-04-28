@@ -900,7 +900,7 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 1. Spark MLlib:全局广播，同步阻断式，慢，确保一致性
   2. Parameter server:异步非阻断式，速度快，一致性有损（某个），多server，一致性hash，参数范围拉取和推送
 
-### 评估
+### 离线评估
 
 - 我们需要的是所有 item 的一种排序，所以直接序列的评估相对于 ctr 之类的可能更好一点
 
@@ -916,9 +916,15 @@ Just a review of machine learning for myself (really busy recently, so ...)
 - 也是通过变化正负样本与之来画的
 - 也用 auc
 
+#### Normalized Discounted Cumulative Gain (NDCG)
+
+- 相比较于 precision, recall，更多地考虑了排序顺序；目标 item 越靠前，分数越高
+
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b3510c9c5cf42ee8820d65335675cada51b40736">
+
 #### mAP
 
-- mean averagte precision
+- mean average precision
 
 - 对于每个用户，对样本进行排序，然后对于所有正样本处的 precision进行平均，得到一个值 ap，对所有用户进行平均，得到mAP
 
