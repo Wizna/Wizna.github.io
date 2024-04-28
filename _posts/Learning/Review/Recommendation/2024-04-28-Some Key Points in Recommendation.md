@@ -59,4 +59,4 @@
 
 . 训练过程中左侧所有 sparse 特征不接受 Gate NN 的反传梯度，这样操作的目的是减少 Gate NN 对现有特征 embedding 收敛产生的影响。
 
-![](https://docs.corp.kuaishou.com/image/api/external/load/out?code=fcABtcMlNJrDJmFdDILFMBrfH:2783107405797731102fcABtcMlNJrDJmFdDILFMBrfH:1714297552741)
+<img title="" src="https://raw.githubusercontent.com/Wizna/play/master/ppnet.jpeg" alt="">
