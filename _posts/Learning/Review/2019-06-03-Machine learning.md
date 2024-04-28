@@ -919,8 +919,23 @@ Just a review of machine learning for myself (really busy recently, so ...)
 #### Normalized Discounted Cumulative Gain (NDCG)
 
 - 相比较于 precision, recall，更多地考虑了排序顺序；目标 item 越靠前，分数越高
+- $rel_i$ 是 item i 的 relevance (得分), $p$ 是在 rank position $p$ , IDCG 是最理想情况，最大值 1.0
 
-<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b3510c9c5cf42ee8820d65335675cada51b40736">
+$$
+DCG_{p}=\sum_{i=1}^{p}{\frac{rel_i}{\log_{2}(i + 1)}}
+$$
+
+$$
+
+$$
+IDCG_{p}=\sum_{i=1}^{|REL_{p}|}{\frac{2^{rel_i}-1}{\log_{2}{(i+1)}}}
+$$
+
+$$
+
+$$
+nDCG_{p}=\frac{DCG_{p}}{IDCG_{p}}
+$$
 
 #### mAP
 
