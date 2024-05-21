@@ -28,6 +28,10 @@
   $$
 
 - $$
+  
+  $$
+
+### CB2CF
 
 ## 二、Rank
 
@@ -47,16 +51,12 @@
 
 - pairwise
 
-- 
-
 ### Parameter Personalized Net (PPNet)
 
 - PPNet 通过 Gate NN 结构达到增强用户个性化表达的能力 （uid + pid + aid）
 
-. 训练过程中左侧所有sparse特征不接受Gate NN 的反传梯度，这样操作的目的是减少 Gate NN 对现有特征 embedding 收敛产生的影响。
+- 训练过程中左侧所有sparse特征不接受Gate NN 的反传梯度，这样操作的目的是减少 Gate NN 对现有特征 embedding 收敛产生的影响。
 
-. GateNN结构共两层，第二层网络的激活函数是2 * sigmoid，默认值为1
-
-. 训练过程中左侧所有 sparse 特征不接受 Gate NN 的反传梯度，这样操作的目的是减少 Gate NN 对现有特征 embedding 收敛产生的影响。
+- GateNN结构共两层，第二层网络的激活函数是2 * sigmoid，默认值为1
 
 <img title="" src="https://raw.githubusercontent.com/Wizna/play/master/ppnet.jpeg" alt="">
