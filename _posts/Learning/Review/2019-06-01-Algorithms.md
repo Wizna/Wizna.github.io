@@ -180,6 +180,33 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
         return res
 ```
 
+### Heap / Priority queue
+
+- leetcode No.2542 maximum subsequence score:  输入 2个数组，选择 k 个 index，第一个数组对应 index 值的和乘以第二个数组对应 index 值的最小值，所能计算的最大的值；思路上就是对于第二个数组排序，注意需要降序
+  
+  ```python
+  import heapq
+  class Solution:
+      def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+          p = sorted([(v, m) for v, m in zip(nums1, nums2)], key=lambda x: -x[1])
+          queue = []
+          result = -1
+          total = 0
+          for pair in p:
+              heapq.heappush(queue, pair[0])
+              total += pair[0]
+              if len(queue) > k:
+                  low = heapq.heappop(queue)
+                  total -= low
+  
+              if len(queue) == k:
+                  result = max(result, pair[1] * total)
+  
+          return result
+  ```
+
+- 
+
 ### Red-Black Trees
 
 ### AVL Trees
