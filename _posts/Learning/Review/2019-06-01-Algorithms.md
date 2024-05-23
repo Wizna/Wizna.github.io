@@ -566,6 +566,24 @@ def can_split_into_two_equal_sums(nums):
     return dp[n][target_sum]
 ```
 
+- leetcode No.790 多米诺骨牌，有 2 种骨牌，对于 2 * n 的地面，有多少种全覆盖 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Wizna/play/master/20240523105208.png">
+</p>
+
+```python
+def numTilings(n: int) -> int:
+        dp = [(1, 0, 0), (2, 1, 1)]
+        for i in range(2, n):
+            x = tuple([dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 2][0],
+                       dp[i - 1][2] + dp[i-2][0], 
+                       dp[i - 1][1] + dp[i-2][0]])
+            dp.append(x)
+
+        return dp[n - 1][0]
+```
+
 ### Linear programming
 
 ### 4.3 String matching
