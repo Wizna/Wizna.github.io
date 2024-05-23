@@ -30,13 +30,13 @@ For targets we don't want, e.g. reduce_similar, report, $\alpha$ is negative.
 
 #### 2.1 Raw score
 
-Use the predicted score directly. Pro is that we have keep the information of predicted score. The con is that we must handle different scale by normalization. Mean predicted effective view rate maybe is 0.4, but like rate is around 0.01. A isotonic funciton is applied on the score.
+Use the predicted score directly. Pro is that we have keep the information of predicted score. The con is that we must handle different scale by normalization. Mean predicted effective view rate maybe is 0.4, but like rate is around 0.01. A isotonic function is applied on the score.
 
 Cons:
 
 - The physical meaning, order of magnitude and distribution of different targets can be significantly different. Directly ensemble of raw scores will cause some of targets to fail.
 
-- Explicit feedback behaviours, e.g. like, report, varies greatly among different users. Thus a fixed weight $\alpha$ is hard to choose.
+- Explicit feedback behaviors, e.g. like, report, varies greatly among different users. Thus a fixed weight $\alpha$ is hard to choose.
 
 #### 2.2 Rank
 
@@ -53,8 +53,14 @@ $$
 
 Percentile is also commonly used. It's sort of similar to rank, while rank is request-wise, and percentile can be target-wise. By logging of all the predicted values of $x$, for a new given value $x_i$ , we can easily compute the percentile of it among all the values. It can be viewed as a different version of rank (target-wise)
 
+Normally, sparse actions (e.g. like, comment, share) should use percentile instead of raw score; while dense actions (e.g. effective view, click) should use raw score.
+
 #### 2.4 Normalization
 
 For a monotonically increasing function, we can transform a value to another value without messing up the order.
 
 Commonly used functions are as follows:
+
+
+
+# To be continued ...
