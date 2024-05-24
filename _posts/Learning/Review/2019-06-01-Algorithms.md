@@ -217,7 +217,43 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
 
 ### Disjoint sets (Union find)
 
-- ### Trie
+### Trie
+
+```python
+class Trie:
+
+    def __init__(self):
+        self.s = {}
+
+    def insert(self, word: str) -> None:
+        tmp = self.s
+        for v in word:
+            if v not in tmp:
+                tmp[v] = {}
+            tmp = tmp[v]
+
+        tmp["is_word"] = True
+
+    def search(self, word: str) -> bool:
+        tmp = self.s
+        for v in word:
+            if v in tmp:
+                tmp = tmp[v]
+            else:
+                return False
+
+        return "is_word" in tmp
+
+    def startsWith(self, prefix: str) -> bool:
+        tmp = self.s
+        for v in prefix:
+            if v in tmp:
+                tmp = tmp[v]
+            else:
+                return False
+
+        return True
+```
 
 ### Range query
 
