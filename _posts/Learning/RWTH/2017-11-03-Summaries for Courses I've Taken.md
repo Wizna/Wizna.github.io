@@ -27,4 +27,3 @@ The contents are in English, with some side notes in Chinese. Because of my inca
 [Software Architecture](https://wizna.github.io/assets/summary/Software%20Architecture%20-%20summary.pdf)
 
 [Software Project Management](https://wizna.github.io/assets/summary/Software%20Project%20Management%20-%20summary.pdf)
-
