@@ -9,6 +9,12 @@ Just a review of machine learning for myself (really busy recently, so ...)
 
 内容来自dive into deep learning, pattern recognition and machine learning, 网络。
 
+
+
+# Online resources
+
+- [深度学习百科及面试资源 &mdash; PaddleEdu documentation](https://paddlepedia.readthedocs.io/en/latest/index.html#)
+
 # Basics
 
 ## Batch normalization
@@ -926,13 +932,11 @@ DCG_{p}=\sum_{i=1}^{p}{\frac{rel_i}{\log_{2}(i + 1)}}
 $$
 
 $$
-
 $$
 IDCG_{p}=\sum_{i=1}^{|REL_{p}|}{\frac{2^{rel_i}-1}{\log_{2}{(i+1)}}}
 $$
 
 $$
-
 $$
 nDCG_{p}=\frac{DCG_{p}}{IDCG_{p}}
 $$
