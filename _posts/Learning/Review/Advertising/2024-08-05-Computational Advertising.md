@@ -1,4 +1,4 @@
-# ![](https://i1.hdslb.com/bfs/archive/89f87d60e87505668e5dc1a40d111d1d45605bcb.jpg)
+# ![](https://www.wallpapertip.com/wmimgs/3-31105_anime-girl.jpg)
 
 # 背景
 
