@@ -1,4 +1,4 @@
-# ![](https://i2.hdslb.com/bfs/archive/6d99349f16e5f5c41bfdd328c768f8f29bbf51f5.jpg)
+# ![](https://i1.hdslb.com/bfs/archive/89f87d60e87505668e5dc1a40d111d1d45605bcb.jpg)
 
 # 背景
 
@@ -29,5 +29,6 @@
 - CPC 竞价：点击率供给方算，价值需求方算
 - 程序化交易：都需求方算，实时报价，强者愈强
 - 智能投放：供给方多算，需求方提供转化价值，oCPX，可以扶持小客户、提高市场活跃度
-- 
+- 搜索广告：查询扩展，检索，排序，放置，定价
+- DSP for 需求方，SSP for 供给方，
 
