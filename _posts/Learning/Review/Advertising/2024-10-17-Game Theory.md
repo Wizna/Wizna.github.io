@@ -65,4 +65,12 @@
 
 # lecture 7: multi-parameter mechanism design and the VCG mechanism
 
+- 之前的情形都是 single-parameter，也就是一个 participant 有一个 private 信息（物品价值），可以扩展到 multi-paramter，也就是物品给 A 或 B 对于我来说价值不同，或者 物品 C 和 D 对我来说有偏好
+- multi-paramter mechanism key ingredients:
+  - $n$ strategic participants
+  - a finite set $\Omega$ of outcomes
+  - each participant $i$ has a private valuation $v_i(w)$ for each outcome $w\in\Omega$
+- Vickrey-Clarke-Groves mechanism: in every genral mechanism design environment, there is a DSIC welfare-maximizing mechanism
+- Myerson's lemma does not hold beyond single-paramter environments (not able to define monotonicity in more than 1 dimension)
+- payment rule: $p_i(b)=max_{w\in\Omega} \Sigma_{j\ne i}b_j(w) - \Sigma_{j\ne i}b_j(w^*)$
 - 
