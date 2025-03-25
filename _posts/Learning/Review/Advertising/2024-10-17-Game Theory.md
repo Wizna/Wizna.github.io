@@ -72,5 +72,17 @@
   - each participant $i$ has a private valuation $v_i(w)$ for each outcome $w\in\Omega$
 - Vickrey-Clarke-Groves mechanism: in every genral mechanism design environment, there is a DSIC welfare-maximizing mechanism
 - Myerson's lemma does not hold beyond single-paramter environments (not able to define monotonicity in more than 1 dimension)
-- payment rule: $p_i(b)=max_{w\in\Omega} \Sigma_{j\ne i}b_j(w) - \Sigma_{j\ne i}b_j(w^*)$
+- 分 2 步设计，第一步在假定都真实 bid 的情况下，allocation rule 为 $x(b) = \underset{w\in \Omega}{\argmax} \Sigma_{i=1}^{n}b_i(w)$
+- 第二步设计 payment rule，也就是有我们 $i$ 导致的外部损失: $p_i(b)=max_{w\in\Omega} \Sigma_{j\ne i}b_j(w) - \Sigma_{j\ne i}b_j(w^*)$，其中 $w^*=x(b)$ ，注意到 $p_i(b) \ge 0 $
+- Combinatorial Auctions: 定义是 n 个 bidders，拍卖物是 set $M$，有 m 个物品，各不相同，每个 bidder 可以获取某种物品组合，有 2 个 assumptions, $v_i(\Phi)=0$ 也就是没有得到东西时效用是 0，$v_i(S)\lt v_i(T) $ 如果 $ S\subseteq T$，也就是不要白不要
+- 组合竞价有多个难点：
+  - 首先，组合非常多，impractical 交流所有组合的 value，一般可以通过 indirect auction 解决，也就是日常的竞拍逻辑，一个物品记住当前的 price 和潜在 winner，然后逐渐抬价直到只剩一个人
+  - 其次，福利最大化 intractable: impossible to check, bidders' valuations 是未知的
+  - VCG 机制即使 DSIC 仍可能具有较差的收入和激励特性
+  - 组合 auctions 经常是多轮次的，也给了策略操作空间，比如通过 bids 发送信号给别的 bidder
+
+# lecture 8:  Combinatorial and Wireless Spectrum Auctions
+
+- 组合拍卖有 2 类，一个是 substitues, 一个是 complements；前者更容易设计机制和现实应用，因为理论上分开卖就行
+- 现实中大部分拍卖是 mixture of substitutes and complements，例如频谱拍卖
 - 
