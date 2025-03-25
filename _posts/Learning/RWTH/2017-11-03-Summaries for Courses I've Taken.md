@@ -1,4 +1,4 @@
-![title image](https://i.ytimg.com/vi/CLu_ilApr2A/maxresdefault.jpg)
+![title image](https://iknow-pic.cdn.bcebos.com/d833c895d143ad4becfcee4090025aafa50f065b)
 
 ### Background
 
