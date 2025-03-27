@@ -85,4 +85,15 @@
 
 - 组合拍卖有 2 类，一个是 substitues, 一个是 complements；前者更容易设计机制和现实应用，因为理论上分开卖就行
 - 现实中大部分拍卖是 mixture of substitutes and complements，例如频谱拍卖
-- 
+- 多 item 拍卖需要争取避免 2 条：
+  - 一个一个顺序拍卖：因为 bidder 可能会等待后面轮次再出价因为可以省钱，但是这会导致策略复杂化
+  - 同时密封投标拍卖：竞标和协调难度使得这种拍卖形式容易导致福利和收入较低，比如 3 人 2 相同 item，那只有一个人选的 item 可能就 reserve price 拍卖了
+
+- Simultaneous ascending auctions (SAA): 
+  - 拍卖形式：多个物品同时进行拍卖，竞标者可以对一个或多个物品出价，而价格会随着每一轮的竞价逐步上升；活动规则要求每个 bidder 随着时间进展投标个数下降，价格上升
+  - 竞标者可以根据实时价格调整自己的策略，从而实现价格发现（price discovery）；此外，bidders only need to determine valuations on a need-to-know basis
+  - 有一些检查可以间接表明拍卖效果不错：没有太多 resale，有也价格和拍卖的价格接近；类似的 item 有相近的价格；price discovery，拍卖中途的潜在赢家和最终的 winner 强相关；拍卖者的打包结果应该合理
+  - 有 2 个弱点：1，demand reduction，bidder 可能为了降低竞争烈度而减少需求；2，exposure problem，在 complements 情况下，如果竞标者只成功拍得部分物品，他们可能会面临巨大的经济损失，这种风险会使得竞标者在初期阶段就非常谨慎，甚至可能选择完全退出某些物品的竞价，从而导致拍卖效率下降。
+  - 为了解决 exposure problem，需要引入 package bidding
+  - 设计方法：1，在 SAA 之后增加 1 轮竞标，让 bidders 提交打包竞标并和单个物品中标结果竞争；2，预先定好允许的 package bids
+  - 
