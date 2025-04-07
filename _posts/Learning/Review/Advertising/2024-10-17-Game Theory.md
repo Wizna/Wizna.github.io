@@ -96,4 +96,12 @@
   - 有 2 个弱点：1，demand reduction，bidder 可能为了降低竞争烈度而减少需求；2，exposure problem，在 complements 情况下，如果竞标者只成功拍得部分物品，他们可能会面临巨大的经济损失，这种风险会使得竞标者在初期阶段就非常谨慎，甚至可能选择完全退出某些物品的竞价，从而导致拍卖效率下降。
   - 为了解决 exposure problem，需要引入 package bidding
   - 设计方法：1，在 SAA 之后增加 1 轮竞标，让 bidders 提交打包竞标并和单个物品中标结果竞争；2，预先定好允许的 package bids
+  - FCC double auction: 主要包含 3 部分
+    - reverse auction: 持有者提交愿意出售频谱的报价，FCC从低到高依次接受，直到满足目标频谱量。
+    - repacking: 回收的频谱经过重新规划，腾出连续的频段
+    - forward auction: 运营商竞拍频谱许可证，价高者得。
+  
+
+  # lecture 9: Beyond Quasi-Linearity
+  - no DSIC auction that respects budgets can approximate the surplus well. 所以增加 budget constraints 后需要新的 auction 形式
   - 
