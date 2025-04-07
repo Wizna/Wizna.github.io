@@ -104,4 +104,6 @@
 
   # lecture 9: Beyond Quasi-Linearity
   - no DSIC auction that respects budgets can approximate the surplus well. 所以增加 budget constraints 后需要新的 auction 形式
+  - market clearing price 市场出清价格: 比如相同的 item 有 m 个，价格 p 太高则需求降低（payment 大于 value 则需求为 0），有个价格需求和供给数量相同。不过这个 MCP 不满足 DSIC，因为报价可以直接影响价格，所以有策略动机
+  - clinching auction: 拍卖方逐步提高价格, 如果某个竞拍者的需求无法被其他竞拍者挤出（即其他竞拍者的剩余需求不足以覆盖所有物品），则该竞拍者锁定（Clinches）部分物品,以这个价格购买。这个拍卖是 near DSIC （如果 budget公开则 DSIC）的，计算复杂度高，但是支持异质物品
   - 
