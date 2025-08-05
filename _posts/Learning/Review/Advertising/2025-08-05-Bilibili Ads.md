@@ -5,7 +5,6 @@
 
 # 框架
 
-{% if page.mermaid %}
 <div class="mermaid">
 mindmap
   root((思维导图))
@@ -15,4 +14,3 @@ mindmap
     分支2
       子分支3
 </div>
-{% endif %}
