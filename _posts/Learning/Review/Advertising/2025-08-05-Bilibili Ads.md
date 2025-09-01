@@ -10,7 +10,7 @@
 
 广告投放决策流程：
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A[开始投放策略] --> B{目标用户分析}
     B --> |年轻用户| C[选择B站平台]
@@ -26,13 +26,13 @@ flowchart TD
     I --> K[继续投放]
     J --> F
     K --> H
-```
+</div>
 
 ## 思维导图 (Mindmap)
 
 B站广告策略思维导图：
 
-```mermaid
+<div class="mermaid">
 mindmap
   root((B站广告策略))
     用户画像
@@ -61,13 +61,13 @@ mindmap
         点击率
         转化率
         ROI
-```
+</div>
 
 ## 时序图 (Sequence Diagram)
 
 广告投放流程时序图：
 
-```mermaid
+<div class="mermaid">
 sequenceDiagram
     participant 广告主
     participant B站平台
@@ -83,13 +83,13 @@ sequenceDiagram
     B站平台->>数据分析: 收集数据
     数据分析->>广告主: 效果报告
     广告主->>B站平台: 优化投放策略
-```
+</div>
 
 ## 甘特图 (Gantt Chart)
 
 广告投放项目时间计划：
 
-```mermaid
+<div class="mermaid">
 gantt
     title 广告投放项目时间表
     dateFormat  YYYY-MM-DD
@@ -103,13 +103,13 @@ gantt
     section 优化阶段
     数据分析           :         des6, 2025-08-18, 2025-09-22
     策略优化           :         des7, 2025-08-25, 2025-09-25
-```
+</div>
 
 ## 状态图 (State Diagram)
 
 广告状态流转图：
 
-```mermaid
+<div class="mermaid">
 stateDiagram-v2
     [*] --> 草稿
     草稿 --> 待审核: 提交审核
@@ -121,13 +121,13 @@ stateDiagram-v2
     投放中 --> 完成: 预算用完/时间到期
     暂停 --> 投放中: 恢复投放
     完成 --> [*]
-```
+</div>
 
 ## 类图 (Class Diagram)
 
 广告系统类结构：
 
-```mermaid
+<div class="mermaid">
 classDiagram
     class Advertisement {
         +String id
@@ -170,19 +170,19 @@ classDiagram
     Campaign ||--o{ Advertisement
     Advertisement }o--|| Platform
     Platform }o--|| User
-```
+</div>
 
 ## 饼图 (Pie Chart)
 
 广告预算分配：
 
-```mermaid
+<div class="mermaid">
 pie title 广告预算分配
     "视频广告" : 45
     "信息流广告" : 30
     "品牌合作" : 15
     "其他推广" : 10
-```
+</div>
 
 # 使用说明
 
@@ -190,10 +190,11 @@ pie title 广告预算分配
 
 在你的markdown文件中使用以下格式：
 
-```
-```mermaid
+```html
+<div class="mermaid">
 图表类型
     图表内容
+</div>
 ```
 
 ## 支持的图表类型
