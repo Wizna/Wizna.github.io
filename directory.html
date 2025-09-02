@@ -8,8 +8,11 @@ exclude_from_search: true
 <link class="cssdeck" rel="stylesheet" href="../bootstrap/css/directory.css">
 <div id="loader"></div>
 <div id="placeHolder"></div>
-<div id="loadfiles" style="display:none;" class="animate-bottom">
-    {% for post in site.posts %}
-    	<span class="post-direct">{{ post.url }}</span> 
-    {% endfor %}
+<div class="directory-container">
+    <h1 class="directory-title">📚 Posts Directory</h1>
+    <div id="loadfiles" style="display:none;" class="animate-bottom">
+        {% for post in site.posts %}
+        	<span class="post-direct">{{ post.url }}</span> 
+        {% endfor %}
+    </div>
 </div>
