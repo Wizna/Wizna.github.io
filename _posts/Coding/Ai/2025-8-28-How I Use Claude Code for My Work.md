@@ -1,4 +1,4 @@
-# ![title image](https://ts3.tc.mm.bing.net/th/id/OIP-C.7tzCKLEvcO7XAbgC_DrDIwHaFj?rs=1&pid=ImgDetMain)
+![title image](https://ts3.tc.mm.bing.net/th/id/OIP-C.7tzCKLEvcO7XAbgC_DrDIwHaFj?rs=1&pid=ImgDetMain)
 
 # Background
 
