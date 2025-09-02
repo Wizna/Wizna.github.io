@@ -1,5 +1,6 @@
 # ![](https://ts1.tc.mm.bing.net/th/id/OIP-C.IIb4LBa6pdsaIDCMNh9WCQHaEx?rs=1&pid=ImgDetMain)
 
+
 # 背景
 
 本文档展示了在Jekyll博客中使用Mermaid图表的各种示例，包括流程图、思维导图、时序图等。
