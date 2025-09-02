@@ -12,6 +12,8 @@ exclude_from_search: true
         <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
         <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
         <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
+        <!-- Preload critical images for better performance -->
+        <link rel="preload" href="{{ site.avatar | site.baseurl }}" as="image" type="image/webp">
         <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
         <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
         <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
@@ -48,7 +50,7 @@ exclude_from_search: true
         <div class="wrapper-masthead">
             <div class="container">
                 <header class="masthead clearfix">
-                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" alt="{{ site.name }}" loading="eager" /></a>
                     <div class="site-info">
                         <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
                         <br>

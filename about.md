@@ -7,7 +7,7 @@ permalink: /about/
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/Wizna/Wizna.github.io/master/images/profile.webp">
+<img src="{{ site.baseurl }}/images/profile.webp" alt="Profile Picture" loading="lazy">
 </p>
 
 <center>I am a student. 我是一个学生</center>
