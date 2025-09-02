@@ -22,8 +22,26 @@ exclude_from_search: true
         <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
         <script src="{{ " /assets/tipuesearch/tipuesearch.min.js " | site.baseurl  }}"></script>
         {% endif %}
-        <script src="{{ '/bootstrap/js/mermaid.min.js' | site.baseurl }}"></script>
-        <script>mermaid.initialize({startOnLoad:true});</script>
+        <!-- Mermaid.js loaded conditionally and asynchronously -->
+        <script>
+        // Check if page contains mermaid diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.querySelector('.language-mermaid, .mermaid')) {
+                // Load Mermaid from CDN asynchronously
+                var script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js';
+                script.async = true;
+                script.onload = function() {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'default'
+                    });
+                    mermaid.run();
+                };
+                document.head.appendChild(script);
+            }
+        });
+        </script>
     </head>
 
     <body>
