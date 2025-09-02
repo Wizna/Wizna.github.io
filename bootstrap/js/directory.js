@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     out += "</ul></div></div></div>";
 
-    $("#loadfiles").html(out);
+    $("#directory-tree").html(out);
 
     $('label.tree-toggler').click(function() {
         $(this).parent().children('ul.tree').toggle(200);
