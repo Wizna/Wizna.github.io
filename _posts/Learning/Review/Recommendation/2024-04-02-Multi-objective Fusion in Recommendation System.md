@@ -1,4 +1,4 @@
-# ![](https://img1.baidu.com/it/u=1179199327,1946315836&fm=253&fmt=auto&app=138&f=JPEG?w=1364&h=800)
+![](https://images.pexels.com/photos/163891/italy-sicily-sea-ocean-163891.jpeg)
 
 ### Background
 
