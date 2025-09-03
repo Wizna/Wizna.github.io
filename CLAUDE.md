@@ -41,22 +41,37 @@ Key settings in `_config.yml`:
 
 ## Development Commands
 
-This is a Jekyll site hosted on GitHub Pages. Since no Gemfile is present, this site relies on GitHub Pages' built-in Jekyll processing:
-- **GitHub Pages**: Automatically builds and deploys on push to master branch
-- **Local development**: Would require creating a Gemfile with Jekyll and required gems
-- **Direct editing**: Files can be edited directly as static HTML/CSS/JS with Jekyll templating
+This site uses GitHub Pages' automatic Jekyll processing with no local build system:
+- **Deployment**: Automatic on push to `master` branch via GitHub Pages
+- **Local development**: Jekyll would need manual setup (no Gemfile present)
+- **Testing changes**: Direct file editing with GitHub's web interface or local Jekyll serve
+- **Dependencies**: Bootstrap 3.3.7, jQuery 3.7.1, Tipue Search (all vendored locally)
 
-Note: No Gemfile, package.json, or build scripts found - site is designed for GitHub Pages auto-deployment.
+No build scripts, linting, or test commands - this is a static Jekyll site optimized for GitHub Pages.
 
 ## Custom Architecture Components
 
-- **Directory functionality**: `bootstrap/js/directory.js` creates dynamic hierarchical post navigation from Jekyll post collection
-- **Search integration**: Tipue Search provides client-side full-text search across all posts
-- **Layout structure**: 
-  - `default.html`: Main template with search modal, Bootstrap integration, and Mermaid initialization
-  - Custom navigation with Blog/Directory/About sections
-  - Responsive masthead with site avatar and description
-- **Asset organization**: PDFs stored in `assets/summary/` for course materials and documents
+### Dynamic Directory System
+- **Core logic**: `bootstrap/js/directory.js:77-131` implements Tree data structure for hierarchical post navigation
+- **DOM generation**: `recurseTree()` function builds collapsible Bootstrap UI from Jekyll post collection  
+- **Path parsing**: Extracts directory structure from Jekyll's `site.posts` via `.post-direct` selectors
+- **Bootstrap integration**: Uses collapse components for expandable category navigation
+
+### Client-Side Search
+- **Tipue Search**: Full-text search across all posts without server dependency
+- **Content indexing**: `tipuesearch_content.js` contains indexed post data
+- **Modal interface**: Search results display in Bootstrap modal (`default.html:75-85`)
+- **Async loading**: Search only loads when modal is triggered
+
+### Performance Optimizations
+- **Conditional Mermaid loading**: `default.html:29-47` only loads Mermaid.js when diagrams detected
+- **Image preloading**: WebP avatar preloaded for faster rendering (`default.html:16`)
+- **Vendored dependencies**: All JS/CSS libraries served locally (no CDN dependencies except Mermaid)
+
+### Template Architecture
+- **Multi-language support**: Chinese/English content with consistent navigation
+- **Pagination**: 5 posts per page via Jekyll paginate plugin
+- **Custom permalinks**: Posts use `/posts/:path/` structure for organized URLs
 
 ## Content Guidelines
 
