@@ -124,55 +124,6 @@ stateDiagram-v2
     完成 --> [*]
 </div>
 
-## 类图 (Class Diagram)
-
-广告系统类结构：
-
-<div class="mermaid">
-classDiagram
-    class Advertisement {
-        +String id
-        +String title
-        +String content
-        +BigDecimal budget
-        +Date startTime
-        +Date endTime
-        +AdStatus status
-        +create()
-        +update()
-        +pause()
-        +resume()
-    }
-    
-    class Campaign {
-        +String campaignId
-        +String name
-        +List~Advertisement~ ads
-        +addAdvertisement()
-        +removeAdvertisement()
-        +getTotalBudget()
-    }
-    
-    class User {
-        +String userId
-        +String name
-        +Integer age
-        +List~String~ interests
-        +getProfile()
-    }
-    
-    class Platform {
-        +String platformId
-        +String name
-        +showAd()
-        +collectData()
-    }
-    
-    Campaign ||--o{ Advertisement
-    Advertisement }o--|| Platform
-    Platform }o--|| User
-</div>
-
 ## 饼图 (Pie Chart)
 
 广告预算分配：
