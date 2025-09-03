@@ -17,9 +17,6 @@ $(document).ready(function() {
 
     $("#directory-tree").html(out);
 
-    $('button.tree-toggler').click(function() {
-        $(this).siblings('.collapse').collapse('toggle');
-    });
 
     showPage();
 });
