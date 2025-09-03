@@ -39,7 +39,7 @@ function recurseTree(node) {
             }
             if (node.data.substring(1) != 'posts') {
                 var collapseId = 'collapse-' + node.data.substring(1).replace(/[^a-zA-Z0-9]/g, '');
-                out = '<li class=\"list-group-item p-0\"><button class=\"btn btn-primary w-100 text-start tree-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#' + collapseId + '\" aria-expanded=\"true\">' + decodeURI(node.data.substring(1)) + '</button><div class=\"collapse show\" id=\"' + collapseId + '\"><ul class=\"list-group list-group-flush ms-3\">' + out + '</ul></div></li>';
+                out = '<li class=\"list-group-item\" style=\"padding: 0;\"><button class=\"btn btn-primary\" style=\"width: 100%; text-align: left;\" type=\"button\" data-toggle=\"collapse\" data-target=\"#' + collapseId + '\" aria-expanded=\"true\">' + decodeURI(node.data.substring(1)) + '</button><div class=\"collapse in\" id=\"' + collapseId + '\"><ul class=\"list-group\" style=\"margin-left: 15px;\">' + out + '</ul></div></li>';
             }
         }
     }
