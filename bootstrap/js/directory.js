@@ -8,17 +8,17 @@ $(document).ready(function() {
     console.log(windowLoc);
     
 
-    var out = '<div class=\"span3\"> <div class=\"well\"> <div><ul class=\"nav nav-list\">';
+    var out = '<div class=\"card\"><div class=\"card-body\"><ul class=\"list-group list-group-flush\">';
     var tree = getDirectoryStructure();
 
     out += recurseTree(tree.root);
 
-    out += "</ul></div></div></div>";
+    out += "</ul></div></div>";
 
     $("#directory-tree").html(out);
 
-    $('label.tree-toggler').click(function() {
-        $(this).parent().children('ul.tree').toggle(200);
+    $('button.tree-toggler').click(function() {
+        $(this).siblings('.collapse').collapse('toggle');
     });
 
     showPage();
@@ -35,13 +35,14 @@ function recurseTree(node) {
     if (node) {
         if (node.children.length == 0) {
             var strArray = node.data.split('/');
-            out = '<li><a href=\"../' + node.data.substring(1) + '\">' + decodeURI(strArray[strArray.length - 1]).replace(/[0-9]+-[0-9]+-[0-9]+-/g, "") + '</a></li>';
+            out = '<li class=\"list-group-item\"><a href=\"../' + node.data.substring(1) + '\" class=\"text-decoration-none d-flex align-items-center\"><i class=\"me-2\">📄</i>' + decodeURI(strArray[strArray.length - 1]).replace(/[0-9]+-[0-9]+-[0-9]+-/g, "") + '</a></li>';
         } else {
             for (var i = 0; i < node.children.length; i++) {
                 out += recurseTree(node.children[i]);
             }
             if (node.data.substring(1) != 'posts') {
-                out = '<li class=\"indent-li\"><label class=\"tree-toggler nav-header\">' + decodeURI(node.data.substring(1)) + '</label><ul class=\"nav nav-list tree\">' + out + '</ul></li>';
+                var collapseId = 'collapse-' + node.data.substring(1).replace(/[^a-zA-Z0-9]/g, '');
+                out = '<li class=\"list-group-item p-0\"><button class=\"btn btn-primary w-100 text-start tree-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#' + collapseId + '\" aria-expanded=\"false\"><i class=\"me-2\">📁</i>' + decodeURI(node.data.substring(1)) + '</button><div class=\"collapse\" id=\"' + collapseId + '\"><ul class=\"list-group list-group-flush ms-3\">' + out + '</ul></div></li>';
             }
         }
     }

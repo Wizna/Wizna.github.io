@@ -6,15 +6,17 @@ tipue_search_active: true
 exclude_from_search: true 
 ---
 <link class="cssdeck" rel="stylesheet" href="../bootstrap/css/directory.css">
-<div id="loader"></div>
+
+<div id="loader" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
 <div id="placeHolder"></div>
-<div class="directory-container">
-    <div id="loadfiles" style="display:none;" class="animate-bottom">
-        <div id="post-data" style="display:none;">
-            {% for post in site.posts %}
-            	<span class="post-direct">{{ post.url }}</span> 
-            {% endfor %}
-        </div>
-        <div id="directory-tree"></div>
+
+<div id="loadfiles" style="display:none;" class="animate-bottom">
+    <div id="post-data" style="display:none;">
+        {% for post in site.posts %}
+        	<span class="post-direct">{{ post.url }}</span> 
+        {% endfor %}
     </div>
+    <div id="directory-tree"></div>
 </div>
