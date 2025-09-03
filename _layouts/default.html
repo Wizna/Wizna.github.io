@@ -14,10 +14,10 @@ exclude_from_search: true
         <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
         <!-- Preload critical images for better performance -->
         <link rel="preload" href="{{ site.avatar | site.baseurl }}" as="image" type="image/webp">
-        <!-- Updated libraries: jQuery 3.7.1 local, Bootstrap 3.4.1 CDN -->
+        <!-- Updated libraries: jQuery 3.7.1 local, Bootstrap 3.3.7 local -->
         <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+        <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
+        <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
         <script src='{{ '/bootstrap/js/directory.js' | site.baseurl  }}'></script>
         {% if page.tipue_search_active or layout.tipue_search_active %}
         <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | site.baseurl  }}"></script>
