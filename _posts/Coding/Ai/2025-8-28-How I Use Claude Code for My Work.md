@@ -55,6 +55,8 @@ Go through the actual dryrun test process, and go online with the development sh
 
 # Thoughts
 
+- Structured intermediate outputs help, and iterative validate of the intermediate outputs yourself.
+
 - Different agents should be assigned different contexts, views, memories, and tools, which can fulfill different roles. Some require understanding the overall architecture, while others require specific implementation details.
 
 - The difference between agents and traditional implementation: Agents can integrate with the human review process, similar to a highway with toll booths, while the traditional programming is a winding, complex, narrow road with many forks. Highways allow us to go further, but they require higher road infrastructure, such as wide and smooth roads (corresponding to the construction of MCP and tools).
