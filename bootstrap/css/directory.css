@@ -1,4 +1,10 @@
-/* Minimal custom styles - mostly using Bootstrap classes */
+/* Modern Directory Page Styling */
+.directory-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
 .directory-title {
     font-size: 2.5rem;
     font-weight: 300;
@@ -8,22 +14,160 @@
     letter-spacing: -0.5px;
 }
 
-/* Override Bootstrap list-group hover effect for file links */
-.list-group-item a:hover {
-    background-color: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary);
+/* Card styling */
+#directory-tree .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
+#directory-tree .card-body {
+    padding: 0;
+}
+
+/* Category button styling */
+.category-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-radius: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.category-btn:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+    transform: translateX(4px);
+}
+
+.category-btn:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.3);
+}
+
+.category-btn::after {
+    content: '▼';
+    position: absolute;
+    right: 1.25rem;
+    transition: transform 0.3s ease;
+}
+
+.category-btn[aria-expanded="false"]::after {
+    transform: rotate(-90deg);
+}
+
+/* List item styling */
+.list-group {
+    margin-bottom: 0;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0;
+    background: white;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Post link styling */
+.post-link {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1.25rem;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.post-link::before {
+    content: '📄';
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.post-link:hover {
+    background-color: #f8f9fa;
+    color: #667eea;
+    padding-left: 1.5rem;
+    text-decoration: none;
+}
+
+/* Nested list styling */
+.nested-list {
+    margin-left: 0;
+    background-color: #fafbfc;
+    border-left: 3px solid #667eea;
+}
+
+.nested-list .list-group-item {
+    background: transparent;
+}
+
+/* Collapse animation */
+.collapse {
+    transition: height 0.3s ease;
+}
+
+.collapse.in {
+    display: block;
+}
+
+/* Loading spinner */
 #placeHolder {
     width: 10px;
     height: 500px;
 }
 
-/* Use Bootstrap spinner - positioning only */
 #loader {
     position: fixed;
     left: 50%;
     top: 50%;
     z-index: 1000;
     margin: -1.5rem 0 0 -1.5rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-bottom {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .directory-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .category-btn {
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+    }
+
+    .post-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
 }

@@ -3,7 +3,7 @@ layout: page
 title: Posts
 permalink: /directory/
 tipue_search_active: true 
-exclude_from_search: true 
+exclude_from_search: true
 ---
 <link class="cssdeck" rel="stylesheet" href="../bootstrap/css/directory.css">
 
@@ -18,5 +18,7 @@ exclude_from_search: true
         	<span class="post-direct">{{ post.url }}</span> 
         {% endfor %}
     </div>
-    <div id="directory-tree"></div>
+    <div class="directory-container">
+        <div id="directory-tree"></div>
+    </div>
 </div>

@@ -8,7 +8,7 @@ $(document).ready(function() {
     console.log(windowLoc);
     
 
-    var out = '<div class=\"card\"><div class=\"card-body\"><ul class=\"list-group list-group-flush\">';
+    var out = '<div class="card"><div class="card-body"><ul class="list-group list-group-flush">';
     var tree = getDirectoryStructure();
 
     out += recurseTree(tree.root);
@@ -32,14 +32,14 @@ function recurseTree(node) {
     if (node) {
         if (node.children.length == 0) {
             var strArray = node.data.split('/');
-            out = '<li class=\"list-group-item\"><a href=\"../' + node.data.substring(1) + '\" class=\"text-decoration-none d-flex align-items-center\">' + decodeURI(strArray[strArray.length - 1]).replace(/[0-9]+-[0-9]+-[0-9]+-/g, "") + '</a></li>';
+            out = '<li class="list-group-item"><a href="../' + node.data.substring(1) + '" class="post-link">' + decodeURI(strArray[strArray.length - 1]).replace(/[0-9]+-[0-9]+-[0-9]+-/g, "") + '</a></li>';
         } else {
             for (var i = 0; i < node.children.length; i++) {
                 out += recurseTree(node.children[i]);
             }
             if (node.data.substring(1) != 'posts') {
                 var collapseId = 'collapse-' + node.data.substring(1).replace(/[^a-zA-Z0-9]/g, '');
-                out = '<li class=\"list-group-item\" style=\"padding: 0;\"><button class=\"btn btn-primary\" style=\"width: 100%; text-align: left;\" type=\"button\" data-toggle=\"collapse\" data-target=\"#' + collapseId + '\" aria-expanded=\"true\">' + decodeURI(node.data.substring(1)) + '</button><div class=\"collapse in\" id=\"' + collapseId + '\"><ul class=\"list-group\" style=\"margin-left: 15px;\">' + out + '</ul></div></li>';
+                out = '<li class="list-group-item" style="padding: 0;"><button class="category-btn" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">' + decodeURI(node.data.substring(1)) + '</button><div class="collapse in" id="' + collapseId + '"><ul class="list-group nested-list">' + out + '</ul></div></li>';
             }
         }
     }
