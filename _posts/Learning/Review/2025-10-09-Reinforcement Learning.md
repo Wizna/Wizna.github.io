@@ -3,12 +3,10 @@
 
 # Background
 
+course: https://github.com/huggingface/deep-rl-class
 
-# Reinforcement learning
 
-## Basics
-
-- course: https://github.com/huggingface/deep-rl-class
+# Basics
 
 - loop: state0, action0, reward1, state1, action1, reward2 ...
 
@@ -49,10 +47,15 @@
   
   - ![](/Users/huangruiming/Library/Application%20Support/marktext/images/2022-12-01-16-55-42-image.png)
 
-## Q-learning
+# Q-learning
 
 - Trains *Q-Function* (an **action-value function**) which internally is a *Q-table* **that contains all the state-action pair values**
 
 - 一般 q-table 都初始化成 0
 
-- 
+
+# Deep Q-learning
+
+
+# Policy gradient
+
