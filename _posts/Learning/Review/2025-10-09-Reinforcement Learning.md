@@ -43,9 +43,17 @@ course: https://github.com/huggingface/deep-rl-class
   
   - Temporal Difference: update the value function from a step, so we replace Gt that we don't have with an estimated return called TD target （获得一个 action的 reward 以及对于下个 state 的估计来更新现在 state，基于 bellman equation）
 
+- we have 2 types of value-based functions:
+
+  - state-value function $V_{\pi}(s)=E_{\pi}[G_t | S_t = s]$: value of a state
+
+  - action-value function $Q_{\pi}(s, a)=E_{\pi}[G_t | S_t = s, A_t = a]$: value of state-action pair
+
 - Bellman equation:
   
-  - ![](/Users/huangruiming/Library/Application%20Support/marktext/images/2022-12-01-16-55-42-image.png)
+  - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit3/bellman4.jpg)
+
+  - 
 
 # Q-learning
 
