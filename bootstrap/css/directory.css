@@ -105,13 +105,24 @@
 
 /* Nested list styling */
 .nested-list {
-    margin-left: 0;
+    margin-left: 1.5rem;
     background-color: #fafbfc;
     border-left: 3px solid #667eea;
 }
 
 .nested-list .list-group-item {
     background: transparent;
+}
+
+/* Deep nested list indentation */
+.nested-list .nested-list {
+    margin-left: 2rem;
+    border-left-color: #8b9dc3;
+}
+
+.nested-list .nested-list .nested-list {
+    margin-left: 2.5rem;
+    border-left-color: #a8b5d1;
 }
 
 /* Collapse animation */

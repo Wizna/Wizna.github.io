@@ -9,8 +9,8 @@ This is a Jekyll-based personal blog hosted on GitHub Pages. The site uses Jekyl
 ## Site Structure
 
 - **`_posts/`**: Blog posts organized by category
-  - `Coding/`: Programming tutorials (Python, JS/HTML/CSS, AI subcategories)
-  - `Learning/`: Course summaries, book reviews, and study notes (Reading, Review subdirectories)
+  - `Coding/`: Programming tutorials (Python, JS-HTML-CSS, Ai subcategories)
+  - `Learning/`: Course summaries, book reviews, and study notes (Reading, Review, RWTH subdirectories)
   - `Handbook/`: Quick reference guides and cheat sheets
 - **`_layouts/`**: Jekyll page templates (default.html, post.html, page.html)
 - **`_includes/`**: Reusable template components (analytics, disqus, meta tags, svg-icons)
