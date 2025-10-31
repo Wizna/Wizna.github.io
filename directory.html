@@ -2,23 +2,34 @@
 layout: page
 title: Posts
 permalink: /directory/
-tipue_search_active: true 
+tipue_search_active: true
 exclude_from_search: true
 ---
 <link class="cssdeck" rel="stylesheet" href="../bootstrap/css/directory.css">
 
-<div id="loader" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-</div>
-<div id="placeHolder"></div>
-
-<div id="loadfiles" style="display:none;" class="animate-bottom">
-    <div id="post-data" style="display:none;">
-        {% for post in site.posts %}
-        	<span class="post-direct">{{ post.url }}</span> 
-        {% endfor %}
+<div class="directory-page">
+    <div id="loader" class="directory-loader" role="status" aria-live="polite">
+        <span class="loader-dot loader-dot--one"></span>
+        <span class="loader-dot loader-dot--two"></span>
+        <span class="loader-dot loader-dot--three"></span>
+        <span class="sr-only">Loading directory...</span>
     </div>
-    <div class="directory-container">
-        <div id="directory-tree"></div>
+    <div id="placeHolder" aria-hidden="true"></div>
+
+    <div id="loadfiles" style="display:none;" class="directory-shell animate-bottom">
+        <div id="post-data" style="display:none;">
+            {% for post in site.posts %}
+                <span class="post-direct" data-title="{{ post.title | escape }}">{{ post.url }}</span>
+            {% endfor %}
+        </div>
+        <header class="directory-hero">
+            <h1 class="directory-title">Content Directory</h1>
+            <p class="directory-subtitle">
+                Expand a category to explore <span id="directory-count">0</span> posts across the site.
+            </p>
+        </header>
+        <div class="directory-container">
+            <div id="directory-tree" class="directory-tree"></div>
+        </div>
     </div>
 </div>

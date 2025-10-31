@@ -1,22 +1,26 @@
+var directoryTitles = {};
+
 $(document).ready(function() {
     $('#tipue_search_input').tipuesearch();
     
-    var windowLoc = $(location).attr('pathname');
-    if (windowLoc != '/directory/') {
+    var windowLoc = $(location).attr('pathname') || '';
+    if (!/\/directory\/(index\.html)?$/.test(windowLoc)) {
         return;
     }
-    console.log(windowLoc);
-    
-
-    var out = '<div class="card"><div class="card-body"><ul class="list-group list-group-flush">';
     var tree = getDirectoryStructure();
+    var renderResult = buildList(tree.root ? tree.root.children : [], true);
+    var $directoryTree = $("#directory-tree");
 
-    out += recurseTree(tree.root);
+    if (renderResult.count) {
+        $directoryTree.html('<div class="directory-card">' + renderResult.html + '</div>');
+    } else {
+        $directoryTree.html('<p class="directory-empty">暂无文章，敬请期待。</p>');
+    }
 
-    out += "</ul></div></div>";
-
-    $("#directory-tree").html(out);
-
+    var $count = $("#directory-count");
+    if ($count.length) {
+        $count.text(renderResult.count || 0);
+    }
 
     showPage();
 });
@@ -27,43 +31,147 @@ function showPage() {
     document.getElementById("loadfiles").style.display = "block";
 }
 
-function recurseTree(node) {
-    var out = "";
-    if (node) {
-        if (node.children.length == 0) {
-            var strArray = node.data.split('/');
-            out = '<li class="list-group-item"><a href="../' + node.data.substring(1) + '" class="post-link">' + decodeURI(strArray[strArray.length - 1]).replace(/[0-9]+-[0-9]+-[0-9]+-/g, "") + '</a></li>';
-        } else {
-            for (var i = 0; i < node.children.length; i++) {
-                out += recurseTree(node.children[i]);
-            }
-            if (node.data.substring(1) != 'posts') {
-                var collapseId = 'collapse-' + node.data.substring(1).replace(/[^a-zA-Z0-9]/g, '');
-                out = '<li class="list-group-item" style="padding: 0;"><button class="category-btn" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">' + decodeURI(node.data.substring(1)) + '</button><div class="collapse in" id="' + collapseId + '"><ul class="list-group nested-list">' + out + '</ul></div></li>';
-            }
-        }
+function buildList(children, isRoot) {
+    if (!children || !children.length) {
+        return { html: '', count: 0 };
     }
 
-    return out;
+    var html = '<ul class="directory-list' + (isRoot ? ' directory-root' : '') + '">';
+    var total = 0;
+    var sorted = children.slice().sort(function(a, b) {
+        return getSortKey(a).localeCompare(getSortKey(b));
+    });
+
+    for (var idx = 0; idx < sorted.length; idx++) {
+        var childResult = buildNode(sorted[idx]);
+        if (!childResult.count) {
+            continue;
+        }
+        html += childResult.html;
+        total += childResult.count;
+    }
+
+    html += '</ul>';
+
+    if (!total) {
+        return { html: '', count: 0 };
+    }
+
+    return { html: html, count: total };
+}
+
+function buildNode(node) {
+    if (!node) {
+        return { html: '', count: 0 };
+    }
+
+    if (!node.children.length) {
+        var path = node.data.substring(1);
+        var label = formatPostTitle(path);
+        var url = '../' + path;
+
+        return {
+            html: '<li class="directory-item directory-post-item"><a href="' + url + '" class="directory-link">' + label + '</a></li>',
+            count: 1
+        };
+    }
+
+    var listResult = buildList(node.children, false);
+    if (!listResult.count) {
+        return { html: '', count: 0 };
+    }
+
+    var collapseId = 'collapse-' + sanitizeId(node.data);
+    var displayName = formatCategoryTitle(node);
+
+    var html = ''
+        + '<li class="directory-item directory-category">'
+        + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">'
+        + '<span class="category-name">' + displayName + '</span>'
+        + '<span class="category-count">' + listResult.count + '</span>'
+        + '</button>'
+        + '<div class="collapse in directory-sublist" id="' + collapseId + '">'
+        + listResult.html
+        + '</div>'
+        + '</li>';
+
+    return { html: html, count: listResult.count };
+}
+
+function formatCategoryTitle(node) {
+    return decodeURIComponent(node.data.substring(1)).replace(/-/g, ' ');
+}
+
+function formatPostTitle(path) {
+    if (directoryTitles[path]) {
+        return directoryTitles[path];
+    }
+
+    var segments = path.split('/');
+    var slug = decodeURIComponent(segments[segments.length - 1] || '');
+    slug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+    slug = slug.replace(/-/g, ' ');
+    slug = slug.replace(/\s+/g, ' ').trim();
+    return slug || decodeURIComponent(path);
+}
+
+function getSortKey(node) {
+    if (!node) {
+        return '';
+    }
+
+    if (!node.children.length) {
+        var path = node.data.substring(1);
+        var segments = path.split('/');
+        var slug = decodeURIComponent(segments[segments.length - 1] || '');
+        if (directoryTitles[path]) {
+            return directoryTitles[path].toLowerCase();
+        }
+        slug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+        return slug.toLowerCase();
+    }
+
+    return decodeURIComponent(node.data.substring(1)).toLowerCase();
+}
+
+function sanitizeId(value) {
+    return value.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
 }
 
 function getDirectoryStructure() {
     var collection = [];
     var tree = new Tree();
     tree.add('0posts');
+    directoryTitles = {};
 
-    $(".post-direct").each(function(i, obj) {
-        var path = $(this).text();
-        path = path.substring(1, path.length - 1);
+    $(".post-direct").each(function(_, obj) {
+        var path = $(obj).text().trim();
+        var title = ($(obj).attr('data-title') || '').trim();
+        if (!path) {
+            return;
+        }
+        if (path.charAt(0) === '/') {
+            path = path.substring(1);
+        }
+        if (path.charAt(path.length - 1) === '/') {
+            path = path.substring(0, path.length - 1);
+        }
+        if (!path.length) {
+            return;
+        }
+
         var strArray = path.split('/');
-        for (i = 1; i < strArray.length; i++) {
-            if (i == (strArray.length - 1)) {
-                tree.add(i + path, (i - 1) + strArray[i - 1]);
+        for (var level = 1; level < strArray.length; level++) {
+            var key = level + strArray[level];
+            if (level === strArray.length - 1) {
+                if (title) {
+                    directoryTitles[path] = title;
+                }
+                tree.add(level + path, (level - 1) + strArray[level - 1]);
             } else {
-                //since add to tree does not check multiples, so may result in many duplicate nodes
-                if (!collection.includes(i + strArray[i])) {
-                    tree.add(i + strArray[i], (i - 1) + strArray[i - 1]);
-                    collection.push(i + strArray[i]);
+                if (collection.indexOf(key) === -1) {
+                    tree.add(key, (level - 1) + strArray[level - 1]);
+                    collection.push(key);
                 }
             }
         }
@@ -71,7 +179,6 @@ function getDirectoryStructure() {
 
     return tree;
 }
-
 
 //below is the construction of tree, get from github
 function Node(data) {
