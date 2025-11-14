@@ -39,8 +39,8 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
       $$
 - we have 2 types of value-based functions:
 
-  - state-value function $V_{\pi}(s)=E_{\pi}[G_t | S_t = s]$ : value of a state
-  - action-value function $Q_{\pi}(s, a)=E_{\pi}[G_t | S_t = s, A_t = a]$ : value of state-action pair
+  - state-value function $V_{\pi}(s)=E_{\pi}[G_t \mid S_t = s]$ : value of a state
+  - action-value function $Q_{\pi}(s, a)=E_{\pi}[G_t \mid S_t = s, A_t = a]$ : value of state-action pair
 - Bellman equation:
 
   - $$
