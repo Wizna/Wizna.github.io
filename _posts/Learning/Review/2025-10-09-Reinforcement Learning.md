@@ -62,4 +62,18 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
 # Deep Q-learning
 
+- loss function that compares Q-value prediction and the Q-target to update DQN
+
+- Deep Q-learning has 2 phases:
+
+  - Sampling: we perform actions and store the observed experience tuples in a replay memory.
+  - Training: Select a small batch of tuples randomly and learn from this batch using a gradient descent update step.
+
+- 3 solutions to stabilize training:
+  - Experience Replay to make more efficient use of experiences. 通过 replay buffer 从中不断 sample batches, 多次学习 experience
+  - Fixed Q-Target to stabilize the training. 因为我们使用估计的 q value of next_state，所以 q-value, target-value 都在不断变化,
+    - 拆分成 online network, target network，每 n steps copy online network 更新一次 target network
+  - Double Deep Q-Learning, to handle the problem of the overestimation of Q-values. 因为我们每次 select action 是 max，会导致系统性高估，通过 online network 挑选 action，而 target network 来计算 target q-value of next_state taking that action，因为 2 个 nets 没那么容易同时高估，所以降低了高估的 bias
+
+
 # Policy gradient
