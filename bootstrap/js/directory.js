@@ -1,8 +1,10 @@
 var directoryTitles = {};
 
 $(document).ready(function() {
-    $('#tipue_search_input').tipuesearch();
-    
+    if (typeof $.fn.tipuesearch === 'function') {
+        $('#tipue_search_input').tipuesearch();
+    }
+
     var windowLoc = $(location).attr('pathname') || '';
     if (!/\/directory\/(index\.html)?$/.test(windowLoc)) {
         return;
@@ -204,8 +206,12 @@ Tree.prototype.add = function(data, toNodeData) {
     }
 };
 Tree.prototype.remove = function(data) {
+    if (!this.root) {
+        return 'No root node found';
+    }
     if (this.root.data === data) {
         this.root = null;
+        return;
     }
 
     var queue = [this.root];
@@ -224,6 +230,9 @@ Tree.prototype.contains = function(data) {
     return this.findBFS(data) ? true : false;
 };
 Tree.prototype.findBFS = function(data) {
+    if (!this.root) {
+        return null;
+    }
     var queue = [this.root];
     while (queue.length) {
         var node = queue.shift();

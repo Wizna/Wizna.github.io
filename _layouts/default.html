@@ -13,17 +13,17 @@ exclude_from_search: true
         <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
         <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
         <!-- Preload critical images for better performance -->
-        <link rel="preload" href="{{ site.avatar | site.baseurl }}" as="image" type="image/webp">
+        <link rel="preload" href="{{ site.avatar | prepend: site.baseurl }}" as="image" type="image/webp">
         <!-- Updated libraries: jQuery 3.7.1 local, Bootstrap 3.3.7 local -->
-        <script src='{{ '/bootstrap/js/jquery.min.js' | site.baseurl  }}'></script>
-        <script src="{{  '/bootstrap/js/bootstrap.min.js'  | site.baseurl  }}"></script>
-        <link rel="stylesheet" href="{{ " /bootstrap/css/bootstrap.min.css " | site.baseurl  }}">
-        <script src='{{ '/bootstrap/js/directory.js' | site.baseurl  }}'></script>
+        <script src="{{ '/bootstrap/js/jquery.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/bootstrap/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
+        <link rel="stylesheet" href="{{ '/bootstrap/css/bootstrap.min.css' | prepend: site.baseurl }}">
+        <script src="{{ '/bootstrap/js/directory.js' | prepend: site.baseurl }}"></script>
         {% if page.tipue_search_active or layout.tipue_search_active %}
-        <script src="{{ " /assets/tipuesearch/tipuesearch_content.js " | site.baseurl  }}"></script>
-        <link rel="stylesheet" href="{{ " /assets/tipuesearch/css/tipuesearch.css " | site.baseurl  }}">
-        <script src="{{ " /assets/tipuesearch/tipuesearch_set.js " | site.baseurl  }}"></script>
-        <script src="{{ " /assets/tipuesearch/tipuesearch.min.js " | site.baseurl  }}"></script>
+        <script src="{{ '/assets/tipuesearch/tipuesearch_content.js' | prepend: site.baseurl }}"></script>
+        <link rel="stylesheet" href="{{ '/assets/tipuesearch/css/tipuesearch.css' | prepend: site.baseurl }}">
+        <script src="{{ '/assets/tipuesearch/tipuesearch_set.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/tipuesearch/tipuesearch.min.js' | prepend: site.baseurl }}"></script>
         {% endif %}
         <!-- Mermaid.js loaded conditionally and asynchronously -->
         <script>
@@ -65,9 +65,9 @@ exclude_from_search: true
                     </nav>
 
                     <div id = "search-div">
-                        <form action="{{ page.url | site.baseurl  }}" onsubmit="return false;">
+                        <form action="{{ page.url | prepend: site.baseurl }}" onsubmit="return false;">
                             <div class="tipue_search_right">
-                                <img src="{{ " /assets/tipuesearch/search.png " | site.baseurl  }}" class="tipue_search_icon">
+                                <img src="{{ '/assets/tipuesearch/search.png' | prepend: site.baseurl }}" class="tipue_search_icon">
                                 <input type="text" name="q" id="tipue_search_input" pattern=".{3,}" title="At least 3 characters" required>
                             </div>
                         </form>
