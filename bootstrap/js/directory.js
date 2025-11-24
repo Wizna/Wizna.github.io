@@ -2,7 +2,10 @@ var directoryTitles = {};
 
 $(document).ready(function() {
     if (typeof $.fn.tipuesearch === 'function') {
-        $('#tipue_search_input').tipuesearch();
+        $('#tipue_search_input').tipuesearch({
+            'wholeWords': false,  // Enable partial matching for Chinese characters
+            'minimumLength': 1    // Allow 1-character searches (common in Chinese)
+        });
     }
 
     var windowLoc = $(location).attr('pathname') || '';

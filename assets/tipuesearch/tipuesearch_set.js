@@ -54,21 +54,21 @@ var tipuesearch_related = {'searches': [
 
 // Internal strings
 
-var tipuesearch_string_1 = 'No title';
-var tipuesearch_string_2 = 'Showing results for';
-var tipuesearch_string_3 = 'Search instead for';
-var tipuesearch_string_4 = '1 result';
-var tipuesearch_string_5 = 'results';
-var tipuesearch_string_6 = 'Back';
-var tipuesearch_string_7 = 'More';
-var tipuesearch_string_8 = 'Nothing found.';
-var tipuesearch_string_9 = 'Common words are largely ignored.';
-var tipuesearch_string_10 = 'Search too short';
-var tipuesearch_string_11 = 'Should be one character or more.';
-var tipuesearch_string_12 = 'Should be';
-var tipuesearch_string_13 = 'characters or more.';
-var tipuesearch_string_14 = 'seconds';
-var tipuesearch_string_15 = 'Searches related to';
+var tipuesearch_string_1 = 'No title / 无标题';
+var tipuesearch_string_2 = 'Showing results for / 显示结果';
+var tipuesearch_string_3 = 'Search instead for / 改为搜索';
+var tipuesearch_string_4 = '1 result / 1个结果';
+var tipuesearch_string_5 = 'results / 个结果';
+var tipuesearch_string_6 = 'Back / 上一页';
+var tipuesearch_string_7 = 'More / 下一页';
+var tipuesearch_string_8 = 'Nothing found. / 未找到结果。';
+var tipuesearch_string_9 = 'Common words are largely ignored. / 常用词已被忽略。';
+var tipuesearch_string_10 = 'Search too short / 搜索词太短';
+var tipuesearch_string_11 = 'Should be one character or more. / 至少需要一个字符。';
+var tipuesearch_string_12 = 'Should be / 至少需要';
+var tipuesearch_string_13 = 'characters or more. / 个字符。';
+var tipuesearch_string_14 = 'seconds / 秒';
+var tipuesearch_string_15 = 'Searches related to / 相关搜索';
 
 
 // Internals
