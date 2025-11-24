@@ -18,17 +18,19 @@ Only three files were created for the directory, one html file, one JavaScript f
 
 Reading the posts in the folder _posts and put the path of them in the html page:
 
+{% raw %}
+
 ```html
 <div id="loadfiles">
 
     {% for post in site.posts %}
-    	<span class="post-direct">{{ post.url }}</span> 
+    	<span class="post-direct">{{ post.url }}</span>
     {% endfor %}
 
 </div>
 ```
 
-
+{% endraw %}
 
 We will get something like:
 
@@ -155,13 +157,17 @@ The corresponding CSS is :
 
 Add CSS style and class to the `<div>` for path:
 
+{% raw %}
+
 ```html
 <div id="loadfiles" style="display:none;" class="animate-bottom">
     {% for post in site.posts %}
-    	<span class="post-direct">{{ post.url }}</span> 
+    	<span class="post-direct">{{ post.url }}</span>
     {% endfor %}
 </div>
 ```
+
+{% endraw %}
 
 
 
