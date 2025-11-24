@@ -72,16 +72,24 @@ exclude_from_search: true
                             </div>
                         </form>
 
-                        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Search Results</h5>
-                              </div>
-                              <div id="tipue_search_content" class="modal-body">
-                              </div>
+                        <div class="modal fade search-modal" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered search-modal__dialog" role="document">
+                                <div class="modal-content search-modal__content">
+                                    <div class="search-modal__header">
+                                        <div class="search-modal__heading">
+                                            <p class="search-modal__eyebrow">Site Search · 站内检索</p>
+                                            <h5 class="search-modal__title" id="searchModalTitle">Search Results</h5>
+                                            <p class="search-modal__subtitle">按 Enter 键即可打开模态框并刷新 Tipue 结果。</p>
+                                        </div>
+                                        <button type="button" class="close search-modal__close" data-dismiss="modal" aria-label="关闭">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="search-modal__body">
+                                        <div id="tipue_search_content"></div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
                         </div>
                     </div>
                 </header>
