@@ -108,6 +108,14 @@ strong, b {
 
 img {
   max-width: 100%;
+  height: auto;
+}
+
+// Image loading placeholder to prevent layout shift
+.post img,
+.entry img {
+  background-color: #f5f5f5;
+  min-height: 100px;
 }
 
 // Fixes images in popup boxes from Google Translate

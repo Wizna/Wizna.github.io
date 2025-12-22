@@ -106,5 +106,45 @@ exclude_from_search: true
             </div>
         </div>
         {% include analytics.html %}
+        <!-- Image optimization: lazy loading and URL parameter optimization -->
+        <script>
+        (function() {
+            'use strict';
+            function optimizeImages() {
+                var contentAreas = document.querySelectorAll('.post .entry, article.post, .entry');
+                contentAreas.forEach(function(area) {
+                    var images = area.querySelectorAll('img');
+                    images.forEach(function(img, index) {
+                        var src = img.getAttribute('src');
+                        if (!src) return;
+
+                        // Optimize Pexels images - add compression and size limit
+                        if (src.includes('images.pexels.com') && !src.includes('w=') && !src.includes('auto=compress')) {
+                            var sep = src.includes('?') ? '&' : '?';
+                            img.setAttribute('src', src + sep + 'auto=compress&cs=tinysrgb&w=800');
+                        }
+
+                        // Optimize Unsplash images
+                        if (src.includes('images.unsplash.com') && !src.includes('w=')) {
+                            var sep = src.includes('?') ? '&' : '?';
+                            img.setAttribute('src', src + sep + 'w=800&q=80');
+                        }
+
+                        // First image eager (LCP), rest lazy loaded
+                        if (index > 0) {
+                            img.setAttribute('loading', 'lazy');
+                        }
+                        img.setAttribute('decoding', 'async');
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', optimizeImages);
+            } else {
+                optimizeImages();
+            }
+        })();
+        </script>
     </body>
 </html>
