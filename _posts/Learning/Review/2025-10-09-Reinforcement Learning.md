@@ -77,3 +77,11 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
 
 # Policy gradient
+
+- 目标是 parametrize the policy, 直接学这个 policy
+
+- 而 actor-critic 是 a combination of value-based and policy-based methods.
+
+- policy-gradient 是 policy-based 方法的子集， 特点是 optimize the parameter $\theta$ directly by performing the gradient ascent on the performance of the objective function $J(\theta)$
+
+- 
