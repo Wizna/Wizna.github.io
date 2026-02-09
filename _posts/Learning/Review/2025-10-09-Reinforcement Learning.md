@@ -84,4 +84,14 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
 - policy-gradient 是 policy-based 方法的子集， 特点是 optimize the parameter $\theta$ directly by performing the gradient ascent on the performance of the objective function $J(\theta)$
 
-- 
+- advantages:
+  1. The simplicity of integration
+  2. Policy-gradient methods can learn a stochastic policy, 不再需要手动实现 exploration/exploitation trade-off，也避免了 perceptual aliasing 感知混叠，即某几个 state 可能是一样的，但是需要执行不同的 action
+  3. Policy-gradient methods are more effective in high-dimensional action spaces and continuous actions spaces, 不再设计连续值取 max
+  4. Policy-gradient methods have better convergence properties 训练变化一般会更平滑，而不会因为 max 而有突变
+
+- disadvantages:
+  1. 经常 converges to a local maximum
+  2. step by step: it can take longer to train
+  3. can have high variance
+
