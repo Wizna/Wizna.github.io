@@ -10,22 +10,22 @@ permalink: /about/
 <img src="{{ site.baseurl }}/images/profile.webp" alt="Profile Picture" loading="lazy">
 </p>
 
-<center>Always a student. 终生学习，日拱一卒</center>
-<center>分享知识，让世界更公平</center>
-<center>Hope my blogs could be helpful  ٩(˘◡˘)۶</center>
+<div style="text-align:center">Always a student. 终生学习，日拱一卒</div>
+<div style="text-align:center">分享知识，让世界更公平</div>
+<div style="text-align:center">Hope my blogs could be helpful  ٩(˘◡˘)۶</div>
 
 ### My hobbies
 
-<center>Coding; Reading; Drawing; Football</center>
+<div style="text-align:center">Coding; Reading; Drawing; Football</div>
 
 ### Websites
-<center><a href="http://secnone.com/">- Secnone -</a></center>
+<div style="text-align:center"><a href="http://secnone.com/">- Secnone -</a></div>
 
 ### Life motto
 
-<center><i>Dirty, Dangerous, Difficult</i></center>
-<center><a href="https://en.wikipedia.org/wiki/Infinite_Challenge">- Infinite Challenge -</a></center>
+<div style="text-align:center"><i>Dirty, Dangerous, Difficult</i></div>
+<div style="text-align:center"><a href="https://en.wikipedia.org/wiki/Infinite_Challenge">- Infinite Challenge -</a></div>
 
 ### Contact me
 
-<center> <a href="mailto:huangruiming999@gmail.com">huangruiming999@gmail.com</a></center>
+<div style="text-align:center"><a href="mailto:huangruiming999@gmail.com">huangruiming999@gmail.com</a></div>

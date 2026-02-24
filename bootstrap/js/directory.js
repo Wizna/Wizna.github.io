@@ -1,5 +1,11 @@
 var directoryTitles = {};
 
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
 $(document).ready(function() {
     if (typeof $.fn.tipuesearch === 'function') {
         $('#tipue_search_input').tipuesearch({
@@ -75,7 +81,7 @@ function buildNode(node) {
         var url = '../' + path;
 
         return {
-            html: '<li class="directory-item directory-post-item"><a href="' + url + '" class="directory-link">' + label + '</a></li>',
+            html: '<li class="directory-item directory-post-item"><a href="' + url + '" class="directory-link">' + escapeHtml(label) + '</a></li>',
             count: 1
         };
     }
@@ -91,7 +97,7 @@ function buildNode(node) {
     var html = ''
         + '<li class="directory-item directory-category">'
         + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">'
-        + '<span class="category-name">' + displayName + '</span>'
+        + '<span class="category-name">' + escapeHtml(displayName) + '</span>'
         + '<span class="category-count">' + listResult.count + '</span>'
         + '</button>'
         + '<div class="collapse in directory-sublist" id="' + collapseId + '">'
@@ -207,30 +213,6 @@ Tree.prototype.add = function(data, toNodeData) {
         }
     }
 };
-Tree.prototype.remove = function(data) {
-    if (!this.root) {
-        return 'No root node found';
-    }
-    if (this.root.data === data) {
-        this.root = null;
-        return;
-    }
-
-    var queue = [this.root];
-    while (queue.length) {
-        var node = queue.shift();
-        for (var i = 0; i < node.children.length; i++) {
-            if (node.children[i].data === data) {
-                node.children.splice(i, 1);
-            } else {
-                queue.push(node.children[i]);
-            }
-        }
-    }
-};
-Tree.prototype.contains = function(data) {
-    return this.findBFS(data) ? true : false;
-};
 Tree.prototype.findBFS = function(data) {
     if (!this.root) {
         return null;
@@ -246,82 +228,4 @@ Tree.prototype.findBFS = function(data) {
         }
     }
     return null;
-};
-Tree.prototype._preOrder = function(node, fn) {
-    if (node) {
-        if (fn) {
-            fn(node);
-        }
-        for (var i = 0; i < node.children.length; i++) {
-            this._preOrder(node.children[i], fn);
-        }
-    }
-};
-Tree.prototype._postOrder = function(node, fn) {
-    if (node) {
-        for (var i = 0; i < node.children.length; i++) {
-            this._postOrder(node.children[i], fn);
-        }
-        if (fn) {
-            fn(node);
-        }
-    }
-};
-Tree.prototype.traverseDFS = function(fn, method) {
-    var current = this.root;
-    if (method) {
-        this['_' + method](current, fn);
-    } else {
-        this._preOrder(current, fn);
-    }
-};
-Tree.prototype.traverseBFS = function(fn) {
-    var queue = [this.root];
-    while (queue.length) {
-        var node = queue.shift();
-        if (fn) {
-            fn(node);
-        }
-        for (var i = 0; i < node.children.length; i++) {
-            queue.push(node.children[i]);
-        }
-    }
-};
-Tree.prototype.print = function() {
-    if (!this.root) {
-        return console.log('No root node found');
-    }
-    var newline = new Node('|');
-    var queue = [this.root, newline];
-    var string = '';
-    while (queue.length) {
-        var node = queue.shift();
-        string += node.data.toString() + ' ';
-        if (node === newline && queue.length) {
-            queue.push(newline);
-        }
-        for (var i = 0; i < node.children.length; i++) {
-            queue.push(node.children[i]);
-        }
-    }
-    console.log(string.slice(0, -2).trim());
-};
-Tree.prototype.printByLevel = function() {
-    if (!this.root) {
-        return console.log('No root node found');
-    }
-    var newline = new Node('\n');
-    var queue = [this.root, newline];
-    var string = '';
-    while (queue.length) {
-        var node = queue.shift();
-        string += node.data.toString() + (node.data !== '\n' ? ' ' : '');
-        if (node === newline && queue.length) {
-            queue.push(newline);
-        }
-        for (var i = 0; i < node.children.length; i++) {
-            queue.push(node.children[i]);
-        }
-    }
-    console.log(string.trim());
 };
