@@ -84,6 +84,8 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
 - policy-gradient 是 policy-based 方法的子集， 特点是 optimize the parameter $\theta$ directly by performing the gradient ascent on the performance of the objective function $J(\theta)$
 
+- gradient ascent / descent 就是根据函数需要最大化 / 最小化来选
+
 - advantages:
   1. The simplicity of integration
   2. Policy-gradient methods can learn a stochastic policy, 不再需要手动实现 exploration/exploitation trade-off，也避免了 perceptual aliasing 感知混叠，即某几个 state 可能是一样的，但是需要执行不同的 action
@@ -94,4 +96,30 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
   1. 经常 converges to a local maximum
   2. step by step: it can take longer to train
   3. can have high variance
+
+- objective function:
+  - 给定一个 trajectory $\tau$ 给出 agent 的 expected cumulative reward
+
+  - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/objective.jpg)
+
+  - 目标是找到 $\theta$ 来最大化这个目标函数
+
+  - 期望来自于不同轨迹的加权求和
+
+- Policy Gradient Theorem：
+  - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/policy_gradient_theorem.png)
+
+  - 
+
+- Reinforce (Monte-Carlo policy-gradient)
+
+  - uses an estimated return from an entire episode to update the policy parameter $\theta$
+
+    1. use the policy to collect an episode $\tau$
+    2. 计算梯度
+    3. 更新 policy weights
+
+  - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/policy_gradient_one.png)
+
+
 

@@ -22,20 +22,52 @@ bundle exec jekyll build
 bundle exec jekyll doctor
 ```
 
-First-time setup requires Ruby tooling: `gem install bundler jekyll`.
+First-time setup requires `gem install bundler jekyll`. Note: `Gemfile` and `Gemfile.lock` are gitignored — dependencies are not version-locked. Jekyll plugins (`jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`) are declared via the `gems:` key in `_config.yml`.
 
-## Project Structure
+## Layout Inheritance & Template Chain
 
-- `_posts/<Category>/<Subcategory>/`: Blog posts (folder path becomes part of `/posts/...` permalink)
-- `_layouts/`: Templates (`default.html`, `post.html`, `page.html`)
-- `_includes/`: `meta.html` (SEO meta + MathJax), `disqus.html`, `analytics.html`, `svg-icons.html`
-- `_sass/` + `style.scss`: Sass sources with top-level overrides
-- `bootstrap/`, `assets/`: Vendored front-end libs (Bootstrap 3.3.7, jQuery 3.7.1, Tipue Search, directory tree)
-- `images/`: Site imagery
+```
+default.html          ← Root template (head, nav, footer, image optimization JS, conditional Mermaid)
+├── post.html         ← layout: default — wraps content in <article class="post"><div class="entry">
+├── page.html         ← layout: default — wraps content in <article class="page"><div class="entry">
+└── index.html        ← layout: default — homepage with paginator (5 posts/page)
+```
+
+**Critical selector: `.entry`** — Used by post.html, page.html, and index.html. The image optimization script in default.html (lines 110-147) targets `.post .entry`, `article.post`, and `.entry` containers. Any new layout must use this class for images to get lazy loading and URL optimization.
+
+### Includes (`_includes/`)
+
+- **meta.html** — `<head>` content: charset, viewport, OG/Twitter meta tags, and **MathJax 2.7.9 config + script** (loads on every page)
+- **analytics.html** — Google Analytics via GTM (`G-LMJJHCRNEZ`), loaded at end of `<body>` when `site.google_analytics` is set
+- **disqus.html** — Disqus comment embed (shortname: `ruiming-huangs-blog`), included only in `post.html`
+- **svg-icons.html** — Social media footer links rendered as SVG icon sprites
+
+### Root-Level Site Pages
+
+| File | Permalink | Layout | Notes |
+|------|-----------|--------|-------|
+| `index.html` | `/` | default | Homepage with paginator (5 posts/page) |
+| `directory.html` | `/directory/` | page | Post browser + search; has `tipue_search_active: true` and `exclude_from_search: true` |
+| `about.md` | `/about/` | page | Profile, hobbies, contact info |
+| `404.md` | (auto) | page | Custom 404 with back-to-home link |
 
 ## Content Guidelines
 
-- **New post**: Create `YYYY-MM-DD-title.md` in `_posts/<Category>/<Subcategory>/`. The folder path becomes the URL under `/posts/...`
+- **New post**: Create `YYYY-MM-DD-title.md` in `_posts/<Category>/<Subcategory>/`. The folder path becomes the URL under `/posts/...`. Existing category tree:
+  ```
+  _posts/
+  ├── Coding/
+  │   ├── Python/          # 18 posts — cheat sheets, data structures, libraries
+  │   ├── JS-HTML-CSS/     # 2 posts
+  │   └── Ai/              # 1 post
+  ├── Handbook/            # 3 posts — tool shortcuts (PyCharm, IntelliJ, etc.)
+  └── Learning/
+      ├── RWTH/            # 1 post — course summaries
+      ├── Reading/         # 1 post — book reviews
+      └── Review/          # 5 posts + subcategories:
+          ├── Advertising/ # 2 posts
+          └── Recommendation/ # 2 posts
+  ```
 - **Front matter is mostly optional**: Most posts have none. Jekyll infers the title from the filename (strips date prefix, converts hyphens to spaces). Add front matter only to override defaults.
 - **Available front matter flags**:
   - `layout: post` — default for posts; rarely needed explicitly
@@ -68,7 +100,7 @@ The [directory page](directory.html) uses a two-stage pipeline:
 1. **Liquid stage** (`directory.html` lines 21-23): Iterates `site.posts` and emits hidden `<span class="post-direct" data-title="...">{{ post.url }}</span>` elements.
 2. **JS stage** ([bootstrap/js/directory.js](bootstrap/js/directory.js)): `getDirectoryStructure()` parses these spans from the DOM, builds a hierarchical tree, then `buildList()`/`buildNode()` render it as Bootstrap collapsible panels.
 
-Key behaviors: date prefixes (`YYYY-MM-DD-`) stripped from slugs, `data-title` preferred over slug-derived titles, posts sorted alphabetically within categories.
+Key behaviors: date prefixes (`YYYY-MM-DD-`) stripped from slugs, `data-title` preferred over slug-derived titles, posts sorted alphabetically within categories. The directory JS only executes when `pathname` matches `/directory/` — it's safe to load on all pages. Custom tree styling is in `bootstrap/css/directory.css`.
 
 ### Client-Side Search (Tipue Search)
 
@@ -76,14 +108,15 @@ Key behaviors: date prefixes (`YYYY-MM-DD-`) stripped from slugs, `data-title` p
 - **Bilingual support**: `tipuesearch_set.js` defines English + Chinese stop words and bilingual UI strings
 - **Minimum query length**: 1 character, configured in [bootstrap/js/directory.js](bootstrap/js/directory.js) line 6 (`minimumLength: 1`), not in Tipue's own config — enables single-character CJK queries
 - **Conditional loading**: Tipue JS/CSS only loads on pages with `tipue_search_active: true` front matter (set in `default.html` and `directory.html`)
+- **Search modal**: Bootstrap 3 `.modal` triggered by search input, results rendered into `#tipue_search_content`, heavily styled via custom Sass in `style.scss` (lines 295-598)
 
-### Performance Optimizations
+### Conditional Resource Loading (Three Patterns)
 
-- **Conditional Mermaid**: Mermaid 10.6.1 loaded from CDN only when `.language-mermaid` or `.mermaid` classes detected
-- **Unconditional MathJax**: MathJax 2.7.9 loads on every page via `_includes/meta.html`
-- **Image optimization**: Automatic compression for Pexels/Unsplash URLs, lazy loading for non-first images
-- **Vendored dependencies**: Bootstrap, jQuery, Tipue Search served locally (only Mermaid and MathJax use CDN)
-- **Avatar preload**: WebP avatar preloaded via `<link rel="preload">` for faster LCP
+| Resource | Strategy | Trigger |
+|----------|----------|---------|
+| Tipue Search | Front matter flag | `tipue_search_active: true` on page or layout |
+| Mermaid 10.6.1 | DOM detection | `.language-mermaid` or `.mermaid` class found after DOMContentLoaded |
+| MathJax 2.7.9 | Always loaded | Unconditional via `_includes/meta.html` on every page |
 
 ## Jekyll Configuration
 
@@ -91,9 +124,26 @@ Key settings in [_config.yml](_config.yml):
 
 - Kramdown with GFM, Rouge syntax highlighter
 - Plugins: `jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`
-- Page permalink: `/:title/`
-- Posts permalink: `/posts/:path/`
+- **Dual permalink system**: default `permalink: /:title/` applies to non-collection pages (`about.md` → `/about/`); posts use the collection override `permalink: /posts/:path/` (folder structure becomes URL path)
 - Pagination: 5 posts per page (`/page:num/`)
+- Homepage is `index.html` (not `.md`) — required by `jekyll-paginate`
+
+## Sass Architecture
+
+- `style.scss` (607 lines) — main stylesheet, imports partials below
+- `_sass/_reset.scss` — Meyer reset + box-sizing
+- `_sass/_variables.scss` — colors (`$blue: #4183C4`), fonts (Helvetica/Georgia), mobile breakpoint (640px)
+- `_sass/_highlights.scss` — Rouge syntax theme (Solarized Dark)
+- `_sass/_svg-icons.scss` — **39KB+ of base64-encoded SVG data** for social icons; avoid reading this file
+- `bootstrap/css/directory.css` — custom styling for the directory tree collapsible panels
+
+Search modal styling lives in `style.scss` lines 295-598 (gradients, blur, responsive flex layout).
+
+## Large Binary Files (Do Not Read)
+
+- `assets/Simple-Java.pdf` (~2.8 GB) and `assets/paper.pdf` (~7.5 GB) — reference PDFs, never read or process these
+- `assets/summary/` — 11 PDF study summaries (~44 MB total)
+- `_sass/_svg-icons.scss` — 39KB+ of base64-encoded SVG data
 
 ## Coding Style
 
