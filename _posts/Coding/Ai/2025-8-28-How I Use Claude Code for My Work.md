@@ -56,3 +56,50 @@ Go through the actual dryrun test process, and go online with the development sh
 - The difference between agents and traditional implementation: Agents can integrate with the human review process, similar to a highway with toll booths, while the traditional programming is a winding, complex, narrow road with many forks. Highways allow us to go further, but they require higher road infrastructure, such as wide and smooth roads (corresponding to the construction of MCP and tools).
 - When designing memory (as an important component of LLM agent), in addition to layering, a recursive structure is also necessary. That is, after considering a specific point locally, return the results back to the previous level, which then reviews and considers all the information. Then, I decide whether it's necessary to reconsider a specific point. The key here is to avoid falling into an endless loop.
 - AI is powerful, but never too powerful. Just as, despite Moore's Law, software complexity has historically increased, leading to insufficient performance for hardware of mobile phones and computers, the same holds true for AI. As AI expands each individual's personal boundaries, the effort required of us to be competitive remains the same. Our outputs must be differentiated from the mass-produced output of ordinary LLMs to be valuable.
+
+---
+
+Below is my configuration of `~/.claude/settings.json`: 
+
+```json
+{
+  "telemetry": "off",
+  "includeCoAuthoredBy": false,
+  "cleanupPeriodDays": 7,
+
+  "permissions": {
+    "defaultMode": "acceptEdits",
+
+    "allow": [
+      "Bash(git:*)",
+      "Bash(make:*)",
+      "Bash(cmake:*)",
+      "Bash(ninja:*)",
+      "Bash(python:*)",
+      "Bash(pip:*)",
+      "Bash(pytest:*)",
+      "Bash(npm:*)",
+      "Bash(node:*)",
+      "Bash(docker:*)",
+
+      "Read(**)",
+      "Edit(**)",
+      "Write(**)",
+      "MultiEdit(**)",
+      "Glob",
+      "Grep",
+      "LS"
+    ],
+
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
+  },
+
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}
+```
