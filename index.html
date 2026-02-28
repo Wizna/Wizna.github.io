@@ -10,10 +10,11 @@ layout: default
 
       <div class="post-meta">
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %e, %Y" }}</time>
-        {% if post.categories.size > 0 %}
+        {% assign path_parts = post.path | remove: "_posts/" | split: "/" %}
+        {% if path_parts.size > 1 %}
           <span class="post-meta-divider">/</span>
           <span class="post-meta-categories">
-            {{ post.categories | join: " / " }}
+            {% for part in path_parts %}{% unless forloop.last %}{% if forloop.index > 1 %} / {% endif %}{{ part }}{% endunless %}{% endfor %}
           </span>
         {% endif %}
       </div>
