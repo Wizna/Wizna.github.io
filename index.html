@@ -8,6 +8,16 @@ layout: default
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
+      <div class="post-meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %e, %Y" }}</time>
+        {% if post.categories.size > 0 %}
+          <span class="post-meta-divider">/</span>
+          <span class="post-meta-categories">
+            {{ post.categories | join: " / " }}
+          </span>
+        {% endif %}
+      </div>
+
       <div class="entry">
         {{ post.excerpt }}
       </div>

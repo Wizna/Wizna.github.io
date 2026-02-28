@@ -249,6 +249,26 @@ nav {
   border-bottom: 1px solid $lightGray;
 }
 
+.post-meta {
+  font-size: 14px;
+  color: $gray;
+  margin: -10px 0 10px;
+
+  time {
+    font-style: italic;
+  }
+
+  .post-meta-divider {
+    margin: 0 4px;
+    color: $lightGray;
+  }
+
+  .post-meta-categories {
+    color: $blue;
+    font-size: 13px;
+  }
+}
+
 .posts > .post:last-child {
   padding-bottom: 1em;
   border-bottom: none;
