@@ -46,7 +46,7 @@ default.html          ← Root template (head, nav, footer, image optimization J
 
 | File | Permalink | Layout | Notes |
 |------|-----------|--------|-------|
-| `index.html` | `/` | default | Homepage with paginator (5 posts/page) |
+| `index.html` | `/` | default | Homepage with paginator (5 posts/page), shows post date + categories via `.post-meta` |
 | `directory.html` | `/directory/` | page | Post browser + search; has `tipue_search_active: true` and `exclude_from_search: true` |
 | `about.md` | `/about/` | page | Profile, hobbies, contact info |
 | `404.md` | (auto) | page | Custom 404 with back-to-home link |
@@ -125,12 +125,13 @@ Key settings in [_config.yml](_config.yml):
 - Kramdown with GFM, Rouge syntax highlighter
 - Plugins: `jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`
 - **Dual permalink system**: default `permalink: /:title/` applies to non-collection pages (`about.md` → `/about/`); posts use the collection override `permalink: /posts/:path/` (folder structure becomes URL path)
+- **`post.categories` is empty**: Because `posts` is explicitly defined in `collections:`, Jekyll does not auto-infer categories from subdirectory paths. Use `post.path` (e.g. `_posts/Coding/Python/2024-01-01-post.md`) and parse it with Liquid to extract categories. The homepage `index.html` already does this.
 - Pagination: 5 posts per page (`/page:num/`)
 - Homepage is `index.html` (not `.md`) — required by `jekyll-paginate`
 
 ## Sass Architecture
 
-- `style.scss` (607 lines) — main stylesheet, imports partials below
+- `style.scss` (~630 lines) — main stylesheet, imports partials below
 - `_sass/_reset.scss` — Meyer reset + box-sizing
 - `_sass/_variables.scss` — colors (`$blue: #4183C4`), fonts (Helvetica/Georgia), mobile breakpoint (640px)
 - `_sass/_highlights.scss` — Rouge syntax theme (Solarized Dark)
