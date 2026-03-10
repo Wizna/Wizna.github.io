@@ -121,5 +121,10 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
   - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/policy_gradient_one.png)
 
+  - 算法伪代码：
+
+    - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/pg_pseudocode.png)
+
+
 
 
