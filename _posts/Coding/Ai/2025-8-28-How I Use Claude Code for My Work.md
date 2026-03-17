@@ -63,12 +63,23 @@ Below is my configuration of `~/.claude/settings.json`:
 
 ```json
 {
+  "model": "opus",
+  "defaultMode": "plan",
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "language": "auto",
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
   "telemetry": "off",
   "includeCoAuthoredBy": false,
   "cleanupPeriodDays": 7,
-
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/context-bar.sh"
+  },
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "defaultMode": "plan",
 
     "allow": [
       "Bash(git:*)",
@@ -94,12 +105,17 @@ Below is my configuration of `~/.claude/settings.json`:
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
-      "Read(./secrets/**)"
+      "Read(./secrets/**)",
+      "Bash(rm -rf /)",
+      "Bash(sudo:*)"
     ]
   },
 
   "env": {
-    "PYTHONUNBUFFERED": "1"
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONIOENCODING": "utf-8"
   }
 }
 ```
+
+- [45 Claude Code Tips: From Basics to Advanced](https://github.com/ykdojo/claude-code-tips)
