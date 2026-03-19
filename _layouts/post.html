@@ -5,13 +5,23 @@ layout: default
 <article class="post">
   <h1>{{ page.title }}</h1>
 
+  <div class="post-detail-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %e, %Y" }}</time>
+    {% assign path_parts = page.path | remove: "_posts/" | split: "/" %}
+    {% if path_parts.size > 1 %}
+      {% for part in path_parts %}
+        {% unless forloop.last %}
+          <span class="post-detail-category">{{ part }}</span>
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
   <div class="entry">
     {{ content }}
   </div>
 
-  <div class="date">
-    Written on <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %e, %Y" }}</time>
-  </div>
+  <div class="post-footer"></div>
 
   {% include disqus.html %}
 </article>
