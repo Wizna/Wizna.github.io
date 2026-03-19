@@ -3,23 +3,71 @@
 // VARIABLES
 //
 
-// Colors
-$blue: #4183C4;
+// ── Brand / Indigo palette ──────────────────────────────────
+$indigo-50:  #eef2ff;
+$indigo-100: #e0e7ff;
+$indigo-200: #c7d2fe;
+$indigo-300: #a5b4fc;
+$indigo-400: #818cf8;
+$indigo-500: #6366f1;
+$indigo-600: #4f46e5;
+$indigo-700: #1d4ed8;   // primary – actually Tailwind blue-700; matches directory.css & search modal
+$indigo-800: #3730a3;
 
-// Grays
-$black: #000;
-$darkerGray: #222;
-$darkGray: #333;
-$gray: #666;
-$lightGray: #eee;
-$white: #fff;
+$blue: $indigo-700;      // backward-compat alias
 
-// Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
+// ── Slate neutrals (Tailwind-aligned) ───────────────────────
+$slate-50:  #f8fafc;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-500: #64748b;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$slate-900: #0f172a;
+
+// Legacy gray aliases (keeps old selectors working)
+$black:      #000;
+$darkerGray: $slate-800;
+$darkGray:   $slate-700;
+$gray:       $slate-500;
+$lightGray:  $slate-200;
+$white:      #fff;
+
+// ── Typography ──────────────────────────────────────────────
+$helvetica:     Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
+$georgia:       Georgia, serif;
 
-// Mobile breakpoints
+// ── Spacing ─────────────────────────────────────────────────
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+// ── Border radius ───────────────────────────────────────────
+$radius-sm:   6px;
+$radius-md:  10px;
+$radius-lg:  12px;
+$radius-xl:  16px;
+$radius-pill: 999px;
+
+// ── Transitions ─────────────────────────────────────────────
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;
+
+// ── Shadows (matching directory.css depth) ──────────────────
+$shadow-sm:   0 1px 3px rgba(15, 23, 42, 0.08);
+$shadow-md:   0 8px 24px -12px rgba(15, 23, 42, 0.15);
+$shadow-lg:   0 24px 50px -38px rgba(18, 38, 63, 0.45);
+$shadow-hover: 0 18px 36px -20px rgba(29, 78, 216, 0.35);
+
+// ── Breakpoints ─────────────────────────────────────────────
 @mixin mobile {
   @media screen and (max-width: 640px) {
     @content;

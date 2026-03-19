@@ -50,7 +50,7 @@ exclude_from_search: true
     <body>
         <div class="wrapper-masthead">
             <div class="container">
-                <header class="masthead clearfix">
+                <header class="masthead">
                     <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" alt="{{ site.name }}" loading="eager" /></a>
                     <div class="site-info">
                         <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
@@ -67,8 +67,8 @@ exclude_from_search: true
                     <div id = "search-div">
                         <form action="{{ page.url | prepend: site.baseurl }}" onsubmit="return false;">
                             <div class="tipue_search_right">
-                                <img src="{{ '/assets/tipuesearch/search.png' | prepend: site.baseurl }}" class="tipue_search_icon">
-                                <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 character" required>
+                                <img src="{{ '/assets/tipuesearch/search.png' | prepend: site.baseurl }}" class="tipue_search_icon" alt="Search">
+                                <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 character" required aria-label="Search query">
                             </div>
                         </form>
 
@@ -101,7 +101,12 @@ exclude_from_search: true
         <div class="wrapper-footer">
             <div class="container">
                 <footer class="footer">
-                    {% include svg-icons.html %}
+                    <div class="footer-copyright">
+                        &copy; {{ site.time | date: '%Y' }} {{ site.name }}
+                    </div>
+                    <div class="footer-social">
+                        {% include svg-icons.html %}
+                    </div>
                 </footer>
             </div>
         </div>
