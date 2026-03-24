@@ -22,7 +22,7 @@ bundle exec jekyll build
 bundle exec jekyll doctor
 ```
 
-First-time setup requires `gem install bundler jekyll`. Note: `Gemfile` and `Gemfile.lock` are gitignored — dependencies are not version-locked. Jekyll plugins (`jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`) are declared via the `gems:` key in `_config.yml`.
+First-time setup requires `gem install bundler jekyll`. Note: `Gemfile` and `Gemfile.lock` are gitignored — dependencies are not version-locked. Jekyll plugins (`jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`) are declared via the `gems:` key in `_config.yml`. The `url` in `_config.yml` points to the live site (`https://wizna.github.io/`); `jekyll serve` overrides this automatically, but keep it in mind when debugging asset path issues locally.
 
 ## Layout Inheritance & Template Chain
 
@@ -57,7 +57,7 @@ default.html          ← Root template (head, nav, footer, image optimization J
   ```
   _posts/
   ├── Coding/
-  │   ├── Python/          # 18 posts — cheat sheets, data structures, libraries
+  │   ├── Python/          # 16 posts — cheat sheets, data structures, libraries
   │   ├── JS-HTML-CSS/     # 2 posts
   │   └── Ai/              # 1 post
   ├── Handbook/            # 3 posts — tool shortcuts (PyCharm, IntelliJ, etc.)
@@ -123,7 +123,7 @@ Key behaviors: date prefixes (`YYYY-MM-DD-`) stripped from slugs, `data-title` p
 Key settings in [_config.yml](_config.yml):
 
 - Kramdown with GFM, Rouge syntax highlighter
-- Plugins: `jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed`
+- Plugins: `jekyll-paginate`, `jekyll-sitemap`, `jekyll-feed` (declared via legacy `gems:` key — rename to `plugins:` if Jekyll is upgraded past 3.5)
 - **Dual permalink system**: default `permalink: /:title/` applies to non-collection pages (`about.md` → `/about/`); posts use the collection override `permalink: /posts/:path/` (folder structure becomes URL path)
 - **`post.categories` is empty**: Because `posts` is explicitly defined in `collections:`, Jekyll does not auto-infer categories from subdirectory paths. Use `post.path` (e.g. `_posts/Coding/Python/2024-01-01-post.md`) and parse it with Liquid to extract categories. The homepage `index.html` already does this.
 - Pagination: 5 posts per page (`/page:num/`)
@@ -149,6 +149,7 @@ Search modal styling lives in `style.scss` lines 295-598 (gradients, blur, respo
 ## Coding Style
 
 - Four-space indentation in HTML, Liquid, and JavaScript files
+- **Vendored frontend**: Bootstrap 3.3.7 and jQuery 3.7.1 are local under `bootstrap/` (no CDN). Do not use Bootstrap 4/5 classes or APIs.
 - Use existing Bootstrap 3 class patterns (`data-toggle`, `collapse`, `modal`, `container`)
 - Lowercase directory names with hyphens in `_posts/` paths
 - Post filenames: `YYYY-MM-DD-descriptive-title-with-hyphens.md`
