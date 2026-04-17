@@ -125,6 +125,12 @@ course: [deep-rl-class](https://github.com/huggingface/deep-rl-class)
 
     - ![](https://huggingface.co/datasets/huggingface-deep-rl-course/course-images/resolve/main/en/unit6/pg_pseudocode.png)
 
+# ML agents
 
+- modern rl 有 2 个核心问题，一是 sparse rewards problem，很多时候最终目标很远，这中间都没有 reward 来教会 agent 什么是好是坏；二是 the extrinsic reward function is handmade，手工设置的 reward 不能很好 scale up
+
+- 使用 curiosity 也就是 intrinsic reward: $IR = \| predicted(s_{t+1}) - s_{t+1} \|$
+
+- 
 
 
