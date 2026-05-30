@@ -7,7 +7,6 @@ name: Ruiming Huang's Blog
 
 # Short bio or description (displayed in the header)
 description: 私人博客，欢迎指点
-lang: zh-CN
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: /images/profile.webp
@@ -70,7 +69,7 @@ kramdown:
 
 # Set the Sass partials directory, as we're using @imports
 sass:
-  style: :compressed
+  style: :expanded # You might prefer to minify using :compressed
 
 # Use the following plug-ins
 plugins:
@@ -94,13 +93,6 @@ collections:
   posts:
     output: true
     permalink: /posts/:path/
-
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post
 
 # markdown: CommonMarkGhPages
 
