@@ -4,33 +4,28 @@ exclude_from_search: true
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
 
     <head>
         <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
         {% include meta.html %}
+        <link rel="stylesheet" href="{{ '/bootstrap/css/bootstrap.min.css' | prepend: site.baseurl }}">
         <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
         <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
         <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/images/favicon.ico" />
-        <!-- Preload critical images for better performance -->
         <link rel="preload" href="{{ site.avatar | prepend: site.baseurl }}" as="image" type="image/webp">
-        <!-- Updated libraries: jQuery 3.7.1 local, Bootstrap 3.3.7 local -->
-        <script src="{{ '/bootstrap/js/jquery.min.js' | prepend: site.baseurl }}"></script>
-        <script src="{{ '/bootstrap/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
-        <link rel="stylesheet" href="{{ '/bootstrap/css/bootstrap.min.css' | prepend: site.baseurl }}">
-        <script src="{{ '/bootstrap/js/directory.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/bootstrap/js/jquery.min.js' | prepend: site.baseurl }}" defer></script>
+        <script src="{{ '/bootstrap/js/bootstrap.min.js' | prepend: site.baseurl }}" defer></script>
         {% if page.tipue_search_active or layout.tipue_search_active %}
-        <script src="{{ '/assets/tipuesearch/tipuesearch_content.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/tipuesearch/tipuesearch_content.js' | prepend: site.baseurl }}" defer></script>
         <link rel="stylesheet" href="{{ '/assets/tipuesearch/css/tipuesearch.css' | prepend: site.baseurl }}">
-        <script src="{{ '/assets/tipuesearch/tipuesearch_set.js' | prepend: site.baseurl }}"></script>
-        <script src="{{ '/assets/tipuesearch/tipuesearch.min.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/assets/tipuesearch/tipuesearch_set.js' | prepend: site.baseurl }}" defer></script>
+        <script src="{{ '/assets/tipuesearch/tipuesearch.min.js' | prepend: site.baseurl }}" defer></script>
         {% endif %}
-        <!-- Mermaid.js loaded conditionally and asynchronously -->
+        <script src="{{ '/bootstrap/js/directory.js' | prepend: site.baseurl }}" defer></script>
         <script>
-        // Check if page contains mermaid diagrams
         document.addEventListener('DOMContentLoaded', function() {
             if (document.querySelector('.language-mermaid, .mermaid')) {
-                // Load Mermaid from CDN asynchronously
                 var script = document.createElement('script');
                 script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js';
                 script.async = true;
@@ -50,25 +45,25 @@ exclude_from_search: true
     <body>
         <div class="wrapper-masthead">
             <div class="container">
-                <header class="masthead clearfix">
-                    <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" alt="{{ site.name }}" loading="eager" /></a>
-                    <div class="site-info">
-                        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-                        <br>
-                        <p class="site-description">{{ site.description }}</p>
+                <header class="masthead">
+                    <div class="masthead-main">
+                        <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar | prepend: site.baseurl }}" alt="{{ site.name }}" loading="eager" /></a>
+                        <div class="site-info">
+                            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+                            <p class="site-description">{{ site.description }}</p>
+                        </div>
+                        <nav aria-label="Primary navigation">
+                            <a href="{{ site.baseurl }}/">Blog</a>
+                            <a href="{{ site.baseurl }}/directory">Directory</a>
+                            <a href="{{ site.baseurl }}/about">About</a>
+                        </nav>
                     </div>
-                    <nav>
-                        <a href="{{ site.baseurl }}/">Blog</a>
-                        <a href="{{ site.baseurl }}/directory">Directory</a>
-                        <!-- <a href="{{ site.baseurl }}/assets/paper.pdf">Resume</a> -->
-                        <a href="{{ site.baseurl }}/about">About</a>
-                    </nav>
 
-                    <div id = "search-div">
+                    <div id="search-div" class="masthead-search">
                         <form action="{{ page.url | prepend: site.baseurl }}" onsubmit="return false;">
                             <div class="tipue_search_right">
-                                <img src="{{ '/assets/tipuesearch/search.png' | prepend: site.baseurl }}" class="tipue_search_icon">
-                                <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 character" required>
+                                <img src="{{ '/assets/tipuesearch/search.png' | prepend: site.baseurl }}" class="tipue_search_icon" alt="">
+                                <input type="text" name="q" id="tipue_search_input" pattern=".{1,}" title="At least 1 character" aria-label="Search posts" required>
                             </div>
                         </form>
 
@@ -118,19 +113,16 @@ exclude_from_search: true
                         var src = img.getAttribute('src');
                         if (!src) return;
 
-                        // Optimize Pexels images - add compression and size limit
                         if (src.includes('images.pexels.com') && !src.includes('w=') && !src.includes('auto=compress')) {
                             var sep = src.includes('?') ? '&' : '?';
                             img.setAttribute('src', src + sep + 'auto=compress&cs=tinysrgb&w=800');
                         }
 
-                        // Optimize Unsplash images
                         if (src.includes('images.unsplash.com') && !src.includes('w=')) {
                             var sep = src.includes('?') ? '&' : '?';
                             img.setAttribute('src', src + sep + 'w=800&q=80');
                         }
 
-                        // First image eager (LCP), rest lazy loaded
                         if (index > 0) {
                             img.setAttribute('loading', 'lazy');
                         }

@@ -19,7 +19,7 @@ exclude_from_search: true
     <div id="loadfiles" style="display:none;" class="directory-shell animate-bottom">
         <div id="post-data" style="display:none;">
             {% for post in site.posts %}
-                <span class="post-direct" data-title="{{ post.title | escape }}">{{ post.url }}</span>
+                <span class="post-direct" data-path="{{ post.url | escape }}" data-url="{{ post.url | prepend: site.baseurl | escape }}" data-title="{{ post.title | escape }}"></span>
             {% endfor %}
         </div>
         <header class="directory-hero">
