@@ -1,3 +1,5 @@
+var directoryTitles = {};
+
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
@@ -16,7 +18,7 @@ $(document).ready(function() {
         return;
     }
     var tree = getDirectoryStructure();
-    var renderResult = buildList(tree.children, true);
+    var renderResult = buildList(tree.root ? tree.root.children : [], true);
     var $directoryTree = $("#directory-tree");
 
     if (renderResult.count) {
@@ -34,25 +36,19 @@ $(document).ready(function() {
 });
 
 function showPage() {
-    var loader = document.getElementById("loader");
-    var placeHolder = document.getElementById("placeHolder");
-    var loadfiles = document.getElementById("loadfiles");
-
-    if (loader) loader.style.display = "none";
-    if (placeHolder) placeHolder.style.display = "none";
-    if (loadfiles) loadfiles.style.display = "block";
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("placeHolder").style.display = "none";
+    document.getElementById("loadfiles").style.display = "block";
 }
 
 function buildList(children, isRoot) {
-    if (!children || !Object.keys(children).length) {
+    if (!children || !children.length) {
         return { html: '', count: 0 };
     }
 
     var html = '<ul class="directory-list' + (isRoot ? ' directory-root' : '') + '">';
     var total = 0;
-    var sorted = Object.keys(children).map(function(key) {
-        return children[key];
-    }).sort(function(a, b) {
+    var sorted = children.slice().sort(function(a, b) {
         return getSortKey(a).localeCompare(getSortKey(b));
     });
 
@@ -79,9 +75,13 @@ function buildNode(node) {
         return { html: '', count: 0 };
     }
 
-    if (node.url) {
+    if (!node.children.length) {
+        var path = node.data.substring(1);
+        var label = formatPostTitle(path);
+        var url = '../' + path;
+
         return {
-            html: '<li class="directory-item directory-post-item"><a href="' + node.url + '" class="directory-link">' + escapeHtml(node.title) + '</a></li>',
+            html: '<li class="directory-item directory-post-item"><a href="' + url + '" class="directory-link">' + escapeHtml(label) + '</a></li>',
             count: 1
         };
     }
@@ -91,12 +91,13 @@ function buildNode(node) {
         return { html: '', count: 0 };
     }
 
-    var collapseId = 'collapse-' + sanitizeId(node.path);
+    var collapseId = 'collapse-' + sanitizeId(node.data);
+    var displayName = formatCategoryTitle(node);
 
     var html = ''
         + '<li class="directory-item directory-category">'
         + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">'
-        + '<span class="category-name">' + escapeHtml(formatCategoryTitle(node.name)) + '</span>'
+        + '<span class="category-name">' + escapeHtml(displayName) + '</span>'
         + '<span class="category-count">' + listResult.count + '</span>'
         + '</button>'
         + '<div class="collapse in directory-sublist" id="' + collapseId + '">'
@@ -107,19 +108,15 @@ function buildNode(node) {
     return { html: html, count: listResult.count };
 }
 
-function createDirectoryNode(name, path) {
-    return {
-        name: name,
-        path: path,
-        children: {}
-    };
-}
-
-function formatCategoryTitle(name) {
-    return decodeURIComponent(name).replace(/-/g, ' ');
+function formatCategoryTitle(node) {
+    return decodeURIComponent(node.data.substring(1)).replace(/-/g, ' ');
 }
 
 function formatPostTitle(path) {
+    if (directoryTitles[path]) {
+        return directoryTitles[path];
+    }
+
     var segments = path.split('/');
     var slug = decodeURIComponent(segments[segments.length - 1] || '');
     slug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
@@ -133,29 +130,32 @@ function getSortKey(node) {
         return '';
     }
 
-    if (node.url) {
-        return node.title.toLowerCase();
+    if (!node.children.length) {
+        var path = node.data.substring(1);
+        var segments = path.split('/');
+        var slug = decodeURIComponent(segments[segments.length - 1] || '');
+        if (directoryTitles[path]) {
+            return directoryTitles[path].toLowerCase();
+        }
+        slug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+        return slug.toLowerCase();
     }
 
-    return decodeURIComponent(node.name).toLowerCase();
+    return decodeURIComponent(node.data.substring(1)).toLowerCase();
 }
 
 function sanitizeId(value) {
-    var hash = 0;
-    for (var i = 0; i < value.length; i++) {
-        hash = ((hash << 5) - hash) + value.charCodeAt(i);
-        hash = hash & hash;
-    }
-
-    return value.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase() + '-' + Math.abs(hash);
+    return value.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
 }
 
 function getDirectoryStructure() {
-    var root = createDirectoryNode('posts', 'posts');
+    var collection = [];
+    var tree = new Tree();
+    tree.add('0posts');
+    directoryTitles = {};
 
     $(".post-direct").each(function(_, obj) {
-        var path = ($(obj).data('path') || $(obj).text()).trim();
-        var url = ($(obj).data('url') || ('../' + path)).trim();
+        var path = $(obj).text().trim();
         var title = ($(obj).attr('data-title') || '').trim();
         if (!path) {
             return;
@@ -170,27 +170,62 @@ function getDirectoryStructure() {
             return;
         }
 
-        var segments = path.split('/');
-        var current = root;
-
-        for (var level = 1; level < segments.length; level++) {
-            var segment = segments[level];
-            var nodePath = segments.slice(0, level + 1).join('/');
-
-            if (level === segments.length - 1) {
-                current.children[nodePath] = {
-                    title: title || formatPostTitle(path),
-                    url: url
-                };
-                continue;
+        var strArray = path.split('/');
+        for (var level = 1; level < strArray.length; level++) {
+            var key = level + strArray[level];
+            if (level === strArray.length - 1) {
+                if (title) {
+                    directoryTitles[path] = title;
+                }
+                tree.add(level + path, (level - 1) + strArray[level - 1]);
+            } else {
+                if (collection.indexOf(key) === -1) {
+                    tree.add(key, (level - 1) + strArray[level - 1]);
+                    collection.push(key);
+                }
             }
-
-            if (!current.children[nodePath]) {
-                current.children[nodePath] = createDirectoryNode(segment, nodePath);
-            }
-            current = current.children[nodePath];
         }
     });
 
-    return root;
+    return tree;
 }
+
+//below is the construction of tree, get from github
+function Node(data) {
+    this.data = data;
+    this.children = [];
+}
+
+function Tree() {
+    this.root = null;
+}
+
+Tree.prototype.add = function(data, toNodeData) {
+    var node = new Node(data);
+    var parent = toNodeData ? this.findBFS(toNodeData) : null;
+    if (parent) {
+        parent.children.push(node);
+    } else {
+        if (!this.root) {
+            this.root = node;
+        } else {
+            return 'Root node is already assigned';
+        }
+    }
+};
+Tree.prototype.findBFS = function(data) {
+    if (!this.root) {
+        return null;
+    }
+    var queue = [this.root];
+    while (queue.length) {
+        var node = queue.shift();
+        if (node.data === data) {
+            return node;
+        }
+        for (var i = 0; i < node.children.length; i++) {
+            queue.push(node.children[i]);
+        }
+    }
+    return null;
+};

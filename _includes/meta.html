@@ -14,23 +14,14 @@
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="twitter:title" content="{{ page.title }}" />
     {% endif %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var entry = document.querySelector('.entry');
-            if (!entry || !/(\\\(|\\\[|\$\$|(^|[^\\])\$[^$\n]+\$)/.test(entry.textContent)) {
-                return;
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                inlineMath: [['$','$']]
             }
-
-            window.MathJax = {
-                tex2jax: {
-                    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                    inlineMath: [['$', '$']]
-                }
-            };
-
-            var script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-            script.async = true;
-            document.head.appendChild(script);
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
