@@ -164,6 +164,16 @@
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.directory-link:focus {
+    outline: none;
+}
+
+.directory-link:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
 .directory-link::before {
     content: '';
     width: 6px;
@@ -175,14 +185,13 @@
 }
 
 .directory-link:hover,
-.directory-link:focus {
+.directory-link:focus-visible {
     color: #1d4ed8;
-    text-decoration: none;
     transform: translateX(6px);
 }
 
 .directory-link:hover::before,
-.directory-link:focus::before {
+.directory-link:focus-visible::before {
     background: #1d4ed8;
     transform: scale(1.2);
 }

@@ -77,10 +77,16 @@ a {
   }
 }
 
-// Override Bootstrap's link focus outline for pointer clicks while keeping
-// its visible focus indicator for keyboard navigation.
-a:focus:not(:focus-visible) {
+// Keep text-link focus cues on the text, including restored focus after
+// returning to a page, instead of Bootstrap's rectangular outline.
+a[href]:focus {
   outline: none;
+}
+
+a[href]:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 ul, ol {
