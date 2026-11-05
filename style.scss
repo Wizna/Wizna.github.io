@@ -77,6 +77,12 @@ a {
   }
 }
 
+// Override Bootstrap's link focus outline for pointer clicks while keeping
+// its visible focus indicator for keyboard navigation.
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
 ul, ol {
   margin: 15px 0;
   padding-left: 30px;
