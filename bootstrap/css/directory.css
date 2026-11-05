@@ -89,14 +89,17 @@
     text-align: left;
 }
 
-.category-toggle:hover,
 .category-toggle:focus {
-    color: #1d4ed8;
-    background: #eef4ff;
     outline: none;
 }
 
-.category-toggle:focus {
+.category-toggle:hover,
+.category-toggle:focus-visible {
+    color: #1d4ed8;
+    background: #eef4ff;
+}
+
+.category-toggle:focus-visible {
     box-shadow: inset 0 0 0 2px rgba(29, 78, 216, 0.25);
 }
 

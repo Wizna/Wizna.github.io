@@ -389,6 +389,9 @@ footer {
 
 .search-modal__close:focus {
   outline: none;
+}
+
+.search-modal__close:focus-visible {
   box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.25);
 }
 
