@@ -84,6 +84,10 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - node_modules
+  - package.json
+  - package-lock.json
+  - tests
 
 
 paginate: 5 # amount of posts to show

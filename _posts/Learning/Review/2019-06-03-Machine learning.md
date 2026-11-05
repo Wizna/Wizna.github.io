@@ -1,7 +1,7 @@
 ![title image](https://n.sinaimg.cn/ent/transform/250/w630h420/20191209/3df3-iknhexh9270759.jpg)
 
 * TOC
-  {:toc}
+{:toc}
 
 # Background
 

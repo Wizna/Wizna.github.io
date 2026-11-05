@@ -1,7 +1,7 @@
 ![](https://raw.githubusercontent.com/Wizna/play/master/20140526024838215.jpg)
 
 * TOC
-  {:toc}
+{:toc}
 
 # Background
 

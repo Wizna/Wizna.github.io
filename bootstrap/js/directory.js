@@ -1,9 +1,9 @@
-var directoryTitles = {};
+var directoryTitles = Object.create(null);
 
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+    return div.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 $(document).ready(function() {
@@ -13,8 +13,7 @@ $(document).ready(function() {
         });
     }
 
-    var windowLoc = $(location).attr('pathname') || '';
-    if (!/\/directory\/(index\.html)?$/.test(windowLoc)) {
+    if (!$('#directory-tree').length) {
         return;
     }
     var tree = getDirectoryStructure();
@@ -75,13 +74,13 @@ function buildNode(node) {
         return { html: '', count: 0 };
     }
 
-    if (!node.children.length) {
-        var path = node.data.substring(1);
+    if (node.isPost) {
+        var path = node.data;
         var label = formatPostTitle(path);
-        var url = '../' + path;
+        var url = node.url;
 
         return {
-            html: '<li class="directory-item directory-post-item"><a href="' + url + '" class="directory-link">' + escapeHtml(label) + '</a></li>',
+            html: '<li class="directory-item directory-post-item"><a href="' + escapeHtml(url) + '" class="directory-link">' + escapeHtml(label) + '</a></li>',
             count: 1
         };
     }
@@ -96,7 +95,7 @@ function buildNode(node) {
 
     var html = ''
         + '<li class="directory-item directory-category">'
-        + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true">'
+        + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-controls="' + collapseId + '" aria-expanded="true">'
         + '<span class="category-name">' + escapeHtml(displayName) + '</span>'
         + '<span class="category-count">' + listResult.count + '</span>'
         + '</button>'
@@ -109,7 +108,7 @@ function buildNode(node) {
 }
 
 function formatCategoryTitle(node) {
-    return decodeURIComponent(node.data.substring(1)).replace(/-/g, ' ');
+    return decodeURIComponent(node.data.split('/').pop()).replace(/-/g, ' ');
 }
 
 function formatPostTitle(path) {
@@ -130,8 +129,8 @@ function getSortKey(node) {
         return '';
     }
 
-    if (!node.children.length) {
-        var path = node.data.substring(1);
+    if (node.isPost) {
+        var path = node.data;
         var segments = path.split('/');
         var slug = decodeURIComponent(segments[segments.length - 1] || '');
         if (directoryTitles[path]) {
@@ -141,18 +140,21 @@ function getSortKey(node) {
         return slug.toLowerCase();
     }
 
-    return decodeURIComponent(node.data.substring(1)).toLowerCase();
+    return formatCategoryTitle(node).toLowerCase();
 }
 
 function sanitizeId(value) {
-    return value.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
+    // Fixed-width UTF-16 encoding keeps case, punctuation and full paths unique.
+    return value.split('').map(function(character) {
+        return ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
+    }).join('');
 }
 
 function getDirectoryStructure() {
-    var collection = [];
+    var collection = Object.create(null);
     var tree = new Tree();
-    tree.add('0posts');
-    directoryTitles = {};
+    tree.add('posts');
+    directoryTitles = Object.create(null);
 
     $(".post-direct").each(function(_, obj) {
         var path = $(obj).text().trim();
@@ -172,16 +174,18 @@ function getDirectoryStructure() {
 
         var strArray = path.split('/');
         for (var level = 1; level < strArray.length; level++) {
-            var key = level + strArray[level];
+            var key = strArray.slice(0, level + 1).join('/');
+            var parentKey = strArray.slice(0, level).join('/');
             if (level === strArray.length - 1) {
                 if (title) {
                     directoryTitles[path] = title;
                 }
-                tree.add(level + path, (level - 1) + strArray[level - 1]);
+                var postNode = tree.add(key, parentKey, true);
+                postNode.url = $(obj).attr('data-url') || '/' + path + '/';
             } else {
-                if (collection.indexOf(key) === -1) {
-                    tree.add(key, (level - 1) + strArray[level - 1]);
-                    collection.push(key);
+                if (!collection[key]) {
+                    tree.add(key, parentKey);
+                    collection[key] = true;
                 }
             }
         }
@@ -191,17 +195,18 @@ function getDirectoryStructure() {
 }
 
 //below is the construction of tree, get from github
-function Node(data) {
+function Node(data, isPost) {
     this.data = data;
     this.children = [];
+    this.isPost = Boolean(isPost);
 }
 
 function Tree() {
     this.root = null;
 }
 
-Tree.prototype.add = function(data, toNodeData) {
-    var node = new Node(data);
+Tree.prototype.add = function(data, toNodeData, isPost) {
+    var node = new Node(data, isPost);
     var parent = toNodeData ? this.findBFS(toNodeData) : null;
     if (parent) {
         parent.children.push(node);
@@ -212,6 +217,7 @@ Tree.prototype.add = function(data, toNodeData) {
             return 'Root node is already assigned';
         }
     }
+    return node;
 };
 Tree.prototype.findBFS = function(data) {
     if (!this.root) {
