@@ -130,11 +130,17 @@
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg);
     margin-left: 1rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.35s ease;
 }
 
 .category-toggle[aria-expanded="true"]::after {
     transform: rotate(-135deg);
+}
+
+/* The animated wrapper must reach zero without padding or borders. */
+.directory-collapse {
+    padding: 0;
+    border: 0;
 }
 
 .directory-sublist {

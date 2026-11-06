@@ -93,14 +93,17 @@ function buildNode(node) {
     var collapseId = 'collapse-' + sanitizeId(node.data);
     var displayName = formatCategoryTitle(node);
 
+    // Bootstrap animates this wrapper's height; keep spacing inside it.
     var html = ''
         + '<li class="directory-item directory-category">'
         + '<button class="category-toggle" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-controls="' + collapseId + '" aria-expanded="true">'
         + '<span class="category-name">' + escapeHtml(displayName) + '</span>'
         + '<span class="category-count">' + listResult.count + '</span>'
         + '</button>'
-        + '<div class="collapse in directory-sublist" id="' + collapseId + '">'
+        + '<div class="collapse in directory-collapse" id="' + collapseId + '">'
+        + '<div class="directory-sublist">'
         + listResult.html
+        + '</div>'
         + '</div>'
         + '</li>';
 

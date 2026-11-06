@@ -18,7 +18,7 @@ exclude_from_search: true
         <script src="{{ '/bootstrap/js/jquery.min.js' | prepend: site.baseurl }}"></script>
         <script src="{{ '/bootstrap/js/bootstrap.min.js' | prepend: site.baseurl }}"></script>
         <link rel="stylesheet" href="{{ '/bootstrap/css/bootstrap.min.css' | prepend: site.baseurl }}">
-        <script src="{{ '/bootstrap/js/directory.js' | prepend: site.baseurl }}"></script>
+        <script src="{{ '/bootstrap/js/directory.js' | prepend: site.baseurl }}?v={{ site.time | date: '%s' }}"></script>
         {% if page.tipue_search_active or layout.tipue_search_active %}
         <script src="{{ '/assets/tipuesearch/tipuesearch_content.js' | prepend: site.baseurl }}"></script>
         <link rel="stylesheet" href="{{ '/assets/tipuesearch/css/tipuesearch.css' | prepend: site.baseurl }}">
