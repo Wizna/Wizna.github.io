@@ -9,7 +9,10 @@ function escapeHtml(str) {
 $(document).ready(function() {
     if (typeof $.fn.tipuesearch === 'function') {
         $('#tipue_search_input').tipuesearch({
-            'minimumLength': 1    // Allow single-character queries for CJK languages
+            'minimumLength': 1,    // Allow single-character queries for CJK languages
+            'showTime': false,
+            'showURL': false,
+            'showTitleCount': false
         });
     }
 

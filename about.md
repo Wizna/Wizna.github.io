@@ -6,7 +6,7 @@ permalink: /about/
 
 
 
-<p align="center">
+<p align="center" class="about-profile">
 <img src="{{ site.baseurl }}/images/profile.webp" alt="Profile Picture" loading="lazy">
 </p>
 

@@ -10,10 +10,13 @@ const post = (title, text = '', tags = '') => ({
     title, text, tags, url: '/posts/' + encodeURIComponent(title) + '/'
 });
 
-async function page(t, { posts, rows = [], options = {}, query } = {}) {
+async function page(t, { posts, rows = [], options = {}, query, withForm = false, withUi = false } = {}) {
     const dom = new JSDOM(`<!doctype html><html><head><title>Blog</title></head><body>
-        <input id="tipue_search_input">
-        <div id="searchModal" class="modal"><div id="tipue_search_content"></div></div>
+        ${withForm ? '<form role="search">' : ''}<input id="tipue_search_input">${withForm ? '<button type="submit">Search</button></form>' : ''}
+        <div id="searchModal" class="modal" tabindex="-1"><div class="modal-dialog"><div class="modal-content">
+            <p class="search-modal__subtitle"></p><button class="search-modal__close" data-dismiss="modal">Close</button>
+            <div class="search-modal__body"><div id="tipue_search_content"></div></div>
+        </div></div></div>
         ${posts ? '' : '<div id="loader"></div><div id="placeHolder"></div><div id="loadfiles"><div id="post-data"></div><div id="directory-count"></div><div id="directory-tree"></div></div>'}
         </body></html>`, {
         url: 'https://example.test/directory/' + (query ? '?q=' + encodeURIComponent(query) : ''),
@@ -24,6 +27,11 @@ async function page(t, { posts, rows = [], options = {}, query } = {}) {
     win.eval(source('bootstrap/js/jquery.min.js'));
     win.eval(source('bootstrap/js/bootstrap.min.js'));
     win.jQuery.support.transition = false;
+    if (withUi) {
+        win.eval(source('assets/js/site-ui.js'));
+        await new Promise((resolve) => win.jQuery(resolve));
+        win.jQuery.support.transition = false;
+    }
     if (posts) {
         win.tipuesearch = { pages: posts };
         win.eval(source('assets/tipuesearch/tipuesearch_set.js'));
@@ -124,6 +132,48 @@ test('pagination preserves the choice to search without correction', async (t) =
     win.jQuery('#tipue_search_foot_boxes a').last().trigger('click');
     assert.equal(win.document.querySelector('.tipue_search_content_title').textContent, 'Second');
     assert.equal(win.document.querySelector('#tipue_search_warning'), null);
+});
+
+test('search submits through its form and keeps each result together', async (t) => {
+    const win = await page(t, { posts: [post('Ranking', 'ranking notes')], withForm: true });
+    const form = win.document.querySelector('form');
+    win.document.querySelector('#tipue_search_input').value = 'ranking';
+    const submitted = new win.Event('submit', { bubbles: true, cancelable: true });
+    form.dispatchEvent(submitted);
+    assert.equal(submitted.defaultPrevented, true);
+    const results = win.document.querySelectorAll('.tipue-search-result');
+    assert.equal(results.length, 1);
+    assert.equal(results[0].querySelector('.tipue_search_content_title').textContent, 'Ranking');
+    assert.ok(results[0].querySelector('.tipue_search_content_text').textContent.includes('notes'));
+});
+
+test('result pagination is keyboard reachable and returns to the first result', async (t) => {
+    const win = await page(t, { posts: [post('First', 'ranking'), post('Second', 'ranking')], options: { show: 1 } });
+    search(win, 'ranking');
+    const body = win.document.querySelector('.search-modal__body');
+    body.scrollTop = 500;
+    const next = win.document.querySelector('#tipue_search_foot_boxes a');
+    assert.equal(next.getAttribute('href'), '#tipue_search_content');
+    win.jQuery(next).trigger('click');
+    assert.equal(win.document.querySelector('.tipue_search_content_title').textContent, 'Second');
+    assert.equal(body.scrollTop, 0);
+    assert.equal(win.document.activeElement, win.document.querySelector('.tipue_search_content_title a'));
+    assert.equal(win.document.querySelector('#tipue_search_foot_boxes [aria-current="page"]').textContent, '2');
+    assert.equal(win.location.hash, '');
+});
+
+test('search dialog closes back to its opener and renders query text safely', async (t) => {
+    const win = await page(t, { posts: [post('Notes', 'ranking')], withForm: true, withUi: true });
+    const input = win.document.querySelector('#tipue_search_input');
+    input.value = '<svg onload=alert(1)>';
+    input.focus();
+    win.jQuery(input.form).trigger('submit');
+    assert.equal(win.document.activeElement, win.document.querySelector('.search-modal__close'));
+    assert.ok(win.document.querySelector('.search-modal__subtitle').textContent.includes(input.value));
+    assert.equal(win.document.querySelector('.search-modal__subtitle svg'), null);
+    win.jQuery('.search-modal__close').trigger('click');
+    assert.equal(win.document.activeElement, input);
+    assert.equal(win.document.body.classList.contains('modal-open'), false);
 });
 
 test('same-named subcategories remain in their own branches', async (t) => {
