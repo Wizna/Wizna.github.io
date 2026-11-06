@@ -176,6 +176,25 @@ test('search dialog closes back to its opener and renders query text safely', as
     assert.equal(win.document.body.classList.contains('modal-open'), false);
 });
 
+test('theme defaults to dark, toggles to light, and persists the choice', async (t) => {
+    const dom = new JSDOM('<!doctype html><html><body><button data-theme-toggle hidden></button></body></html>', {
+        url: 'https://example.test/',
+        runScripts: 'dangerously'
+    });
+    t.after(() => dom.window.close());
+    const win = dom.window;
+    win.eval(source('assets/js/theme.js'));
+    win.document.dispatchEvent(new win.Event('DOMContentLoaded'));
+    const button = win.document.querySelector('[data-theme-toggle]');
+    assert.equal(win.document.documentElement.getAttribute('data-theme'), 'dark');
+    assert.equal(button.hidden, false);
+    assert.equal(button.getAttribute('aria-pressed'), 'false');
+    button.click();
+    assert.equal(win.document.documentElement.getAttribute('data-theme'), 'light');
+    assert.equal(button.getAttribute('aria-pressed'), 'true');
+    assert.equal(win.localStorage.getItem('site-theme'), 'light');
+});
+
 test('same-named subcategories remain in their own branches', async (t) => {
     const win = await page(t, {
         rows: [{ path: '/posts/Coding/Python/one/', title: 'One' }, { path: '/posts/Learning/Python/two/', title: 'Two' }]
