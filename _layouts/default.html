@@ -54,10 +54,10 @@ exclude_from_search: true
                             </button>
                         </nav>
                         <div id="search-div">
-                            <form class="site-search" role="search" action="{{ page.url | prepend: site.baseurl }}">
+                            <form class="site-search" role="search" action="{{ page.url | prepend: site.baseurl }}" autocomplete="off">
                                 <svg class="site-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
                                 <label class="sr-only" for="tipue_search_input">搜索文章</label>
-                                <input type="search" name="q" id="tipue_search_input" placeholder="搜索文章…" enterkeyhint="search" required>
+                                <input type="search" name="q" id="tipue_search_input" placeholder="搜索文章…" enterkeyhint="search" autocomplete="off" required>
                                 <button class="site-search__submit" type="submit" aria-label="搜索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
                             </form>
                         </div>

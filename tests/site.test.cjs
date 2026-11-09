@@ -254,7 +254,7 @@ test('theme switches skip the cross-fade when reduced motion is requested', asyn
     assert.equal(win.document.documentElement.getAttribute('data-theme'), 'light');
 });
 
-test('reduced motion removes Bootstrap transition waits and restores them afterwards', async (t) => {
+async function motionPage(t, reduced) {
     const dom = new JSDOM(`<!doctype html><html><body>
         <input id="tipue_search_input">
         <div id="searchModal" class="modal fade" tabindex="-1"></div>
@@ -267,30 +267,71 @@ test('reduced motion removes Bootstrap transition waits and restores them afterw
     win.eval(source('bootstrap/js/jquery.min.js'));
     win.eval(source('bootstrap/js/bootstrap.min.js'));
     await ready();
-    // jsdom has no CSS transitions, so pretend the browser supports them.
-    const capable = { end: 'transitionend' };
-    win.jQuery.support.transition = capable;
+    // Bootstrap detects support, but jsdom emits no CSS transition events.
+    const capable = win.jQuery.support.transition;
+    assert.ok(capable);
     const listeners = [];
-    const media = { matches: true, addEventListener: (type, listener) => listeners.push(listener) };
+    const media = { matches: reduced, addEventListener: (type, listener) => listeners.push(listener) };
     win.matchMedia = () => media;
     win.eval(source('assets/js/site-ui.js'));
     await ready();
+    return {
+        win, capable,
+        setReduced(value) {
+            media.matches = value;
+            listeners.forEach((listener) => listener());
+        }
+    };
+}
 
+test('reduced motion finishes collapses promptly and preserves Bootstrap feature detection', async (t) => {
+    const { win, capable, setReduced } = await motionPage(t, true);
     const $ = win.jQuery;
     const panel = win.document.getElementById('panel');
     const toggle = win.document.querySelector('[data-toggle="collapse"]');
-    assert.equal($.support.transition, false);
+    assert.equal($.support.transition, capable);
     assert.equal($('#searchModal').hasClass('fade'), false);
     toggle.click();
+    await new Promise((resolve) => win.setTimeout(resolve, 0));
     assert.equal(panel.className, 'collapse');
 
-    media.matches = false;
-    listeners.forEach((listener) => listener());
+    setReduced(false);
     assert.equal($.support.transition, capable);
     assert.equal($('#searchModal').hasClass('fade'), true);
     toggle.click();
     assert.equal(panel.classList.contains('collapsing'), true);
 });
+
+for (const direction of ['hide', 'show']) {
+    test(`enabling reduced motion during collapse ${direction} completes it and leaves toggles usable`, async (t) => {
+        const { win, capable, setReduced } = await motionPage(t, false);
+        const $ = win.jQuery;
+        const $panel = $('#panel');
+        const errors = [];
+        win.addEventListener('error', (event) => errors.push(event.error));
+        if (direction === 'show') $panel.removeClass('in');
+        $panel.collapse(direction);
+        assert.equal($panel.hasClass('collapsing'), true);
+
+        setReduced(true);
+        assert.equal($panel.hasClass('collapsing'), false);
+        assert.equal($panel.hasClass('in'), direction === 'show');
+        assert.equal($panel.data('bs.collapse').transitioning, 0);
+        assert.equal($.support.transition, capable);
+
+        // The original Bootstrap fallback timer must also finish without an exception.
+        await new Promise((resolve) => win.setTimeout(resolve, $.fn.collapse.Constructor.TRANSITION_DURATION + 30));
+        assert.deepEqual(errors, []);
+        $panel.collapse('toggle');
+        await new Promise((resolve) => win.setTimeout(resolve, 0));
+        assert.equal($panel.hasClass('collapsing'), false);
+        assert.equal($panel.hasClass('in'), direction === 'hide');
+
+        setReduced(false);
+        $panel.collapse('toggle');
+        assert.equal($panel.hasClass('collapsing'), true);
+    });
+}
 
 test('same-named subcategories remain in their own branches', async (t) => {
     const win = await page(t, {
