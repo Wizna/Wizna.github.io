@@ -1,0 +1,57 @@
+{%- comment -%}
+    Adds image hints to rendered HTML at build time.
+
+    This has to happen in Liquid. A script that runs after parsing is too late: the browser
+    has already requested every <img> src by then, so a late loading="lazy" does nothing and
+    rewriting a CDN URL makes the browser download the image a second time.
+
+    Parameters:
+      html         the rendered HTML to process
+      eager_first  leave the first image eager; it is the likely largest contentful paint
+
+    Variables are prefixed oi_ because assign in an include writes to the page's scope.
+{%- endcomment -%}
+{%- assign oi_pieces = include.html | split: '<img ' -%}
+{%- for oi_piece in oi_pieces -%}
+    {%- if forloop.first -%}
+        {{- oi_piece -}}
+    {%- else -%}
+        {%- assign oi_tag = oi_piece | split: '>' | first -%}
+        {%- assign oi_hints = '' -%}
+        {%- unless oi_tag contains 'decoding=' -%}
+            {%- assign oi_hints = 'decoding="async" ' -%}
+        {%- endunless -%}
+        {%- unless oi_tag contains 'loading=' -%}
+            {%- unless include.eager_first and forloop.index0 == 1 -%}
+                {%- assign oi_hints = oi_hints | prepend: 'loading="lazy" ' -%}
+            {%- endunless -%}
+        {%- endunless -%}
+
+        {%- comment -%} The leading space keeps data-src="..." from matching. {%- endcomment -%}
+        {%- assign oi_probe = oi_tag | prepend: ' ' -%}
+        {%- assign oi_out = oi_piece -%}
+        {%- if oi_probe contains ' src="' -%}
+            {%- assign oi_url = oi_probe | split: ' src="' | last | split: '"' | first -%}
+            {%- assign oi_param = '' -%}
+            {%- if oi_url contains '://images.pexels.com/' -%}
+                {%- unless oi_url contains 'w=' or oi_url contains 'auto=compress' -%}
+                    {%- assign oi_param = 'auto=compress&amp;cs=tinysrgb&amp;w=800' -%}
+                {%- endunless -%}
+            {%- elsif oi_url contains '://images.unsplash.com/' -%}
+                {%- unless oi_url contains 'w=' -%}
+                    {%- assign oi_param = 'w=800&amp;q=80' -%}
+                {%- endunless -%}
+            {%- endif -%}
+            {%- if oi_param != '' -%}
+                {%- if oi_url contains '?' -%}
+                    {%- assign oi_sep = '&amp;' -%}
+                {%- else -%}
+                    {%- assign oi_sep = '?' -%}
+                {%- endif -%}
+                {%- assign oi_new = oi_url | append: oi_sep | append: oi_param -%}
+                {%- assign oi_out = oi_piece | replace_first: oi_url, oi_new -%}
+            {%- endif -%}
+        {%- endif -%}
+        {{- '<img ' -}}{{- oi_hints -}}{{- oi_out -}}
+    {%- endif -%}
+{%- endfor -%}

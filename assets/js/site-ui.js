@@ -5,10 +5,17 @@
         var $modal = $('#searchModal');
         var opener;
         var motion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+        // Bootstrap detects transition support once at load; keep it so the preference can be undone.
+        var nativeTransition = $.support.transition;
 
         function updateMotion() {
+            var reduced = !!(motion && motion.matches);
             // Bootstrap waits for transition events when a modal has .fade.
-            $modal.toggleClass('fade', !motion || !motion.matches);
+            $modal.toggleClass('fade', !reduced);
+            // Collapse waits on a fallback timer for a transitionend that never comes once CSS
+            // removes the transition, leaving it stuck in .collapsing and ignoring clicks.
+            // With no transition support Bootstrap finishes immediately instead.
+            $.support.transition = reduced ? false : nativeTransition;
         }
 
         updateMotion();

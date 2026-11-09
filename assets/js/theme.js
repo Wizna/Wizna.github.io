@@ -32,12 +32,52 @@
     // This script runs before stylesheets, so the first paint uses the saved theme.
     applyTheme(theme);
 
+    var switching = 0;
+
+    function nextFrame(callback) {
+        if (window.requestAnimationFrame) {
+            window.requestAnimationFrame(callback);
+        } else {
+            window.setTimeout(callback, 16);
+        }
+    }
+
+    // Per-element colour transitions run out of step with the page background, so they are
+    // switched off (see .theme-switching in _site.scss) until the new theme has been painted.
+    function holdTransitions() {
+        switching += 1;
+        root.classList.add('theme-switching');
+    }
+
+    function releaseTransitions() {
+        switching = Math.max(0, switching - 1);
+        if (!switching) {
+            root.classList.remove('theme-switching');
+        }
+    }
+
     function setTheme(nextTheme) {
         if (nextTheme === theme) {
             return;
         }
-        applyTheme(nextTheme);
-        document.dispatchEvent(new CustomEvent('site:themechange', { detail: { theme: theme } }));
+        // The saved state changes now; the page itself changes when commit() runs.
+        theme = nextTheme;
+
+        function commit() {
+            applyTheme(theme);
+            document.dispatchEvent(new CustomEvent('site:themechange', { detail: { theme: theme } }));
+        }
+
+        holdTransitions();
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (document.startViewTransition && !reduceMotion) {
+            // Cross-fade the whole page so every colour changes together.
+            document.startViewTransition(commit).finished.then(releaseTransitions, releaseTransitions);
+        } else {
+            commit();
+            // The first frame paints the new theme while transitions are still off.
+            nextFrame(function() { nextFrame(releaseTransitions); });
+        }
     }
 
     function initToggle() {

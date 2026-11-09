@@ -195,6 +195,103 @@ test('theme defaults to dark, toggles to light, and persists the choice', async 
     assert.equal(win.localStorage.getItem('site-theme'), 'light');
 });
 
+function themePage(t, setup) {
+    const dom = new JSDOM('<!doctype html><html><body><button data-theme-toggle hidden></button></body></html>', {
+        url: 'https://example.test/',
+        runScripts: 'dangerously'
+    });
+    t.after(() => dom.window.close());
+    const win = dom.window;
+    if (setup) setup(win);
+    win.eval(source('assets/js/theme.js'));
+    win.document.dispatchEvent(new win.Event('DOMContentLoaded'));
+    return win;
+}
+
+test('theme switches hold CSS transitions off for two frames', async (t) => {
+    const win = themePage(t);
+    const root = win.document.documentElement;
+    win.document.querySelector('[data-theme-toggle]').click();
+    assert.equal(root.getAttribute('data-theme'), 'light');
+    assert.equal(root.classList.contains('theme-switching'), true);
+    await new Promise((resolve) => win.setTimeout(resolve, 80));
+    assert.equal(root.classList.contains('theme-switching'), false);
+});
+
+test('theme switches cross-fade through View Transitions and persist at once', async (t) => {
+    let update;
+    let finish;
+    const win = themePage(t, (w) => {
+        w.document.startViewTransition = (callback) => {
+            update = callback;
+            return { finished: new Promise((resolve) => { finish = resolve; }) };
+        };
+    });
+    const root = win.document.documentElement;
+    win.document.querySelector('[data-theme-toggle]').click();
+    assert.equal(root.getAttribute('data-theme'), 'dark');
+    assert.equal(root.classList.contains('theme-switching'), true);
+    assert.equal(win.localStorage.getItem('site-theme'), 'light');
+    update();
+    assert.equal(root.getAttribute('data-theme'), 'light');
+    assert.equal(root.classList.contains('theme-switching'), true);
+    finish();
+    await new Promise((resolve) => win.setTimeout(resolve, 0));
+    assert.equal(root.classList.contains('theme-switching'), false);
+});
+
+test('theme switches skip the cross-fade when reduced motion is requested', async (t) => {
+    let started = 0;
+    const win = themePage(t, (w) => {
+        w.matchMedia = () => ({ matches: true });
+        w.document.startViewTransition = () => {
+            started += 1;
+            return { finished: Promise.resolve() };
+        };
+    });
+    win.document.querySelector('[data-theme-toggle]').click();
+    assert.equal(started, 0);
+    assert.equal(win.document.documentElement.getAttribute('data-theme'), 'light');
+});
+
+test('reduced motion removes Bootstrap transition waits and restores them afterwards', async (t) => {
+    const dom = new JSDOM(`<!doctype html><html><body>
+        <input id="tipue_search_input">
+        <div id="searchModal" class="modal fade" tabindex="-1"></div>
+        <button data-toggle="collapse" data-target="#panel">Toggle</button>
+        <div id="panel" class="collapse in"></div>
+    </body></html>`, { url: 'https://example.test/', runScripts: 'dangerously' });
+    t.after(() => dom.window.close());
+    const win = dom.window;
+    const ready = () => new Promise((resolve) => win.jQuery(resolve));
+    win.eval(source('bootstrap/js/jquery.min.js'));
+    win.eval(source('bootstrap/js/bootstrap.min.js'));
+    await ready();
+    // jsdom has no CSS transitions, so pretend the browser supports them.
+    const capable = { end: 'transitionend' };
+    win.jQuery.support.transition = capable;
+    const listeners = [];
+    const media = { matches: true, addEventListener: (type, listener) => listeners.push(listener) };
+    win.matchMedia = () => media;
+    win.eval(source('assets/js/site-ui.js'));
+    await ready();
+
+    const $ = win.jQuery;
+    const panel = win.document.getElementById('panel');
+    const toggle = win.document.querySelector('[data-toggle="collapse"]');
+    assert.equal($.support.transition, false);
+    assert.equal($('#searchModal').hasClass('fade'), false);
+    toggle.click();
+    assert.equal(panel.className, 'collapse');
+
+    media.matches = false;
+    listeners.forEach((listener) => listener());
+    assert.equal($.support.transition, capable);
+    assert.equal($('#searchModal').hasClass('fade'), true);
+    toggle.click();
+    assert.equal(panel.classList.contains('collapsing'), true);
+});
+
 test('same-named subcategories remain in their own branches', async (t) => {
     const win = await page(t, {
         rows: [{ path: '/posts/Coding/Python/one/', title: 'One' }, { path: '/posts/Learning/Python/two/', title: 'Two' }]

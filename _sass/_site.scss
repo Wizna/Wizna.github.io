@@ -125,6 +125,8 @@ strong, b { font-weight: 650; }
 img { max-width: 100%; height: auto; }
 .gmnoprint img { max-width: none; }
 ::selection { background: var(--selection); color: var(--selection-ink); }
+/* Set by theme.js while the theme changes, so every property switches in the same frame. */
+.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: none !important; }
 
 .wrapper-masthead { margin-bottom: 36px; }
 .masthead { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--line); }
